@@ -1,0 +1,149 @@
+//
+//  OpenWeatherApi.swift
+//  Dunkel Sky Finder
+//
+//  Created by Henrik Panhans on 15/01/2017.
+//  Copyright © 2017 Henrik Panhans. All rights reserved.
+//
+
+import Alamofire
+import CoreLocation
+import SwiftyJSON
+
+public enum TemperatureUnit: String {
+    case Celsius = "metric"
+    case Fahrenheit = "imperial"
+    case Kelvin = ""
+}
+
+public enum Language : String {
+    case English = "en",
+    Russian = "ru",
+    Italian = "it",
+    Spanish = "es",
+    Ukrainian = "uk",
+    German = "de",
+    Portuguese = "pt",
+    Romanian = "ro",
+    Polish = "pl",
+    Finnish = "fi",
+    Dutch = "nl",
+    French = "fr",
+    Bulgarian = "bg",
+    Swedish = "sv",
+    ChineseTraditional = "zh_tw",
+    ChineseSimplified = "zh_cn",
+    Turkish = "tr",
+    Croatian = "hr",
+    Catalan = "ca"
+}
+
+public class OpenWeatherSwift {
+    
+    private var params = [String : AnyObject]()
+    public var temperatureFormat: TemperatureUnit = .Kelvin {
+        didSet {
+            params["units"] = temperatureFormat.rawValue as AnyObject?
+        }
+    }
+    
+    public var language: Language = .English {
+        didSet {
+            params["lang"] = language.rawValue as AnyObject?
+        }
+    }
+    
+    public init(apiKey: String) {
+        params["appid"] = apiKey as AnyObject?
+    }
+    
+    public convenience init(apiKey: String, temperatureFormat: TemperatureUnit) {
+        self.init(apiKey: apiKey)
+        self.temperatureFormat = temperatureFormat
+        self.params["units"] = temperatureFormat.rawValue as AnyObject?
+        
+    }
+    
+    public convenience init(apiKey: String, temperatureFormat: TemperatureUnit, lang: Language) {
+        self.init(apiKey: apiKey, temperatureFormat: temperatureFormat)
+        
+        self.language = lang
+        self.temperatureFormat = temperatureFormat
+        
+        params["units"] = temperatureFormat.rawValue as AnyObject?
+        params["lang"] = lang.rawValue as AnyObject?
+    }
+    
+    
+    func encode(params: [String: AnyObject]) -> String {
+        var stringToAppend = String()
+        
+        for param in params {
+            stringToAppend = stringToAppend + "&\(param.key)=\(param.value)"
+        }
+        
+        return stringToAppend
+    }
+    
+    public func getIconFromID(id: String) -> UIImage {
+        let url = URL(string: "http://openweathermap.org/img/w/\(id).png")
+        do {
+            let data = try Data.init(contentsOf: url!)
+            let image = UIImage(data: data)
+            
+            return image!
+        } catch {
+            print("error")
+        }
+        
+        return UIImage()
+    }
+    
+    public func currentWeatherByCity(name: String, completionHandler: @escaping (_ result: JSON) -> ()) {
+        let apiURL = "http://api.openweathermap.org/data/2.5/weather?q=\(name)" + encode(params: params)
+        
+        Alamofire.request(apiURL).responseJSON { (response) in
+            if response.result.isSuccess {
+                let json = JSON(response.result.value as Any)
+                
+                completionHandler(json)
+            }
+        }
+    }
+    
+    public func currentWeatherByCoordinates(coords: CLLocationCoordinate2D, completionHandler: @escaping (_ result: JSON) -> ()) {
+        let apiURL = "http://api.openweathermap.org/data/2.5/weather?lat=\(coords.latitude)&lon=\(coords.longitude)" + encode(params: params)
+        
+        Alamofire.request(apiURL).responseJSON { (response) in
+            if response.result.isSuccess {
+                let json = JSON(response.result.value as Any)
+                
+                completionHandler(json)
+            }
+        }
+    }
+    
+    public func currentWeatherByID(id: String, completionHandler: @escaping (_ result: Any) -> ()) {
+        let apiURL = "http://api.openweathermap.org/data/2.5/weather?id=\(id)" + encode(params: params)
+        
+        Alamofire.request(apiURL).responseJSON { (response) in
+            if response.result.isSuccess {
+                let json = JSON(response.result.value as Any)
+                
+                completionHandler(json)
+            }
+        }
+    }
+    
+    public func currentWeatherByZIP(code: String, countryCode: String, completionHandler: @escaping (_ result: Any) -> ()) {
+        let apiURL = "http://api.openweathermap.org/data/2.5/weather?zip=\(code),\(countryCode)" + encode(params: params)
+        
+        Alamofire.request(apiURL).responseJSON { (response) in
+            if response.result.isSuccess {
+                let json = JSON(response.result.value as Any)
+                
+                completionHandler(json)
+            }
+        }
+    }
+}
