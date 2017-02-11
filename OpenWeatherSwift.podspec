@@ -14,9 +14,9 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "9.0"
   s.watchos.deployment_target = "2.0"
 
-  s.source       = { :git => 'https://github.com/Fri3ndlyGerman/OpenWeatherAPI.git', :tag => "0.1.0" }
+  s.source       = { :git => 'https://github.com/Fri3ndlyGerman/OpenWeatherSwift.git', :tag => "0.1.0" }
 
-  s.source_files = "OpenWeatherSwift", "OpenWeatherSwift/*.{plist,swift}"
+  s.source_files = "OpenWeatherSwift", "OpenWeatherSwift/*.{plist,h,swift}"
 
   s.dependency 'Alamofire'
   s.dependency 'SwiftyJSON'
