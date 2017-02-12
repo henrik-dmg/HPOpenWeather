@@ -23,7 +23,7 @@ public struct Weather {
     var condition: String
     var icon: String
     
-    init(data: JSON) {
+    public init(data: JSON) {
         self.humidity = data["main"]["humidity"].intValue
         self.id = data["id"].intValue
         self.clouds = 100/data["clouds"]["all"].floatValue
