@@ -41,6 +41,7 @@ public enum Language : String {
 public class OpenWeatherSwift {
     
     private let currentBase = "http://api.openweathermap.org/data/2.5/weather?"
+    
     private var params = [String : AnyObject]()
     public var temperatureFormat: TemperatureUnit = .Kelvin {
         didSet {
@@ -108,6 +109,8 @@ public class OpenWeatherSwift {
                 let json = JSON(response.result.value as Any)
                 
                 completionHandler(json)
+            } else {
+                print("error")
             }
         }
     }
@@ -120,6 +123,8 @@ public class OpenWeatherSwift {
                 let json = JSON(response.result.value as Any)
                 
                 completionHandler(json)
+            } else {
+                print("error")
             }
         }
     }
@@ -132,6 +137,8 @@ public class OpenWeatherSwift {
                 let json = JSON(response.result.value as Any)
                 
                 completionHandler(json)
+            } else {
+                print("error")
             }
         }
     }
@@ -144,42 +151,51 @@ public class OpenWeatherSwift {
                 let json = JSON(response.result.value as Any)
                 
                 completionHandler(json)
+            } else {
+                print("error")
             }
         }
     }
     
-    public func forecastWeatherByCity(name: String, completionHandler: @escaping (_ result: JSON) -> ()) {
-        let apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=\(name)" + encode(params: params)
+    public func forecastWeatherByCity(name: String, type: ForecastType, completionHandler: @escaping (_ result: JSON) -> ()) {
+        let apiURL = type.rawValue + "q=\(name)" + encode(params: params)
         
         Alamofire.request(apiURL).responseJSON { (response) in
             if response.result.isSuccess {
                 let json = JSON(response.result.value as Any)
                 
                 completionHandler(json)
+            } else {
+                print("error")
             }
         }
     }
     
-    public func forecastWeatherByCoordinates(coords: CLLocationCoordinate2D, completionHandler: @escaping (_ result: JSON) -> ()) {
-        let apiURL = "http://api.openweathermap.org/data/2.5/forecast?lat=\(coords.latitude)&lon=\(coords.longitude)" + encode(params: params)
+    public func forecastWeatherByCoordinates(coords: CLLocationCoordinate2D, type: ForecastType, completionHandler: @escaping (_ result: JSON) -> ()) {
+        let apiURL = type.rawValue + "lat=\(coords.latitude)&lon=\(coords.longitude)" + encode(params: params)
         
         Alamofire.request(apiURL).responseJSON { (response) in
             if response.result.isSuccess {
                 let json = JSON(response.result.value as Any)
                 
                 completionHandler(json)
+            } else {
+                print("error")
             }
+
         }
     }
     
-    public func forecastWeatherByID(id: String, completionHandler: @escaping (_ result: Any) -> ()) {
-        let apiURL = "http://api.openweathermap.org/data/2.5/forecast?id=\(id)" + encode(params: params)
+    public func forecastWeatherByID(id: String, type: ForecastType, completionHandler: @escaping (_ result: Any) -> ()) {
+        let apiURL = type.rawValue + "id=\(id)" + encode(params: params)
         
         Alamofire.request(apiURL).responseJSON { (response) in
             if response.result.isSuccess {
                 let json = JSON(response.result.value as Any)
                 
                 completionHandler(json)
+            } else {
+                print("error")
             }
         }
     }
