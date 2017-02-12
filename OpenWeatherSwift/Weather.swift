@@ -9,19 +9,19 @@
 import SwiftyJSON
 
 public struct Weather {
-    var humidity: Int
-    var id: Int
-    var clouds: Float
-    var country: String
-    var visibility: Int
-    var airPressure: Int
+    public var humidity: Int
+    public var id: Int
+    public var clouds: Float
+    public var country: String
+    public var visibility: Int
+    public var airPressure: Int
     
-    var temperature: Int
-    var low: Int
-    var high: Int
-    var location: String
-    var condition: String
-    var icon: String
+    public var temperature: Int
+    public var low: Int
+    public var high: Int
+    public var location: String
+    public var condition: String
+    public var icon: String
     
     public init(data: JSON) {
         self.humidity = data["main"]["humidity"].intValue
