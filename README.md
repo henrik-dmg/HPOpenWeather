@@ -41,7 +41,7 @@ var newApi = OpenWeatherSwift(apiKey: "_your_api_key_goes_here", temperatureForm
   
   
 **The following functions are available for now:**
-The result will always be a Weather() object, whose values can be accessed.
+The result will always be a JSON object, whose values can be accessed. Additionally, you can create a Weather() object to conveniently access the JSON data.
 
 ```swift
 newApi.currentWeatherByCoordinates(coords: CLLocationCoordinate2D) { (results) in
