@@ -26,7 +26,7 @@ public struct Weather {
     public init(data: JSON) {
         self.humidity = data["main"]["humidity"].intValue
         self.id = data["id"].intValue
-        self.clouds = 100/data["clouds"]["all"].floatValue
+        self.clouds = data["clouds"]["all"].floatValue
         self.country = data["sys"]["country"].stringValue
         self.visibility = data["visibility"].intValue
         self.airPressure = data["main"]["pressure"].intValue

@@ -33,12 +33,12 @@ public struct Forecast {
             
             let subdata = data["list"]
             
-            for (index,subJson):(String, JSON) in subdata {
-                self.temperatures.append(subJson["main"]["temp"].intValue)
-                self.clouds.append(Float(100/subJson["clouds"]["all"].intValue))
-                self.conditions.append(subJson["weather"]["main"].stringValue)
-                self.pressures.append(subJson["main"]["pressure"].intValue)
-                self.humidities.append(Float(100/subJson["main"]["humidity"].intValue))
+            for subJSON in subdata.array! {
+                self.temperatures.append(subJSON["main"]["temp"].intValue)
+                self.clouds.append(subJSON["clouds"]["all"].floatValue)
+                self.conditions.append(subJSON["weather"]["main"].stringValue)
+                self.pressures.append(subJSON["main"]["pressure"].intValue)
+                self.humidities.append(subJSON["main"]["humidity"].floatValue)
             }
         } else {
             self.city = data["city"]["name"].stringValue
@@ -47,12 +47,12 @@ public struct Forecast {
             
             let subdata = data["list"]
             
-            for (index,subJson):(String, JSON) in subdata {
+            for subJson in subdata.array! {
                 self.temperatures.append(subJson["main"]["temp"].intValue)
-                self.clouds.append(Float(100/subJson["clouds"]["all"].intValue))
+                self.clouds.append(subJson["clouds"]["all"].floatValue)
                 self.conditions.append(subJson["weather"]["main"].stringValue)
                 self.pressures.append(subJson["main"]["pressure"].intValue)
-                self.humidities.append(Float(100/subJson["main"]["humidity"].intValue))
+                self.humidities.append(subJson["main"]["humidity"].floatValue)
             }
         }
     }
