@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF7B02E01E5074950083F35F /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B02DF1E5074950083F35F /* Weather.swift */; };
+		AFBA5A1E1E50678F009EA7EF /* OpenWeatherSwift.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AFBA5A1D1E50678F009EA7EF /* OpenWeatherSwift.podspec */; };
 		AFCD309D1E4F7B1800545890 /* OpenWeatherSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = AFCD309B1E4F7B1800545890 /* OpenWeatherSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFCD30A41E4F7B2B00545890 /* OpenWeatherSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCD30A31E4F7B2B00545890 /* OpenWeatherSwift.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF7B02DF1E5074950083F35F /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		AFBA5A1D1E50678F009EA7EF /* OpenWeatherSwift.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenWeatherSwift.podspec; sourceTree = SOURCE_ROOT; };
 		AFCD30981E4F7B1800545890 /* OpenWeatherSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenWeatherSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFCD309B1E4F7B1800545890 /* OpenWeatherSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenWeatherSwift.h; sourceTree = "<group>"; };
 		AFCD309C1E4F7B1800545890 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -48,7 +52,9 @@
 		AFCD309A1E4F7B1800545890 /* OpenWeatherSwift */ = {
 			isa = PBXGroup;
 			children = (
+				AFBA5A1D1E50678F009EA7EF /* OpenWeatherSwift.podspec */,
 				AFCD30A31E4F7B2B00545890 /* OpenWeatherSwift.swift */,
+				AF7B02DF1E5074950083F35F /* Weather.swift */,
 				AFCD309B1E4F7B1800545890 /* OpenWeatherSwift.h */,
 				AFCD309C1E4F7B1800545890 /* Info.plist */,
 			);
@@ -126,6 +132,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFBA5A1E1E50678F009EA7EF /* OpenWeatherSwift.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF7B02E01E5074950083F35F /* Weather.swift in Sources */,
 				AFCD30A41E4F7B2B00545890 /* OpenWeatherSwift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +312,7 @@
 				AFCD30A21E4F7B1800545890 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
