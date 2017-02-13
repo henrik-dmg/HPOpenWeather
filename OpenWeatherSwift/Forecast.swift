@@ -39,6 +39,10 @@ public struct Forecast {
                 self.conditions.append(subJSON["weather"]["main"].stringValue)
                 self.pressures.append(subJSON["main"]["pressure"].intValue)
                 self.humidities.append(subJSON["main"]["humidity"].floatValue)
+                
+                let date = subJSON["dt_txt"].stringValue.convertToDate(withFormat: "yyyy-MM-dd HH:mm:ss")
+                
+                self.dates.append(date)
             }
         } else {
             self.city = data["city"]["name"].stringValue
@@ -53,6 +57,10 @@ public struct Forecast {
                 self.conditions.append(subJson["weather"]["main"].stringValue)
                 self.pressures.append(subJson["main"]["pressure"].intValue)
                 self.humidities.append(subJson["main"]["humidity"].floatValue)
+                
+                let date = subJson["dt_txt"].stringValue.convertToDate(withFormat: "yyyy-MM-dd HH:mm:ss")
+                
+                self.dates.append(date)
             }
         }
     }

@@ -47,3 +47,12 @@ extension Double {
         return dateFormatter.string(from: currentDateTime)
     }
 }
+
+extension String {
+    func convertToDate(withFormat: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = withFormat
+        
+        return dateFormatter.date(from: self)!
+    }
+}
