@@ -40,7 +40,7 @@ var newApi = OpenWeatherSwift(apiKey: "_your_api_key_goes_here", temperatureForm
   - Fahrenheit
   
   
-**The following functions are available for now:**
+**The following functions are available:**
 The result will always be a JSON object, whose values can be accessed. Additionally, you can create a Weather() object to conveniently access the JSON data.
 
 ```swift
@@ -48,22 +48,35 @@ newApi.currentWeatherByCoordinates(coords: CLLocationCoordinate2D) { (results) i
        let weather = Weather(data: results)
 }
 
+
 newApi.currentWeatherByCity(name: String) { (result) in
        let weather = Weather(data: results)
 }
+
 
 newApi.currentWeatherByID(id: String) { (result) in
        let weather = Weather(data: results)
 }
 
+
 newApi.currentWeatherByZIP(code: String, countryCode: String) { (result) in
        let weather = Weather(data: results)
 }
+
+
+newApi.forecastWeatherByCoordinates(coords: CLLocationCoordinate2D, type: ForecastType) { (results) in
+       let forecast = Forecast(data: results, type: ForecastType)
+}
+
+
+newApi.forecastWeatherByID(id: String, type: ForecastType) { (results) in
+       let forecast = Forecast(data: results, type: ForecastType)
+}
+
+
+newApi.forecastWeatherByCity(name: String, type: ForecastType) { (results) in
+       let forecast = Forecast(data: results, type: ForecastType)
+}
 ```
 
-
-**Todo-List:**
-- [x] current weather condition functions
-- [ ] 5 day / 3 hour forecasts
-- [ ] 16 day / daily forecasts
-  
+Have fun and thanks for using :)
