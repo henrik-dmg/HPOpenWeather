@@ -492,6 +492,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = OpenWeatherSwift/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.henrikpanhans.OpenWeatherSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -514,6 +515,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = OpenWeatherSwift/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.henrikpanhans.OpenWeatherSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -532,6 +534,7 @@
 				AFAB242F1E50846700F2D31B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AFCD30921E4F7B1800545890 /* Build configuration list for PBXProject "OpenWeatherSwift" */ = {
 			isa = XCConfigurationList;

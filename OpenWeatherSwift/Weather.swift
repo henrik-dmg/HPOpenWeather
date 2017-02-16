@@ -48,11 +48,27 @@ extension Double {
     }
 }
 
-extension String {
+public extension String {
     func convertToDate(withFormat: String) -> Date {
+        TimeZone.ReferenceType.default = TimeZone(abbreviation: "BST")!
+        
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.ReferenceType.default
         dateFormatter.dateFormat = withFormat
         
         return dateFormatter.date(from: self)!
     }
 }
+
+public extension Date {
+    func convertToString() -> String {
+        TimeZone.ReferenceType.default = TimeZone(abbreviation: "BST")!
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.ReferenceType.default
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        return dateFormatter.string(from: self)
+    }
+}
+
