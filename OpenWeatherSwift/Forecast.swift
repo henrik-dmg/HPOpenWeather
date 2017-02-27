@@ -27,7 +27,6 @@ public struct Forecast {
     public var dt = [Double]()
     public var icon = [String]()
     
-    
     public init(data: JSON, type: ForecastType) {
         if type == .Hourly {
             self.city = data["city"]["name"].stringValue
