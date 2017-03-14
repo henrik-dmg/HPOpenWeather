@@ -46,7 +46,19 @@ public class Forecast {
                 self.dt.append(subJSON["dt"].doubleValue)
                 
                 let date = subJSON["dt_txt"].stringValue.convertToDate(withFormat: "yyyy-MM-dd HH:mm:ss")
+=======
+            for subJson in subdata.array! {
+                self.temperatures.append(subJson["main"]["temp"].doubleValue)
+                self.clouds.append(subJson["clouds"]["all"].doubleValue)
+                self.conditions.append(subJson["weather"]["main"].stringValue)
+                self.pressures.append(subJson["main"]["pressure"].doubleValue)
+                self.humidities.append(subJson["main"]["humidity"].doubleValue)
+                self.rain.append(subJson["rain"]["3h"].doubleValue)
+                self.icon.append(subJson["weather"][0]["icon"].stringValue)
+                self.dt.append(subJson["dt"].doubleValue)
+>>>>>>> 2ecab61adbb94be2b0f01da77513ca2dffdb24c0
                 
+                let date = subJson["dt_txt"].stringValue.convertToDate(withFormat: "yyyy-MM-dd HH:mm:ss")
                 self.dates.append(date)
             }
         } else {
@@ -62,7 +74,12 @@ public class Forecast {
                 self.conditions.append(subJson["weather"]["main"].stringValue)
                 self.pressures.append(subJson["main"]["pressure"].doubleValue)
                 self.humidities.append(subJson["main"]["humidity"].doubleValue)
+<<<<<<< HEAD
                 
+=======
+                self.dt.append(subJson["dt"].doubleValue)
+
+>>>>>>> 2ecab61adbb94be2b0f01da77513ca2dffdb24c0
                 let date = subJson["dt_txt"].stringValue.convertToDate(withFormat: "yyyy-MM-dd HH:mm:ss")
                 
                 self.dates.append(date)
