@@ -27,8 +27,6 @@ class OpenWeatherSwiftTests: XCTestCase {
     }
     
     func test() {
-        api.forecastWeatherByCity(name: "Berlin") { (results) in
-            print("test")
-        }
+        
     }
 }

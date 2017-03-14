@@ -13,17 +13,19 @@ public enum ForecastType: String {
     case Daily = "http://api.openweathermap.org/data/2.5/forecast/daily?"
 }
 
-public struct Forecast {
+public class Forecast {
     public var city: String
     public var country: String
     public var cityID: String
-    public var temperatures = [Int]()
-    public var clouds = [Float]()
+    public var temperatures = [Double]()
+    public var clouds = [Double]()
     public var conditions = [String]()
-    public var pressures = [Int]()
-    public var humidities = [Float]()
+    public var pressures = [Double]()
+    public var humidities = [Double]()
+    public var rain = [Double]()
     public var dates = [Date]()
-    
+    public var dt = [Double]()
+    public var icon = [String]()
     
     public init(data: JSON, type: ForecastType) {
         if type == .Hourly {
@@ -34,11 +36,14 @@ public struct Forecast {
             let subdata = data["list"]
             
             for subJSON in subdata.array! {
-                self.temperatures.append(subJSON["main"]["temp"].intValue)
-                self.clouds.append(subJSON["clouds"]["all"].floatValue)
+                self.temperatures.append(subJSON["main"]["temp"].doubleValue)
+                self.clouds.append(subJSON["clouds"]["all"].doubleValue)
                 self.conditions.append(subJSON["weather"]["main"].stringValue)
-                self.pressures.append(subJSON["main"]["pressure"].intValue)
-                self.humidities.append(subJSON["main"]["humidity"].floatValue)
+                self.pressures.append(subJSON["main"]["pressure"].doubleValue)
+                self.humidities.append(subJSON["main"]["humidity"].doubleValue)
+                self.rain.append(subJSON["rain"]["3h"].doubleValue)
+                self.icon.append(subJSON["weather"][0]["icon"].stringValue)
+                self.dt.append(subJSON["dt"].doubleValue)
                 
                 let date = subJSON["dt_txt"].stringValue.convertToDate(withFormat: "yyyy-MM-dd HH:mm:ss")
                 
@@ -52,11 +57,11 @@ public struct Forecast {
             let subdata = data["list"]
             
             for subJson in subdata.array! {
-                self.temperatures.append(subJson["main"]["temp"].intValue)
-                self.clouds.append(subJson["clouds"]["all"].floatValue)
+                self.temperatures.append(subJson["main"]["temp"].doubleValue)
+                self.clouds.append(subJson["clouds"]["all"].doubleValue)
                 self.conditions.append(subJson["weather"]["main"].stringValue)
-                self.pressures.append(subJson["main"]["pressure"].intValue)
-                self.humidities.append(subJson["main"]["humidity"].floatValue)
+                self.pressures.append(subJson["main"]["pressure"].doubleValue)
+                self.humidities.append(subJson["main"]["humidity"].doubleValue)
                 
                 let date = subJson["dt_txt"].stringValue.convertToDate(withFormat: "yyyy-MM-dd HH:mm:ss")
                 
