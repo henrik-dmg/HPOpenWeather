@@ -31,9 +31,11 @@ public class Forecast {
     public var dates = [Date]()
     public var dt = [Double]()
     public var icon = [String]()
+    public var weatherSmallDesc = [String]()
+    public var weatherDesc = [String]()
     
     public init(data: JSON, type: ForecastType) {
-        //        if type == .Hourly {
+     if type == .Hourly {
         //            self.city = data["city"]["name"].stringValue
         //            self.country = data["city"]["country"].stringValue
         //            self.cityID = data["city"]["id"].stringValue
@@ -55,7 +57,7 @@ public class Forecast {
         //
         //                self.dates.append(date as Date)
         //            }
-        //        } else {
+     } else {
         self.city = data["city"]["name"].stringValue
         self.country = data["city"]["country"].stringValue
         self.cityID = data["city"]["id"].stringValue
@@ -75,14 +77,16 @@ public class Forecast {
             self.pressures.append(subJson["pressure"].doubleValue)
             self.humidities.append(subJson["humidity"].doubleValue)
             self.icon.append(subJson["weather"][0]["icon"].stringValue)
+            self.weatherSmallDesc(subJson["weather"][0]["main"].stringValue)
+            self.weatherDesc(subJson["weather"][0]["description"].stringValue)
+            
             
             self.dt.append(subJson["dt"].doubleValue)
             
             let date = NSDate(timeIntervalSince1970: subJson["dt"].doubleValue)
-            //                let date = subJson["dt_txt"].stringValue.convertToDate(withFormat: "yyyy-MM-dd HH:mm:ss")
             
             self.dates.append(date as Date)
         }
-        //        }
+      }
     }
 }
