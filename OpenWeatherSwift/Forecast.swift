@@ -77,8 +77,8 @@ public class Forecast {
             self.pressures.append(subJson["pressure"].doubleValue)
             self.humidities.append(subJson["humidity"].doubleValue)
             self.icon.append(subJson["weather"][0]["icon"].stringValue)
-            self.weatherSmallDesc(subJson["weather"][0]["main"].stringValue)
-            self.weatherDesc(subJson["weather"][0]["description"].stringValue)
+//            self.weatherSmallDesc(subJson["weather"][0]["main"].stringValue)
+//            self.weatherDesc(subJson["weather"][0]["description"].stringValue)
             
             
             self.dt.append(subJson["dt"].doubleValue)
