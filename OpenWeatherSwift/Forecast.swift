@@ -31,8 +31,8 @@ public class Forecast {
     public var dates = [Date]()
     public var dt = [Double]()
     public var icon = [String]()
-    public var weatherSmallDesc = [String]()
-    public var weatherDesc = [String]()
+//    public var weatherSmallDesc = [String]()
+//    public var weatherDesc = [String]()
     
     public init(data: JSON, type: ForecastType) {
      if type == .Hourly {
