@@ -14,9 +14,9 @@ public enum ForecastType: String {
 }
 
 public class Forecast {
-    public var city: String
-    public var country: String
-    public var cityID: String
+    public var city: String = ""
+    public var country: String = ""
+    public var cityID: String = ""
     public var tempNight = [Double]()
     public var tempMin = [Double]()
     public var tempEve = [Double]()
