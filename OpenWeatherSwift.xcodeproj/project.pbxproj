@@ -8,33 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		4909D34302201B0D36ED0AA7 /* Pods_OpenWeatherSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABEF7AAF1618FE04518D6EAD /* Pods_OpenWeatherSwift.framework */; };
-		92676FE402DD574B07787BFC /* Pods_OpenWeatherSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C82EA37D12FF0D9BD33D4A3F /* Pods_OpenWeatherSwiftTests.framework */; };
 		AF5ABCFF1E508091008D0857 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5ABCFE1E508091008D0857 /* Forecast.swift */; };
 		AF7B02E01E5074950083F35F /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B02DF1E5074950083F35F /* Weather.swift */; };
-		AFAB24291E50846700F2D31B /* OpenWeatherSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB24281E50846700F2D31B /* OpenWeatherSwiftTests.swift */; };
-		AFAB242B1E50846700F2D31B /* OpenWeatherSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCD30981E4F7B1800545890 /* OpenWeatherSwift.framework */; };
 		AFBA5A1E1E50678F009EA7EF /* OpenWeatherSwift.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AFBA5A1D1E50678F009EA7EF /* OpenWeatherSwift.podspec */; };
 		AFCD309D1E4F7B1800545890 /* OpenWeatherSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = AFCD309B1E4F7B1800545890 /* OpenWeatherSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFCD30A41E4F7B2B00545890 /* OpenWeatherSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCD30A31E4F7B2B00545890 /* OpenWeatherSwift.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		AFAB242C1E50846700F2D31B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AFCD308F1E4F7B1800545890 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AFCD30971E4F7B1800545890;
-			remoteInfo = OpenWeatherSwift;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		36763E9BA8D1C5B323F5003E /* Pods-OpenWeatherSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenWeatherSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenWeatherSwift/Pods-OpenWeatherSwift.debug.xcconfig"; sourceTree = "<group>"; };
-		89422FDE04DFD83A21BA3010 /* Pods-OpenWeatherSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenWeatherSwiftTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenWeatherSwiftTests/Pods-OpenWeatherSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		ABEF7AAF1618FE04518D6EAD /* Pods_OpenWeatherSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenWeatherSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF5ABCFE1E508091008D0857 /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		AF7B02DF1E5074950083F35F /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		AFAB24261E50846700F2D31B /* OpenWeatherSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenWeatherSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFAB24281E50846700F2D31B /* OpenWeatherSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherSwiftTests.swift; sourceTree = "<group>"; };
 		AFAB242A1E50846700F2D31B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFBA5A1D1E50678F009EA7EF /* OpenWeatherSwift.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenWeatherSwift.podspec; sourceTree = SOURCE_ROOT; };
@@ -43,20 +28,10 @@
 		AFCD309C1E4F7B1800545890 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFCD30A31E4F7B2B00545890 /* OpenWeatherSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenWeatherSwift.swift; sourceTree = "<group>"; };
 		C82EA37D12FF0D9BD33D4A3F /* Pods_OpenWeatherSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenWeatherSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD38839E43C07AA69A4A1C46 /* Pods-OpenWeatherSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenWeatherSwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenWeatherSwiftTests/Pods-OpenWeatherSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EF51520C2CDE45D3E5186CD8 /* Pods-OpenWeatherSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenWeatherSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenWeatherSwift/Pods-OpenWeatherSwift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		AFAB24231E50846700F2D31B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AFAB242B1E50846700F2D31B /* OpenWeatherSwift.framework in Frameworks */,
-				92676FE402DD574B07787BFC /* Pods_OpenWeatherSwiftTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AFCD30941E4F7B1800545890 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -73,8 +48,6 @@
 			children = (
 				36763E9BA8D1C5B323F5003E /* Pods-OpenWeatherSwift.debug.xcconfig */,
 				EF51520C2CDE45D3E5186CD8 /* Pods-OpenWeatherSwift.release.xcconfig */,
-				DD38839E43C07AA69A4A1C46 /* Pods-OpenWeatherSwiftTests.debug.xcconfig */,
-				89422FDE04DFD83A21BA3010 /* Pods-OpenWeatherSwiftTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -112,7 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				AFCD30981E4F7B1800545890 /* OpenWeatherSwift.framework */,
-				AFAB24261E50846700F2D31B /* OpenWeatherSwiftTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,27 +116,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		AFAB24251E50846700F2D31B /* OpenWeatherSwiftTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AFAB24301E50846700F2D31B /* Build configuration list for PBXNativeTarget "OpenWeatherSwiftTests" */;
-			buildPhases = (
-				D7FF33F7931DC95F4DE35F66 /* [CP] Check Pods Manifest.lock */,
-				AFAB24221E50846700F2D31B /* Sources */,
-				AFAB24231E50846700F2D31B /* Frameworks */,
-				AFAB24241E50846700F2D31B /* Resources */,
-				BAE171628E0A0AF8C626CE9D /* [CP] Embed Pods Frameworks */,
-				52891DDE0C41A42C3CF858C7 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AFAB242D1E50846700F2D31B /* PBXTargetDependency */,
-			);
-			name = OpenWeatherSwiftTests;
-			productName = OpenWeatherSwiftTests;
-			productReference = AFAB24261E50846700F2D31B /* OpenWeatherSwiftTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		AFCD30971E4F7B1800545890 /* OpenWeatherSwift */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AFCD30A01E4F7B1800545890 /* Build configuration list for PBXNativeTarget "OpenWeatherSwift" */;
@@ -192,18 +143,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Henrik Panhans";
 				TargetAttributes = {
-					AFAB24251E50846700F2D31B = {
-						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = FMYBNSCQ2F;
-						ProvisioningStyle = Automatic;
-					};
 					AFCD30971E4F7B1800545890 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = FMYBNSCQ2F;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -221,19 +167,11 @@
 			projectRoot = "";
 			targets = (
 				AFCD30971E4F7B1800545890 /* OpenWeatherSwift */,
-				AFAB24251E50846700F2D31B /* OpenWeatherSwiftTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		AFAB24241E50846700F2D31B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AFCD30961E4F7B1800545890 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -246,51 +184,6 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		32D5FB5FAE4C075BB97BF5B5 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		52891DDE0C41A42C3CF858C7 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenWeatherSwiftTests/Pods-OpenWeatherSwiftTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BAE171628E0A0AF8C626CE9D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenWeatherSwiftTests/Pods-OpenWeatherSwiftTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D7FF33F7931DC95F4DE35F66 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -323,14 +216,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		AFAB24221E50846700F2D31B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AFAB24291E50846700F2D31B /* OpenWeatherSwiftTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AFCD30931E4F7B1800545890 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -343,41 +228,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		AFAB242D1E50846700F2D31B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AFCD30971E4F7B1800545890 /* OpenWeatherSwift */;
-			targetProxy = AFAB242C1E50846700F2D31B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		AFAB242E1E50846700F2D31B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD38839E43C07AA69A4A1C46 /* Pods-OpenWeatherSwiftTests.debug.xcconfig */;
-			buildSettings = {
-				DEVELOPMENT_TEAM = FMYBNSCQ2F;
-				INFOPLIST_FILE = OpenWeatherSwiftTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.henrikpanhans.OpenWeatherSwiftTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		AFAB242F1E50846700F2D31B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89422FDE04DFD83A21BA3010 /* Pods-OpenWeatherSwiftTests.release.xcconfig */;
-			buildSettings = {
-				DEVELOPMENT_TEAM = FMYBNSCQ2F;
-				INFOPLIST_FILE = OpenWeatherSwiftTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.henrikpanhans.OpenWeatherSwiftTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
 		AFCD309E1E4F7B1800545890 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -388,7 +239,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -396,7 +249,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -442,7 +299,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -450,7 +309,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -498,7 +361,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -520,22 +384,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.henrikpanhans.OpenWeatherSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AFAB24301E50846700F2D31B /* Build configuration list for PBXNativeTarget "OpenWeatherSwiftTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AFAB242E1E50846700F2D31B /* Debug */,
-				AFAB242F1E50846700F2D31B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		AFCD30921E4F7B1800545890 /* Build configuration list for PBXProject "OpenWeatherSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

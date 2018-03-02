@@ -40,7 +40,7 @@ public enum Language : String {
 
 public class OpenWeatherSwift {
     
-    private let currentBase = "http://api.openweathermap.org/data/2.5/weather?"
+    private let currentBase = "https://api.openweathermap.org/data/2.5/weather?"
     
     private var params = [String : AnyObject]()
     public var temperatureFormat: TemperatureUnit = .Kelvin {
@@ -118,7 +118,7 @@ public class OpenWeatherSwift {
     public func currentWeatherByCoordinates(coords: CLLocationCoordinate2D, completionHandler: @escaping (_ result: JSON) -> ()) {
         let apiURL = currentBase + "lat=\(coords.latitude)&lon=\(coords.longitude)" + encode(params: params)
         
-        Alamofire.request(apiURL).responseJSON { (response) in
+        Alamofire.request(apiURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!).responseJSON { (response) in
             if response.result.isSuccess {
                 let json = JSON(response.result.value as Any)
                 
@@ -186,7 +186,7 @@ public class OpenWeatherSwift {
         }
     }
     
-    public func forecastWeatherByID(id: String, type: ForecastType, completionHandler: @escaping (_ result: Any) -> ()) {
+    public func forecastWeatherByID(id: String, type: ForecastType, completionHandler: @escaping (_ result: JSON) -> ()) {
         let apiURL = type.rawValue + "id=\(id)" + encode(params: params)
         
         Alamofire.request(apiURL).responseJSON { (response) in
