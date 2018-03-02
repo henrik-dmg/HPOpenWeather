@@ -1,7 +1,7 @@
 # OpenWeatherSwift
 A simple API written in Swift 3 based on OpenWeatherMap.org's API
 
-To install simply add `pod 'OpenWeatherSwift'` to your Podfile
+To install simply add `pod 'HPOpenWeather'` to your Podfile
 
 **Usage:**
 
