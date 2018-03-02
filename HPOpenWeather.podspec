@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 
-  s.name         = "OpenWeatherSwift"
+  s.name         = "HPOpenWeather"
   s.version      = "1.1.0"
   s.summary      = "An API for OpenWeatherMap.org written in Swift"
 
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
 
   s.license      = { :type => "MIT", :file => "LICENSE" }
 
-  s.author             = { "Fri3ndlyGerman" => "contact@henrikpanhans.de" }
+  s.author             = { "Fri3ndlyGerman" => "henrikpanhans@icloud.com" }
   s.social_media_url   = "https://twitter.com/HPanhans"
 
   s.ios.deployment_target = "8.0"
