@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1B1328C85E81910AE08C0670 /* Pods_HPOpenWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546B25B43D6E5AB205ED1FE1 /* Pods_HPOpenWeather.framework */; };
-		4909D34302201B0D36ED0AA7 /* Pods_OpenWeatherSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABEF7AAF1618FE04518D6EAD /* Pods_OpenWeatherSwift.framework */; };
 		AF5ABCFF1E508091008D0857 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5ABCFE1E508091008D0857 /* Forecast.swift */; };
 		AF7B02E01E5074950083F35F /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B02DF1E5074950083F35F /* Weather.swift */; };
 		AFCD309D1E4F7B1800545890 /* OpenWeatherSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = AFCD309B1E4F7B1800545890 /* OpenWeatherSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -17,22 +16,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		36763E9BA8D1C5B323F5003E /* Pods-OpenWeatherSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenWeatherSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenWeatherSwift/Pods-OpenWeatherSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		546B25B43D6E5AB205ED1FE1 /* Pods_HPOpenWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HPOpenWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		795E58A63F19CC4F29AA7561 /* Pods-HPOpenWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPOpenWeather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HPOpenWeather/Pods-HPOpenWeather.debug.xcconfig"; sourceTree = "<group>"; };
-		ABEF7AAF1618FE04518D6EAD /* Pods_OpenWeatherSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenWeatherSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF5ABCFE1E508091008D0857 /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		AF7B02DF1E5074950083F35F /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		AFAB24281E50846700F2D31B /* OpenWeatherSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherSwiftTests.swift; sourceTree = "<group>"; };
-		AFAB242A1E50846700F2D31B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFCD30981E4F7B1800545890 /* HPOpenWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HPOpenWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFCD309B1E4F7B1800545890 /* OpenWeatherSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenWeatherSwift.h; sourceTree = "<group>"; };
 		AFCD309C1E4F7B1800545890 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFCD30A31E4F7B2B00545890 /* HPOpenWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HPOpenWeather.swift; sourceTree = "<group>"; };
 		B104D0A99E9F2BAADFCA60C8 /* Pods-HPOpenWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPOpenWeather.release.xcconfig"; path = "Pods/Target Support Files/Pods-HPOpenWeather/Pods-HPOpenWeather.release.xcconfig"; sourceTree = "<group>"; };
 		C3DF2C1D2123226F00D8B636 /* HPOpenWeather.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HPOpenWeather.podspec; sourceTree = SOURCE_ROOT; };
-		C82EA37D12FF0D9BD33D4A3F /* Pods_OpenWeatherSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenWeatherSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF51520C2CDE45D3E5186CD8 /* Pods-OpenWeatherSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenWeatherSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenWeatherSwift/Pods-OpenWeatherSwift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +33,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4909D34302201B0D36ED0AA7 /* Pods_OpenWeatherSwift.framework in Frameworks */,
 				1B1328C85E81910AE08C0670 /* Pods_HPOpenWeather.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,8 +43,6 @@
 		2020E830BEF3625D7EF90628 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				36763E9BA8D1C5B323F5003E /* Pods-OpenWeatherSwift.debug.xcconfig */,
-				EF51520C2CDE45D3E5186CD8 /* Pods-OpenWeatherSwift.release.xcconfig */,
 				795E58A63F19CC4F29AA7561 /* Pods-HPOpenWeather.debug.xcconfig */,
 				B104D0A99E9F2BAADFCA60C8 /* Pods-HPOpenWeather.release.xcconfig */,
 			);
@@ -62,28 +52,16 @@
 		832BC8D608201E720E1FE47A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ABEF7AAF1618FE04518D6EAD /* Pods_OpenWeatherSwift.framework */,
-				C82EA37D12FF0D9BD33D4A3F /* Pods_OpenWeatherSwiftTests.framework */,
 				546B25B43D6E5AB205ED1FE1 /* Pods_HPOpenWeather.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		AFAB24271E50846700F2D31B /* OpenWeatherSwiftTests */ = {
-			isa = PBXGroup;
-			children = (
-				AFAB24281E50846700F2D31B /* OpenWeatherSwiftTests.swift */,
-				AFAB242A1E50846700F2D31B /* Info.plist */,
-			);
-			path = OpenWeatherSwiftTests;
 			sourceTree = "<group>";
 		};
 		AFCD308E1E4F7B1800545890 = {
 			isa = PBXGroup;
 			children = (
 				C3DF2C1D2123226F00D8B636 /* HPOpenWeather.podspec */,
-				AFCD309A1E4F7B1800545890 /* OpenWeatherSwift */,
-				AFAB24271E50846700F2D31B /* OpenWeatherSwiftTests */,
+				AFCD309A1E4F7B1800545890 /* HPOpenWeather */,
 				AFCD30991E4F7B1800545890 /* Products */,
 				2020E830BEF3625D7EF90628 /* Pods */,
 				832BC8D608201E720E1FE47A /* Frameworks */,
@@ -98,7 +76,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AFCD309A1E4F7B1800545890 /* OpenWeatherSwift */ = {
+		AFCD309A1E4F7B1800545890 /* HPOpenWeather */ = {
 			isa = PBXGroup;
 			children = (
 				AFCD30A31E4F7B2B00545890 /* HPOpenWeather.swift */,
@@ -107,7 +85,7 @@
 				AFCD309B1E4F7B1800545890 /* OpenWeatherSwift.h */,
 				AFCD309C1E4F7B1800545890 /* Info.plist */,
 			);
-			path = OpenWeatherSwift;
+			path = HPOpenWeather;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,11 +330,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = OpenWeatherSwift/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/HPOpenWeather/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.henrikpanhans.OpenWeatherSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.henrikpanhans.HPOpenWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -375,11 +353,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = OpenWeatherSwift/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/HPOpenWeather/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.henrikpanhans.OpenWeatherSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.henrikpanhans.HPOpenWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
