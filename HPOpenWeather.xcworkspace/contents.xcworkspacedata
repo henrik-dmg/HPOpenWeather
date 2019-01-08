@@ -2,9 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:OpenWeatherSwift.xcodeproj">
+      location = "group:/Users/henrikpanhans/Xcode/OpenWeatherSwift/HPOpenWeather.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:HPOpenWeather.xcodeproj">
    </FileRef>
 </Workspace>
