@@ -11,22 +11,24 @@ import Foundation
 /// Declares which forecast endpoint should be used
 public enum ForecastType: String {
     
-    /// Returns hourly forecast for the next 96 hours
+    /// Returns hourly forecast for the next 96 hours. Available for Developer, Professional and Enterprise accounts
     case hourly = "http://api.openweathermap.org/data/2.5/forecast/hourly?"
     
-    /// Returns the forecast for the next 5 days in a 3 hour interval
+    /// Returns the forecast for the next 5 days in a 3 hour interval. Available for all accounts
     case threeHourly = "http://api.openweathermap.org/data/2.5/forecast?"
     
-    /// Returns the daily forecast for the next 16 days
+    /// Returns the daily forecast for the next 16 days. Available for all paid accounts
     case daily = "http://api.openweathermap.org/data/2.5/forecast/daily?"
 }
 
+/// Declares which temperature unit is uses in API response
 public enum TemperatureUnit: String {
     case celsius = "metric"
     case fahrenheit = "imperial"
-    case kelvin = ""
+    case kelvin
 }
 
+/// Declares which language is uses in API response
 public enum Language : String {
     case english = "en",
     russian = "ru",

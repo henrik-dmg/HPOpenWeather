@@ -16,21 +16,33 @@ public class HPOpenWeather {
     private var params = [String : String]()
     private var iconCache = [String : UIImage]()
     
+    /// Specifies the temperature format used in the API response
     public var temperatureFormat: TemperatureUnit = .celsius {
         didSet {
             params["units", default: "metric"] = temperatureFormat.rawValue
         }
     }
+    /// Specifies the language used in the API response
     public var language: Language = .english {
         didSet {
             params["lang", default: "en"] = language.rawValue
         }
     }
+    
+    /**
+     [here]: https://openweathermap.org/api "Obtain API key"
+     
+     The API key used to authenticate API requests. If you don't have one yet, obtain one at [here]
+    */
     private var apiKey: String? {
         didSet {
             params["appid"] = apiKey
         }
     }
+    
+    /**
+     Boolean indicating weather already loaded weather icons should be stored in cache or not
+    */
     public var enableIconCaching: Bool = true {
         didSet {
             if self.enableIconCaching == false {
@@ -42,6 +54,14 @@ public class HPOpenWeather {
         }
     }
     
+    /**
+     [here]: https://openweathermap.org/api "Obtain API key"
+     
+     Initialiser which required an API key and optional parameters to modify response format
+     
+     - Parameters:
+        - apiKey: The API key used to authenticate API requests. If you don't have one yet, obtain one at [here]
+    */
     public convenience init(apiKey: String, temperatureFormat: TemperatureUnit = .celsius, lang: Language = .english) {
         self.init()
         self.apiKey = apiKey
@@ -49,21 +69,33 @@ public class HPOpenWeather {
         self.temperatureFormat = temperatureFormat
     }
     
-    public func getIconFromID(id: String) -> UIImage {
-        // TODO: Use URLSession here to make it asynchronous
-        
-        let url = URL(string: "http://openweathermap.org/img/w/\(id).png")
-        do {
-            
-            let data = try Data.init(contentsOf: url!)
-            let image = UIImage(data: data)
-            
-            return image!
-        } catch {
-            print("error")
+    public func getIconFrom(id: String, completion: @escaping (UIImage?) -> ()) {
+        if self.enableIconCaching {
+            if let cachedImage = self.iconCache[id] {
+                print("Found cached icon")
+                completion(cachedImage)
+                return
+            }
         }
         
-        return UIImage()
+        print("Icon was not in cache, requesting it now")
+        let url = URL(string: "http://openweathermap.org/img/w/\(id).png")!
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data, error != nil else {
+                print(error?.localizedDescription ?? "No Error Description")
+                completion(nil)
+                return
+            }
+            
+            if let image = UIImage(data: data) {
+                if self.enableIconCaching {
+                    self.iconCache[id] = image
+                }
+                completion(image)
+            } else {
+                completion(nil)
+            }
+        }.resume()
     }
     
     /**
