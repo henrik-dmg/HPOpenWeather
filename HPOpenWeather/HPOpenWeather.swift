@@ -118,27 +118,9 @@ public class HPOpenWeather {
     public func requestCurrentWeather<T: WeatherRequest>(with request: T, completion: @escaping (_ weather: Weather?, _ error: Error?) -> ()) {
         let jsonData = try? JSONSerialization.data(withJSONObject: request.parameters(), options: .prettyPrinted)
         
-        // Configures the URLRequest and inserts the JSON header
-        let url = URL(string: HPOpenWeather.baseURL)!
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "POST"
-        urlRequest.httpBody = jsonData
-        
-        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            guard let data = data, error != nil else {
-                completion(nil, error)
-                return
-            }
+        self.request(url: HPOpenWeather.baseURL.url(), with: jsonData) { (json, error) in
             
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            if let responseJSON = responseJSON as? [String: Any] {
-                let weather = Weather(data: responseJSON)
-                
-                completion(weather, error)
-            } else {
-                completion(nil, error)
-            }
-        }.resume()
+        }
     }
     
     /**
@@ -149,6 +131,37 @@ public class HPOpenWeather {
  
     **/
     public func requestForecast<T: WeatherRequest>(with request: T, forecastType: ForecastType) {
+        let jsonData = try? JSONSerialization.data(withJSONObject: request.parameters(), options: .prettyPrinted)
         
+        self.request(url: forecastType.rawValue.url(), with: jsonData) { (json, error) in
+            
+        }
+    }
+    
+    private func request(url: URL, with htmlBody: Data?, completion: @escaping (_ json: [String:Any]?, _ error: Error?) -> ()) {
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
+        urlRequest.httpBody = htmlBody
+        
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            guard let data = data, error != nil else {
+                completion(nil, error)
+                return
+            }
+            
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any] {
+                completion(responseJSON, error)
+            } else {
+                completion(nil, error)
+            }
+        }.resume()
+    }
+}
+
+// WARNING: Do NOT use this in production, or you'll burn in hell
+extension String {
+    func url() -> URL {
+        return URL(string: self)!
     }
 }
