@@ -9,53 +9,69 @@
 import Foundation
 import CoreLocation
 
-public class WeatherRequest {
-    private var searchCriteria: SearchCriteria = .cityName
-    public var coordinates: CLLocationCoordinate2D? {
-        didSet {
-            searchCriteria = .location
-        }
-    }
-    public var cityId: String? {
-        didSet {
-            searchCriteria = .cityId
-        }
-    }
-    public var cityName: String? {
-        didSet {
-            searchCriteria = .cityName
-        }
-    }
-    public var zipCode: (zipCode: String, countryCode: String)? {
-        didSet {
-            searchCriteria = .zipCode
-        }
+public protocol WeatherRequest {
+    func parameters() -> [String:Any]
+}
+
+public class LocationRequest: WeatherRequest {
+    public func parameters() -> [String : Any] {
+        return ["lat": coordinates.latitude,
+                "lon": coordinates.longitude]
     }
     
-    public convenience init(coordinates: CLLocationCoordinate2D) {
-        self.init()
+    public var coordinates: CLLocationCoordinate2D
+    
+    public init(_ coordinates: CLLocationCoordinate2D) {
         self.coordinates = coordinates
     }
+}
+
+public class CityNameRequest: WeatherRequest {
+    public func parameters() -> [String : Any] {
+        var param = self.cityName
+        if self.countryCode != nil {
+            param.append(",\(self.countryCode!)")
+        }
+        return ["q": param]
+    }
     
-    public convenience init(cityName: String) {
-        self.init()
+    public var cityName: String
+    public var countryCode: String?
+    
+    public init(_ cityName: String, countryCode: String?) {
         self.cityName = cityName
-    }
-    
-    public convenience init(cityId: String) {
-        self.init()
-        self.cityId = cityId
-    }
-    
-    public convenience init(zipCode: String, countryCode: String) {
-        self.init()
-        self.zipCode = (zipCode, countryCode)
-    }
-    
-    private enum SearchCriteria {
-        case cityName
-        case zipCode
-        case cityId
-        case location
+        self.countryCode = countryCode
     }
 }
+
+public class CityIdRequest: WeatherRequest {
+    public func parameters() -> [String : Any] {
+        return ["id": self.cityId]
+    }
+    
+    public var cityId: String
+    
+    public init(_ cityId: String) {
+        self.cityId = cityId
+    }
+}
+
+public class ZipCodeRequest: WeatherRequest {
+    public func parameters() -> [String : Any] {
+        var param = self.zipCode
+        if self.countryCode != nil {
+            param.append(",\(self.countryCode!)")
+        }
+        return ["zip": param]
+    }
+    
+    public var zipCode: String
+    public var countryCode: String?
+    
+    public init(zipCode: String, countryCode: String?) {
+        self.zipCode = zipCode
+        self.countryCode = countryCode
+    }
+}
+
+
