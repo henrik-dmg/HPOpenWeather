@@ -7,18 +7,25 @@
 //
 
 import UIKit
-import HPOpenWeather
 
 class ViewController: UIViewController {
-
-    var api: HPOpenWeather?
-    var apiKey: String = "--- USE YOUR OWN API KEY HERE ---"
+    
+    @IBOutlet weak var weatherView: WeatherView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.api = HPOpenWeather(apiKey: apiKey)
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        weatherView.apiKey = "--- YOUR API KEY GOES HERE ---"
+        weatherView.requestLocationAccess()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 }
 

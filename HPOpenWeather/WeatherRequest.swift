@@ -11,16 +11,16 @@ import CoreLocation
 
 /// Generic protocol that returns the parameters needed for an API call
 public protocol WeatherRequest {
-    func parameters() -> [String:Any]
+    func parameters() -> [URLQueryItem]
 }
 
 /**
  A request that uses coordinates
 */
 public class LocationRequest: WeatherRequest {
-    public func parameters() -> [String : Any] {
-        return ["lat": coordinates.latitude,
-                "lon": coordinates.longitude]
+    public func parameters() -> [URLQueryItem] {
+        return [URLQueryItem(name: "lat", value: "\(coordinates.latitude)"),
+                URLQueryItem(name: "lon", value: "\(coordinates.longitude)")]
     }
     
     public var coordinates: CLLocationCoordinate2D
@@ -36,12 +36,13 @@ public class LocationRequest: WeatherRequest {
  A request that uses a city name and optional country code (use ISO 3166 country codes). For a full list, see [Wikipedia]
 */
 public class CityNameRequest: WeatherRequest {
-    public func parameters() -> [String : Any] {
+    public func parameters() -> [URLQueryItem] {
         var param = self.cityName
         if self.countryCode != nil {
             param.append(",\(self.countryCode!)")
         }
-        return ["q": param]
+        
+        return [URLQueryItem(name: "q", value: param)]
     }
     
     public var cityName: String
@@ -60,8 +61,8 @@ public class CityNameRequest: WeatherRequest {
  
 */
 public class CityIdRequest: WeatherRequest {
-    public func parameters() -> [String : Any] {
-        return ["id": self.cityId]
+    public func parameters() -> [URLQueryItem] {
+        return [URLQueryItem(name: "id", value: self.cityId)]
     }
     
     public var cityId: String
@@ -79,12 +80,12 @@ public class CityIdRequest: WeatherRequest {
  
 */
 public class ZipCodeRequest: WeatherRequest {
-    public func parameters() -> [String : Any] {
+    public func parameters() -> [URLQueryItem] {
         var param = self.zipCode
         if self.countryCode != nil {
             param.append(",\(self.countryCode!)")
         }
-        return ["zip": param]
+        return [URLQueryItem(name: "zip", value: param)]
     }
     
     public var zipCode: String

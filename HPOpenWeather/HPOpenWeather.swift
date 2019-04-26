@@ -13,19 +13,19 @@ import Foundation
 public class HPOpenWeather {
     
     static let baseURL = "https://api.openweathermap.org/data/2.5/weather?"
-    private var params = [String : String]()
+    private var params = [String : URLQueryItem]()
     private var iconCache = [String : UIImage]()
     
     /// Specifies the temperature format used in the API response
     public var temperatureFormat: TemperatureUnit = .celsius {
         didSet {
-            params["units", default: "metric"] = temperatureFormat.rawValue
+            params["units"] = URLQueryItem(name: "units", value: self.temperatureFormat.rawValue)
         }
     }
     /// Specifies the language used in the API response
     public var language: Language = .english {
         didSet {
-            params["lang", default: "en"] = language.rawValue
+            params["lang"] = URLQueryItem(name: "lang", value: self.language.rawValue)
         }
     }
     
@@ -36,7 +36,7 @@ public class HPOpenWeather {
     */
     private var apiKey: String? {
         didSet {
-            params["appid"] = apiKey
+            params["appid"] = URLQueryItem(name: "appid", value: self.apiKey)
         }
     }
     
@@ -64,11 +64,14 @@ public class HPOpenWeather {
         - temperatureFormat: The temperature format used in API responses
         - language: The language used in API responses
     */
-    public convenience init(apiKey: String, temperatureFormat: TemperatureUnit = .celsius, language: Language = .english) {
-        self.init()
+    public init(apiKey: String, temperatureFormat: TemperatureUnit = .celsius, language: Language = .english) {
+        setter(apiKey, tempFormat: temperatureFormat, lang: language)
+    }
+    
+    private func setter(_ apiKey: String, tempFormat: TemperatureUnit, lang: Language) {
         self.apiKey = apiKey
-        self.language = language
-        self.temperatureFormat = temperatureFormat
+        self.temperatureFormat = tempFormat
+        self.language = lang
     }
     
     /**
@@ -80,7 +83,8 @@ public class HPOpenWeather {
     */
     public func getIconFrom(id: String, completion: @escaping (UIImage?) -> ()) {
         if self.enableIconCaching {
-            if let cachedImage = self.iconCache[id] {
+            if self.iconCache[id] != nil {
+                let cachedImage = self.iconCache[id]
                 print("Found cached icon")
                 completion(cachedImage)
                 return
@@ -116,10 +120,11 @@ public class HPOpenWeather {
         - error: An error object that indicates why the request failed, or nil if the request was successful.
      **/
     public func requestCurrentWeather<T: WeatherRequest>(with request: T, completion: @escaping (_ weather: Weather?, _ error: Error?) -> ()) {
-        let jsonData = try? JSONSerialization.data(withJSONObject: request.parameters(), options: .prettyPrinted)
+        var url = HPOpenWeather.baseURL.url()
+        url.add(request.parameters())
         
-        self.request(url: HPOpenWeather.baseURL.url(), with: jsonData) { (json, error) in
-            
+        self.request(url: &url) { (json, error) in
+            completion(nil, nil)
         }
     }
     
@@ -131,26 +136,28 @@ public class HPOpenWeather {
  
     **/
     public func requestForecast<T: WeatherRequest>(with request: T, forecastType: ForecastType) {
-        let jsonData = try? JSONSerialization.data(withJSONObject: request.parameters(), options: .prettyPrinted)
+        var url = forecastType.rawValue.url()
+        url.add(request.parameters())
         
-        self.request(url: forecastType.rawValue.url(), with: jsonData) { (json, error) in
-            
+        self.request(url: &url) { (json, error) in
+            print(json, error)
         }
     }
     
-    private func request(url: URL, with htmlBody: Data?, completion: @escaping (_ json: [String:Any]?, _ error: Error?) -> ()) {
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "POST"
-        urlRequest.httpBody = htmlBody
+    private func request(url: inout URL, completion: @escaping (_ json: [String:Any]?, _ error: Error?) -> ()) {
+        let values = Array(self.params.values)
+        url.add(values)
+        let urlRequest = URLRequest(url: url)
         
-        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            guard let data = data, error != nil else {
+        URLSession.shared.dataTask(with: urlRequest) { (testdata, response, error) in
+            guard let data = testdata, error == nil else {
                 completion(nil, error)
                 return
             }
             
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
+                print(responseJSON)
                 completion(responseJSON, error)
             } else {
                 completion(nil, error)
@@ -163,5 +170,31 @@ public class HPOpenWeather {
 extension String {
     func url() -> URL {
         return URL(string: self)!
+    }
+}
+
+extension URL {
+    mutating func add(_ queryItems: [URLQueryItem]) {
+        guard var urlComponents = URLComponents(string: absoluteString) else {
+            self = absoluteURL
+            return
+        }
+        
+        // Create array of existing query items
+        var existingItems = urlComponents.queryItems ?? []
+        existingItems.append(contentsOf: queryItems)
+        
+        var dictionary = [String:URLQueryItem]()
+        existingItems.forEach { (item) in
+            dictionary[item.name] = item
+        }
+        
+        existingItems = []
+        dictionary.forEach { (key, value) in
+            existingItems.append(value)
+        }
+        
+        urlComponents.queryItems = existingItems
+        self = urlComponents.url!
     }
 }
