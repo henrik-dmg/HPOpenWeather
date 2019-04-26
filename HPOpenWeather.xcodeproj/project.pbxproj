@@ -15,6 +15,7 @@
 		26DF15DA2273975000F474A8 /* WeatherRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D42273974F00F474A8 /* WeatherRequest.swift */; };
 		26DF15DB2273975000F474A8 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D52273974F00F474A8 /* Forecast.swift */; };
 		26DF15DC2273975000F474A8 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D62273975000F474A8 /* Enums.swift */; };
+		26DF15E02273B6FE00F474A8 /* HPOpenWeather.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 26DF15DF2273B6FE00F474A8 /* HPOpenWeather.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		26DF15D42273974F00F474A8 /* WeatherRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherRequest.swift; sourceTree = "<group>"; };
 		26DF15D52273974F00F474A8 /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		26DF15D62273975000F474A8 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		26DF15DF2273B6FE00F474A8 /* HPOpenWeather.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HPOpenWeather.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 		26DF15AD2273970B00F474A8 = {
 			isa = PBXGroup;
 			children = (
+				26DF15DF2273B6FE00F474A8 /* HPOpenWeather.podspec */,
 				26DF15B92273970C00F474A8 /* HPOpenWeather */,
 				26DF15C42273970C00F474A8 /* HPOpenWeatherTests */,
 				26DF15B82273970C00F474A8 /* Products */,
@@ -193,6 +196,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26DF15E02273B6FE00F474A8 /* HPOpenWeather.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +376,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = HPOpenWeather/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -399,6 +404,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = HPOpenWeather/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
