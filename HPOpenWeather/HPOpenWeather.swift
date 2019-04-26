@@ -61,14 +61,23 @@ public class HPOpenWeather {
      
      - Parameters:
         - apiKey: The API key used to authenticate API requests. If you don't have one yet, obtain one at [here]
+        - temperatureFormat: The temperature format used in API responses
+        - language: The language used in API responses
     */
-    public convenience init(apiKey: String, temperatureFormat: TemperatureUnit = .celsius, lang: Language = .english) {
+    public convenience init(apiKey: String, temperatureFormat: TemperatureUnit = .celsius, language: Language = .english) {
         self.init()
         self.apiKey = apiKey
-        self.language = lang
+        self.language = language
         self.temperatureFormat = temperatureFormat
     }
     
+    /**
+     Requests the icon with the specified ID from the server or loads it from cache if applicable
+     
+     - Parameters:
+        - id: The ID of the the icon to load
+        - completion: Completion block which contains optional UIImage
+    */
     public func getIconFrom(id: String, completion: @escaping (UIImage?) -> ()) {
         if self.enableIconCaching {
             if let cachedImage = self.iconCache[id] {
@@ -99,14 +108,37 @@ public class HPOpenWeather {
     }
     
     /**
-     Requests the current weather using the specified WeatherRequest object
+     Requests the current weather using the specified WeatherRequest object. You can pass any object that conforms to WeatherRequest protocol
      
      - Parameters:
         - request: The WeatherRequest object used to make the request
-     
+        - weather: A Weather object which is returned, or nil if the request failed
+        - error: An error object that indicates why the request failed, or nil if the request was successful.
      **/
-    public func requestCurrentWeather<T: WeatherRequest>(with request: T) {
+    public func requestCurrentWeather<T: WeatherRequest>(with request: T, completion: @escaping (_ weather: Weather?, _ error: Error?) -> ()) {
+        let jsonData = try? JSONSerialization.data(withJSONObject: request.parameters(), options: .prettyPrinted)
         
+        // Configures the URLRequest and inserts the JSON header
+        let url = URL(string: HPOpenWeather.baseURL)!
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
+        urlRequest.httpBody = jsonData
+        
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            guard let data = data, error != nil else {
+                completion(nil, error)
+                return
+            }
+            
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any] {
+                let weather = Weather(data: responseJSON)
+                
+                completion(weather, error)
+            } else {
+                completion(nil, error)
+            }
+        }.resume()
     }
     
     /**

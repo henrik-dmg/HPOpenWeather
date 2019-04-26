@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-/// Generic protocol that returns the parameters need for an API call
+/// Generic protocol that returns the parameters needed for an API call
 public protocol WeatherRequest {
     func parameters() -> [String:Any]
 }
