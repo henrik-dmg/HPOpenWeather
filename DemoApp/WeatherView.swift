@@ -13,6 +13,15 @@ import CoreLocation
 
 class WeatherView: NibLoadingView {
     
+    @IBOutlet weak var mainLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var pressureLabel: UILabel!
+    @IBOutlet weak var cloudLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var windLabel: UILabel!
+    @IBOutlet weak var sunLabel: UILabel!
+    
     private var locationManager: CLLocationManager?
     private var api: HPOpenWeather?
     @IBInspectable public var apiKey: String? {
@@ -43,7 +52,11 @@ class WeatherView: NibLoadingView {
                 return
             }
             
-            print(weather.rain)
+            DispatchQueue.main.async {
+                self.mainLabel.text = weather.conditions.first?.main
+                self.cityLabel.text = weather.name
+                self.tempLabel.text = "\(Int(weather.main.temperature))°"
+            }
         }
     }
 }

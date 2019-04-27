@@ -92,9 +92,9 @@ public class HPOpenWeather {
         }
         
         print("Icon was not in cache, requesting it now")
-        let url = URL(string: "http://openweathermap.org/img/w/\(id).png")!
+        let url = URL(string: "https://openweathermap.org/img/w/\(id).png")!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data, error != nil else {
+            guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No Error Description")
                 completion(nil)
                 return
