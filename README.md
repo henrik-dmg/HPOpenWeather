@@ -3,9 +3,10 @@
 </p>
 
 ## Disclaimer: This documentation is outdated, I'm the process of rewriting the whole library
-A simple API written in Swift 3 based on OpenWeatherMap.org's API
 
-To install simply add `pod 'HPOpenWeather'` to your Podfile
+## Installation
+HPOpenWeather supports iOS 10.0+, watchOS 2.0+
+To install simply add `pod 'HPOpenWeather'` to your Podfile, or add `github "henrik-dmg/HPOpenWeather" ~> 2.0.0`
 
 **Usage:**
 
