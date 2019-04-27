@@ -1,4 +1,6 @@
-# OpenWeatherSwift
+<p align="center">
+    <img src="https://imgur.com/download/VD8CWFH" alt="Storage" />
+</p>
 
 ## Disclaimer: This documentation is outdated, I'm the process of rewriting the whole library
 A simple API written in Swift 3 based on OpenWeatherMap.org's API
@@ -35,13 +37,13 @@ var newApi = OpenWeatherSwift(apiKey: "_your_api_key_goes_here", temperatureForm
   - Croatian
   - Catalan
   
-  
 - Temperature Format
   - Celsius
   - Kelvin
   - Fahrenheit
   
   
+
 **The following functions are available:**
 The result will always be a JSON object, whose values can be accessed. Additionally, you can create a Weather() object to conveniently access the JSON data.
 
