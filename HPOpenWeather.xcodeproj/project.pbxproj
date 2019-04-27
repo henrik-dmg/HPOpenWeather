@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2635DBE3227483BC004BB3CB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2635DBE2227483BC004BB3CB /* Extension.swift */; };
 		26DF15C12273970C00F474A8 /* HPOpenWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26DF15B72273970C00F474A8 /* HPOpenWeather.framework */; };
 		26DF15C62273970C00F474A8 /* HPOpenWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15C52273970C00F474A8 /* HPOpenWeatherTests.swift */; };
 		26DF15C82273970C00F474A8 /* HPOpenWeather.h in Headers */ = {isa = PBXBuildFile; fileRef = 26DF15BA2273970C00F474A8 /* HPOpenWeather.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -61,6 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2635DBE2227483BC004BB3CB /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		26DF15B72273970C00F474A8 /* HPOpenWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HPOpenWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26DF15BA2273970C00F474A8 /* HPOpenWeather.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPOpenWeather.h; sourceTree = "<group>"; };
 		26DF15BB2273970C00F474A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				26DF15D22273974F00F474A8 /* Weather.swift */,
 				26DF15D52273974F00F474A8 /* Forecast.swift */,
 				26DF15D62273975000F474A8 /* Enums.swift */,
+				2635DBE2227483BC004BB3CB /* Extension.swift */,
 				26DF15BA2273970C00F474A8 /* HPOpenWeather.h */,
 				26DF15BB2273970C00F474A8 /* Info.plist */,
 			);
@@ -330,6 +333,7 @@
 				26DF15DA2273975000F474A8 /* WeatherRequest.swift in Sources */,
 				26DF15D82273975000F474A8 /* Weather.swift in Sources */,
 				26DF15D92273975000F474A8 /* HPOpenWeather.swift in Sources */,
+				2635DBE3227483BC004BB3CB /* Extension.swift in Sources */,
 				26DF15DC2273975000F474A8 /* Enums.swift in Sources */,
 				26DF15DB2273975000F474A8 /* Forecast.swift in Sources */,
 			);

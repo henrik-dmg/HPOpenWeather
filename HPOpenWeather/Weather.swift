@@ -7,69 +7,92 @@
 //
 
 import Foundation
+import CoreLocation
 
-public class Weather {
-//    public var humidity: Int
-//    public var id: Int
-//    public var clouds: Float
-//    public var country: String
-//    public var visibility: Int
-//    public var airPressure: Int
-//    
-//    public var temperature: Int
-//    public var low: Int
-//    public var high: Int
-//    public var location: String
-//    public var condition: String
-//    public var icon: String
+public struct Weather {
     
+    init(_ codable: CodableWeather) {
+        
+    }
+}
+
+public struct CodableWeather: Codable {
+    public var id: Int
+    public var name: String
+    private var timeOfCalculation: Date
+    public var coordinates: Coordinates
+    public var system: System
+    public var main: Main
+    public var wind: Wind
+    public var weather: [WeatherCondition]
     
-    public init(data: [String:Any]) {
-//        self.humidity = data["main"]["humidity"].intValue
-//        self.id = data["id"].intValue
-//        self.clouds = data["clouds"]["all"].floatValue
-//        self.country = data["sys"]["country"].stringValue
-//        self.visibility = data["visibility"].intValue
-//        self.airPressure = data["main"]["pressure"].intValue
-//        self.temperature = data["main"]["temp"].intValue
-//        self.low = data["main"]["temp_min"].intValue
-//        self.high = data["main"]["temp_max"].intValue
-//        self.location = data["name"].stringValue
-//        self.condition = data["weather"][0]["main"].stringValue
-//        self.icon = data["weather"][0]["icon"].stringValue
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case timeOfCalculation = "dt"
+        case coordinates = "coord"
+        case system = "sys"
+        case main
+        case wind
+        case weather
+    }
+    
+    public struct Coordinates: Codable {
+        public var longitude: Double
+        public var latitude: Double
+        
+        func object() -> CLLocationCoordinate2D {
+            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        }
+        
+        enum CodingKeys: String, CodingKey {
+            case longitude = "lon"
+            case latitude = "lat"
+        }
+    }
+    
+    public struct System: Codable {
+        var countryCode: String
+        var sunrise: Date
+        var sunset: Date
+        
+        enum CodingKeys: String, CodingKey {
+            case countryCode = "country"
+            case sunrise
+            case sunset
+        }
+    }
+    
+    public struct Main: Codable {
+        var temperature: Double
+        var humidity: Int
+        var pressure: Int
+        var temperatureMin: Double
+        var temperatureMax: Double
+        
+        enum CodingKeys: String, CodingKey {
+            case temperature = "temp"
+            case humidity
+            case pressure
+            case temperatureMin = "temp_min"
+            case temperatureMax = "temp_max"
+        }
+    }
+    
+    public struct Wind: Codable {
+        var speed: Double
+        var degrees: Double
+        
+        enum CodingKeys: String, CodingKey {
+            case speed
+            case degrees = "deg"
+        }
     }
 }
 
-extension Double {
-    func convertTimeToString() -> String {
-        let currentDateTime = Date(timeIntervalSince1970: self)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM hh:mm"
-        return dateFormatter.string(from: currentDateTime)
-    }
+public struct WeatherCondition: Codable {
+    public var id: Int
+    public var main: String
+    public var description: String
+    public var icon: String
 }
-
-public extension String {
-    func convertToDate(withFormat: String) -> Date {
-        TimeZone.ReferenceType.default = TimeZone(abbreviation: "BST")!
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.ReferenceType.default
-        dateFormatter.dateFormat = withFormat
-        
-        return dateFormatter.date(from: self)!
-    }
-}
-
-public extension Date {
-    func convertToString() -> String {
-        TimeZone.ReferenceType.default = TimeZone(abbreviation: "BST")!
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.ReferenceType.default
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        return dateFormatter.string(from: self)
-    }
-}
-

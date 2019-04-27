@@ -23,12 +23,22 @@ class HPOpenWeatherTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testQueryItems() {
+        let firstItems = [URLQueryItem(name: "test1", value: "firstTestString"),
+                          URLQueryItem(name: "test2", value: "firstTestString2"),
+                          URLQueryItem(name: "test3", value: "firstTestString3")]
+        
+        let secondItems = [URLQueryItem(name: "test3", value: "firstTestString3"),
+                          URLQueryItem(name: "test4", value: "firstTestString4"),
+                          URLQueryItem(name: "test5", value: "firstTestString5")]
+        
+        var url = HPOpenWeather.baseURL.url()
+        url.add(firstItems)
+        url.add(secondItems)
+        
+        let components = URLComponents(string: url.absoluteString)
+        
+        XCTAssert(components?.queryItems?.count == 5)
     }
-
 }

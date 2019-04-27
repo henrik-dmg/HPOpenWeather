@@ -118,13 +118,16 @@ public class HPOpenWeather {
         - request: The WeatherRequest object used to make the request
         - weather: A Weather object which is returned, or nil if the request failed
         - error: An error object that indicates why the request failed, or nil if the request was successful.
-     **/
+     */
     public func requestCurrentWeather<T: WeatherRequest>(with request: T, completion: @escaping (_ weather: Weather?, _ error: Error?) -> ()) {
         var url = HPOpenWeather.baseURL.url()
         url.add(request.parameters())
         
         self.request(url: &url) { (json, error) in
-            completion(nil, nil)
+            guard let json = json else {
+                completion(nil, error)
+                return
+            }
         }
     }
     
@@ -133,8 +136,8 @@ public class HPOpenWeather {
      
      - Parameters:
         - request: The ForecastRequest object used to make the request
- 
-    **/
+        - forecastType: Type specifying which API endpoint is used to request the forecast
+    */
     public func requestForecast<T: WeatherRequest>(with request: T, forecastType: ForecastType) {
         var url = forecastType.rawValue.url()
         url.add(request.parameters())
@@ -154,24 +157,18 @@ public class HPOpenWeather {
         - json: Dictionary containing the response in JSON format
         - error: An error object that indicates why the request failed, or nil if the request was successful.
     */
-    private func request(url: inout URL, completion: @escaping (_ json: [String:Any]?, _ error: Error?) -> ()) {
+    private func request(url: inout URL, completion: @escaping (_ data: Data?, _ error: Error?) -> ()) {
         let values = Array(self.params.values)
         url.add(values)
         let urlRequest = URLRequest(url: url)
         
-        URLSession.shared.dataTask(with: urlRequest) { (testdata, response, error) in
-            guard let data = testdata, error == nil else {
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            guard let data = data, error == nil else {
                 completion(nil, error)
                 return
             }
             
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            if let responseJSON = responseJSON as? [String: Any] {
-                print(responseJSON)
-                completion(responseJSON, error)
-            } else {
-                completion(nil, error)
-            }
+            completion(data, error)
         }.resume()
     }
 }
