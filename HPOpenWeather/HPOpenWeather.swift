@@ -140,10 +140,20 @@ public class HPOpenWeather {
         url.add(request.parameters())
         
         self.request(url: &url) { (json, error) in
+            // TODO: Return actual Forecast object here
             print(json, error)
         }
     }
     
+    /**
+     Private function to actually make the API calls
+     
+     - Parameters:
+        - url: The completete the GET request is sent to
+        - completion: Completion block that is called when the network call is completed
+        - json: Dictionary containing the response in JSON format
+        - error: An error object that indicates why the request failed, or nil if the request was successful.
+    */
     private func request(url: inout URL, completion: @escaping (_ json: [String:Any]?, _ error: Error?) -> ()) {
         let values = Array(self.params.values)
         url.add(values)

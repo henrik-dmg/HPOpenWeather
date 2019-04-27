@@ -39,7 +39,7 @@ class WeatherView: NibLoadingView {
         
         let request = LocationRequest(location.coordinate)
         api.requestCurrentWeather(with: request) { (weather, error) in
-            print("Error:", error?.localizedDescription)
+            
         }
     }
 }
