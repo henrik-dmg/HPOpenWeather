@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://imgur.com/download/VD8CWFH" alt="Storage" />
+    <img src="https://imgur.com/download/GktsEf5" alt="Storage" />
 </p>
 
 ## Disclaimer: This documentation is outdated, I'm the process of rewriting the whole library
