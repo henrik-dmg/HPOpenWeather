@@ -19,7 +19,7 @@
                BlueprintIdentifier = "26DF15BF2273970C00F474A8"
                BuildableName = "HPOpenWeatherTests.xctest"
                BlueprintName = "HPOpenWeatherTests"
-               ReferencedContainer = "container:HPOpenWeather iOS.xcodeproj">
+               ReferencedContainer = "container:HPOpenWeather.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

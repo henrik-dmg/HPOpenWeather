@@ -9,10 +9,18 @@
 import CoreLocation
 import Foundation
 
+#if os(iOS) || os(tvOS) || os(watchOS)
+    import UIKit
+#elseif os(macOS)
+    import AppKit
+    public typealias UIImage = NSImage
+#endif
+
 public class HPOpenWeather {
     
     static let baseURL = "https://api.openweathermap.org/data/2.5/weather?"
     private var params = [String : URLQueryItem]()
+    
     private var iconCache = [String : UIImage]()
     
     /// Specifies the temperature format used in the API response
@@ -48,6 +56,7 @@ public class HPOpenWeather {
                 iconCache.forEach { (key, value) in
                     iconCache[key] = nil
                 }
+                
                 iconCache = [String : UIImage]()
             }
         }

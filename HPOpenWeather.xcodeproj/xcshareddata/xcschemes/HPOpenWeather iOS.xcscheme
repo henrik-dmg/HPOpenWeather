@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "26DF15B62273970C00F474A8"
-               BuildableName = "HPOpenWeather_iOS.framework"
+               BuildableName = "HPOpenWeather.framework"
                BlueprintName = "HPOpenWeather iOS"
-               ReferencedContainer = "container:HPOpenWeather iOS.xcodeproj">
+               ReferencedContainer = "container:HPOpenWeather.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "26DF15BF2273970C00F474A8"
                BuildableName = "HPOpenWeatherTests.xctest"
                BlueprintName = "HPOpenWeatherTests"
-               ReferencedContainer = "container:HPOpenWeather iOS.xcodeproj">
+               ReferencedContainer = "container:HPOpenWeather.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "26DF15B62273970C00F474A8"
-            BuildableName = "HPOpenWeather_iOS.framework"
+            BuildableName = "HPOpenWeather.framework"
             BlueprintName = "HPOpenWeather iOS"
-            ReferencedContainer = "container:HPOpenWeather iOS.xcodeproj">
+            ReferencedContainer = "container:HPOpenWeather.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "26DF15B62273970C00F474A8"
-            BuildableName = "HPOpenWeather_iOS.framework"
+            BuildableName = "HPOpenWeather.framework"
             BlueprintName = "HPOpenWeather iOS"
-            ReferencedContainer = "container:HPOpenWeather iOS.xcodeproj">
+            ReferencedContainer = "container:HPOpenWeather.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -83,9 +83,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "26DF15B62273970C00F474A8"
-            BuildableName = "HPOpenWeather_iOS.framework"
+            BuildableName = "HPOpenWeather.framework"
             BlueprintName = "HPOpenWeather iOS"
-            ReferencedContainer = "container:HPOpenWeather iOS.xcodeproj">
+            ReferencedContainer = "container:HPOpenWeather.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

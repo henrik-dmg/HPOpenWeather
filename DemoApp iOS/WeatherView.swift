@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import HPOpenWeather_iOS
+import HPOpenWeather
 import CoreLocation
 
 class WeatherView: NibLoadingView {
