@@ -119,7 +119,7 @@ public class HPOpenWeather {
         - weather: A Weather object which is returned, or nil if the request failed
         - error: An error object that indicates why the request failed, or nil if the request was successful.
      */
-    public func requestCurrentWeather<T: WeatherRequest>(with request: T, completion: @escaping (_ weather: Weather?, _ error: Error?) -> ()) {
+    public func requestCurrentWeather<T: WeatherRequest>(with request: T, completion: @escaping (_ weather: CurrentWeather?, _ error: Error?) -> ()) {
         var url = HPOpenWeather.baseURL.url()
         url.add(request.parameters())
         
@@ -127,6 +127,17 @@ public class HPOpenWeather {
             guard let json = json else {
                 completion(nil, error)
                 return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .secondsSince1970
+                let model = try decoder.decode(CurrentWeather.self, from: json)
+                
+                completion(model, error)
+            } catch let parsingError {
+                print("Parsing Error")
+                completion(nil, parsingError)
             }
         }
     }

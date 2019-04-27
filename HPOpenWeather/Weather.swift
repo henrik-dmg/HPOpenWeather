@@ -9,32 +9,29 @@
 import Foundation
 import CoreLocation
 
-public struct Weather {
-    
-    init(_ codable: CodableWeather) {
-        
-    }
-}
-
-public struct CodableWeather: Codable {
-    public var id: Int
+public class CurrentWeather: Codable {
+    public var cityId: Int
     public var name: String
-    private var timeOfCalculation: Date
-    public var coordinates: Coordinates
+    public var timeOfCalculation: Date
+    public var location: Coordinates
     public var system: System
     public var main: Main
     public var wind: Wind
-    public var weather: [WeatherCondition]
+    public var condition: [WeatherCondition]
+    public var snow: Precipitation?
+    public var rain: Precipitation?
     
     enum CodingKeys: String, CodingKey {
-        case id
+        case cityId = "id"
         case name
         case timeOfCalculation = "dt"
-        case coordinates = "coord"
+        case location = "coord"
         case system = "sys"
         case main
         case wind
-        case weather
+        case condition = "weather"
+        case snow
+        case rain
     }
     
     public struct Coordinates: Codable {
@@ -52,9 +49,9 @@ public struct CodableWeather: Codable {
     }
     
     public struct System: Codable {
-        var countryCode: String
-        var sunrise: Date
-        var sunset: Date
+        public var countryCode: String
+        public var sunrise: Date
+        public var sunset: Date
         
         enum CodingKeys: String, CodingKey {
             case countryCode = "country"
@@ -64,11 +61,13 @@ public struct CodableWeather: Codable {
     }
     
     public struct Main: Codable {
-        var temperature: Double
-        var humidity: Int
-        var pressure: Int
-        var temperatureMin: Double
-        var temperatureMax: Double
+        public var temperature: Double
+        public var humidity: Int
+        public var pressure: Int
+        public var temperatureMin: Double
+        public var temperatureMax: Double
+        public var seaLevelPressure: Int
+        public var groundLevelPressure: Int
         
         enum CodingKeys: String, CodingKey {
             case temperature = "temp"
@@ -76,23 +75,47 @@ public struct CodableWeather: Codable {
             case pressure
             case temperatureMin = "temp_min"
             case temperatureMax = "temp_max"
+            case seaLevelPressure = "sea_level"
+            case groundLevelPressure = "grnd_level"
         }
     }
     
     public struct Wind: Codable {
-        var speed: Double
-        var degrees: Double
+        public var speed: Double
+        public var degrees: Double
         
         enum CodingKeys: String, CodingKey {
             case speed
             case degrees = "deg"
         }
     }
-}
-
-public struct WeatherCondition: Codable {
-    public var id: Int
-    public var main: String
-    public var description: String
-    public var icon: String
+    
+    public struct WeatherCondition: Codable {
+        public var id: Int
+        public var main: String
+        public var description: String
+        public var icon: String
+    }
+    
+    public struct Precipitation: Codable {
+        public var lastHour: Int
+        public var lastThreeHours: Int
+        
+        enum CodingKeys: String, CodingKey {
+            case lastHour = "1h"
+            case lastThreeHours = "3h"
+        }
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        if let snow = try container.decodeIfPresent(Precipitation.self, forKey: .snow) {
+            self.snow = snow
+        }
+        
+        if let rain = try container.decodeIfPresent(Precipitation.self, forKey: .rain) {
+            self.rain = rain
+        }
+    }
 }
