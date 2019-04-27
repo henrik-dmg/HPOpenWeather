@@ -116,7 +116,7 @@ public class HPOpenWeather {
      
      - Parameters:
         - request: The WeatherRequest object used to make the request
-        - weather: A Weather object which is returned, or nil if the request failed
+        - weather: A CurrentWeather object which is returned, or nil if the request or parsing failed
         - error: An error object that indicates why the request failed, or nil if the request was successful.
      */
     public func requestCurrentWeather<T: WeatherRequest>(with request: T, completion: @escaping (_ weather: CurrentWeather?, _ error: Error?) -> ()) {
