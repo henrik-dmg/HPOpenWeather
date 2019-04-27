@@ -17,7 +17,6 @@ class ViewController: NSViewController {
     @IBOutlet weak var locationLabel: NSTextField!
     @IBOutlet weak var locationAccessButton: NSButton!
     
-    
     var apiKey = "--- YOUR API KEY GOES HERE ---" {
         didSet {
             self.api = HPOpenWeather(apiKey: self.apiKey)
@@ -28,6 +27,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.apiKey = "--- YOUR API KEY GOES HERE ---"
         // Do any additional setup after loading the view.
     }
 
