@@ -7,7 +7,6 @@
 //
 
 import CoreLocation
-import UIKit
 import Foundation
 
 public class HPOpenWeather {

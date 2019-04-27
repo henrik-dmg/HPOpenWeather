@@ -8,6 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		2635DBE3227483BC004BB3CB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2635DBE2227483BC004BB3CB /* Extension.swift */; };
+		264B52832274D43F00E20D44 /* HPOpenWeather.h in Headers */ = {isa = PBXBuildFile; fileRef = 26DF15BA2273970C00F474A8 /* HPOpenWeather.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		264B52842274D44000E20D44 /* HPOpenWeather.h in Headers */ = {isa = PBXBuildFile; fileRef = 26DF15BA2273970C00F474A8 /* HPOpenWeather.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		264B52852274D44000E20D44 /* HPOpenWeather.h in Headers */ = {isa = PBXBuildFile; fileRef = 26DF15BA2273970C00F474A8 /* HPOpenWeather.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		264B52862274D46000E20D44 /* WeatherRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D42273974F00F474A8 /* WeatherRequest.swift */; };
+		264B52872274D46000E20D44 /* WeatherRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D42273974F00F474A8 /* WeatherRequest.swift */; };
+		264B52882274D46000E20D44 /* WeatherRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D42273974F00F474A8 /* WeatherRequest.swift */; };
+		264B52892274D46000E20D44 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D52273974F00F474A8 /* Forecast.swift */; };
+		264B528A2274D46000E20D44 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D52273974F00F474A8 /* Forecast.swift */; };
+		264B528B2274D46000E20D44 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D52273974F00F474A8 /* Forecast.swift */; };
+		264B528C2274D46000E20D44 /* HPOpenWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D32273974F00F474A8 /* HPOpenWeather.swift */; };
+		264B528D2274D46000E20D44 /* HPOpenWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D32273974F00F474A8 /* HPOpenWeather.swift */; };
+		264B528E2274D46000E20D44 /* HPOpenWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D32273974F00F474A8 /* HPOpenWeather.swift */; };
+		264B528F2274D46000E20D44 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D62273975000F474A8 /* Enums.swift */; };
+		264B52902274D46000E20D44 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D62273975000F474A8 /* Enums.swift */; };
+		264B52912274D46000E20D44 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D62273975000F474A8 /* Enums.swift */; };
+		264B52922274D46000E20D44 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D22273974F00F474A8 /* Weather.swift */; };
+		264B52932274D46000E20D44 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D22273974F00F474A8 /* Weather.swift */; };
+		264B52942274D46000E20D44 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D22273974F00F474A8 /* Weather.swift */; };
+		264B52952274D46000E20D44 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2635DBE2227483BC004BB3CB /* Extension.swift */; };
+		264B52962274D46000E20D44 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2635DBE2227483BC004BB3CB /* Extension.swift */; };
+		264B52972274D46000E20D44 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2635DBE2227483BC004BB3CB /* Extension.swift */; };
+		264B52982274D4AD00E20D44 /* HPOpenWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26DF15B72273970C00F474A8 /* HPOpenWeather.framework */; };
+		264B52992274D4AD00E20D44 /* HPOpenWeather.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26DF15B72273970C00F474A8 /* HPOpenWeather.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26DF15C12273970C00F474A8 /* HPOpenWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26DF15B72273970C00F474A8 /* HPOpenWeather.framework */; };
 		26DF15C62273970C00F474A8 /* HPOpenWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15C52273970C00F474A8 /* HPOpenWeatherTests.swift */; };
 		26DF15C82273970C00F474A8 /* HPOpenWeather.h in Headers */ = {isa = PBXBuildFile; fileRef = 26DF15BA2273970C00F474A8 /* HPOpenWeather.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -16,7 +39,6 @@
 		26DF15DA2273975000F474A8 /* WeatherRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D42273974F00F474A8 /* WeatherRequest.swift */; };
 		26DF15DB2273975000F474A8 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D52273974F00F474A8 /* Forecast.swift */; };
 		26DF15DC2273975000F474A8 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D62273975000F474A8 /* Enums.swift */; };
-		26DF15E02273B6FE00F474A8 /* HPOpenWeather.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 26DF15DF2273B6FE00F474A8 /* HPOpenWeather.podspec */; };
 		26DF15E82273BA2300F474A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15E72273BA2300F474A8 /* AppDelegate.swift */; };
 		26DF15EA2273BA2300F474A8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15E92273BA2300F474A8 /* ViewController.swift */; };
 		26DF15ED2273BA2300F474A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26DF15EB2273BA2300F474A8 /* Main.storyboard */; };
@@ -26,19 +48,17 @@
 		26DF15FA2273BDAB00F474A8 /* WeatherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26DF15F92273BDAB00F474A8 /* WeatherView.xib */; };
 		26DF15FC2273BDE100F474A8 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15FB2273BDE100F474A8 /* GradientView.swift */; };
 		26DF15FE2273BF9B00F474A8 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15FD2273BF9B00F474A8 /* WeatherView.swift */; };
-		26DF16012273C06800F474A8 /* HPOpenWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26DF15B72273970C00F474A8 /* HPOpenWeather.framework */; };
-		26DF16022273C06800F474A8 /* HPOpenWeather.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26DF15B72273970C00F474A8 /* HPOpenWeather.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		26DF15C22273970C00F474A8 /* PBXContainerItemProxy */ = {
+		264B529A2274D4AD00E20D44 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 26DF15AE2273970B00F474A8 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 26DF15B62273970C00F474A8;
-			remoteInfo = HPOpenWeather;
+			remoteInfo = "HPOpenWeather iOS";
 		};
-		26DF16032273C06800F474A8 /* PBXContainerItemProxy */ = {
+		26DF15C22273970C00F474A8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 26DF15AE2273970B00F474A8 /* Project object */;
 			proxyType = 1;
@@ -48,13 +68,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		26DF16052273C06800F474A8 /* Embed Frameworks */ = {
+		264B529C2274D4AD00E20D44 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				26DF16022273C06800F474A8 /* HPOpenWeather.framework in Embed Frameworks */,
+				264B52992274D4AD00E20D44 /* HPOpenWeather.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,6 +83,11 @@
 
 /* Begin PBXFileReference section */
 		2635DBE2227483BC004BB3CB /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		264B52602274D27200E20D44 /* HPOpenWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HPOpenWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		264B526D2274D29E00E20D44 /* HPOpenWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HPOpenWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		264B527A2274D2BB00E20D44 /* HPOpenWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HPOpenWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		264B529E2274D5C700E20D44 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		264B529F2274D5C700E20D44 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		26DF15B72273970C00F474A8 /* HPOpenWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HPOpenWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26DF15BA2273970C00F474A8 /* HPOpenWeather.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPOpenWeather.h; sourceTree = "<group>"; };
 		26DF15BB2273970C00F474A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -89,6 +114,27 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		264B525D2274D27200E20D44 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		264B526A2274D29E00E20D44 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		264B52772274D2BB00E20D44 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		26DF15B42273970C00F474A8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -108,18 +154,43 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26DF16012273C06800F474A8 /* HPOpenWeather.framework in Frameworks */,
+				264B52982274D4AD00E20D44 /* HPOpenWeather.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		264B52822274D37400E20D44 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				26DF15D32273974F00F474A8 /* HPOpenWeather.swift */,
+				26DF15D42273974F00F474A8 /* WeatherRequest.swift */,
+				26DF15D22273974F00F474A8 /* Weather.swift */,
+				26DF15D52273974F00F474A8 /* Forecast.swift */,
+				26DF15D62273975000F474A8 /* Enums.swift */,
+				2635DBE2227483BC004BB3CB /* Extension.swift */,
+				26DF15BB2273970C00F474A8 /* Info.plist */,
+				26DF15BA2273970C00F474A8 /* HPOpenWeather.h */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		264B529D2274D59F00E20D44 /* Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				264B529E2274D5C700E20D44 /* LICENSE.md */,
+				264B529F2274D5C700E20D44 /* README.md */,
+				26DF15DF2273B6FE00F474A8 /* HPOpenWeather.podspec */,
+			);
+			name = Metadata;
+			sourceTree = "<group>";
+		};
 		26DF15AD2273970B00F474A8 = {
 			isa = PBXGroup;
 			children = (
-				26DF15DF2273B6FE00F474A8 /* HPOpenWeather.podspec */,
-				26DF15B92273970C00F474A8 /* HPOpenWeather */,
+				264B529D2274D59F00E20D44 /* Metadata */,
+				264B52822274D37400E20D44 /* Sources */,
 				26DF15C42273970C00F474A8 /* HPOpenWeatherTests */,
 				26DF15E62273BA2300F474A8 /* DemoApp */,
 				26DF15B82273970C00F474A8 /* Products */,
@@ -132,23 +203,11 @@
 				26DF15B72273970C00F474A8 /* HPOpenWeather.framework */,
 				26DF15C02273970C00F474A8 /* HPOpenWeatherTests.xctest */,
 				26DF15E52273BA2300F474A8 /* DemoApp.app */,
+				264B52602274D27200E20D44 /* HPOpenWeather.framework */,
+				264B526D2274D29E00E20D44 /* HPOpenWeather.framework */,
+				264B527A2274D2BB00E20D44 /* HPOpenWeather.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		26DF15B92273970C00F474A8 /* HPOpenWeather */ = {
-			isa = PBXGroup;
-			children = (
-				26DF15D32273974F00F474A8 /* HPOpenWeather.swift */,
-				26DF15D42273974F00F474A8 /* WeatherRequest.swift */,
-				26DF15D22273974F00F474A8 /* Weather.swift */,
-				26DF15D52273974F00F474A8 /* Forecast.swift */,
-				26DF15D62273975000F474A8 /* Enums.swift */,
-				2635DBE2227483BC004BB3CB /* Extension.swift */,
-				26DF15BA2273970C00F474A8 /* HPOpenWeather.h */,
-				26DF15BB2273970C00F474A8 /* Info.plist */,
-			);
-			path = HPOpenWeather;
 			sourceTree = "<group>";
 		};
 		26DF15C42273970C00F474A8 /* HPOpenWeatherTests */ = {
@@ -188,6 +247,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		264B525B2274D27200E20D44 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				264B52832274D43F00E20D44 /* HPOpenWeather.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		264B52682274D29E00E20D44 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				264B52842274D44000E20D44 /* HPOpenWeather.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		264B52752274D2BB00E20D44 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				264B52852274D44000E20D44 /* HPOpenWeather.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		26DF15B22273970C00F474A8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -199,9 +282,63 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		26DF15B62273970C00F474A8 /* HPOpenWeather */ = {
+		264B525F2274D27200E20D44 /* HPOpenWeather watchOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 26DF15CB2273970C00F474A8 /* Build configuration list for PBXNativeTarget "HPOpenWeather" */;
+			buildConfigurationList = 264B52672274D27200E20D44 /* Build configuration list for PBXNativeTarget "HPOpenWeather watchOS" */;
+			buildPhases = (
+				264B525B2274D27200E20D44 /* Headers */,
+				264B525C2274D27200E20D44 /* Sources */,
+				264B525D2274D27200E20D44 /* Frameworks */,
+				264B525E2274D27200E20D44 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HPOpenWeather watchOS";
+			productName = "HPOpenWeather watchOS";
+			productReference = 264B52602274D27200E20D44 /* HPOpenWeather.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		264B526C2274D29E00E20D44 /* HPOpenWeather tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 264B52722274D29E00E20D44 /* Build configuration list for PBXNativeTarget "HPOpenWeather tvOS" */;
+			buildPhases = (
+				264B52682274D29E00E20D44 /* Headers */,
+				264B52692274D29E00E20D44 /* Sources */,
+				264B526A2274D29E00E20D44 /* Frameworks */,
+				264B526B2274D29E00E20D44 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HPOpenWeather tvOS";
+			productName = "HPOpenWeather tvOS";
+			productReference = 264B526D2274D29E00E20D44 /* HPOpenWeather.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		264B52792274D2BB00E20D44 /* HPOpenWeather macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 264B527F2274D2BB00E20D44 /* Build configuration list for PBXNativeTarget "HPOpenWeather macOS" */;
+			buildPhases = (
+				264B52752274D2BB00E20D44 /* Headers */,
+				264B52762274D2BB00E20D44 /* Sources */,
+				264B52772274D2BB00E20D44 /* Frameworks */,
+				264B52782274D2BB00E20D44 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HPOpenWeather macOS";
+			productName = "HPOpenWeather macOS";
+			productReference = 264B527A2274D2BB00E20D44 /* HPOpenWeather.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		26DF15B62273970C00F474A8 /* HPOpenWeather iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 26DF15CB2273970C00F474A8 /* Build configuration list for PBXNativeTarget "HPOpenWeather iOS" */;
 			buildPhases = (
 				26DF15B22273970C00F474A8 /* Headers */,
 				26DF15B32273970C00F474A8 /* Sources */,
@@ -212,7 +349,7 @@
 			);
 			dependencies = (
 			);
-			name = HPOpenWeather;
+			name = "HPOpenWeather iOS";
 			productName = HPOpenWeather;
 			productReference = 26DF15B72273970C00F474A8 /* HPOpenWeather.framework */;
 			productType = "com.apple.product-type.framework";
@@ -242,12 +379,12 @@
 				26DF15E12273BA2300F474A8 /* Sources */,
 				26DF15E22273BA2300F474A8 /* Frameworks */,
 				26DF15E32273BA2300F474A8 /* Resources */,
-				26DF16052273C06800F474A8 /* Embed Frameworks */,
+				264B529C2274D4AD00E20D44 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				26DF16042273C06800F474A8 /* PBXTargetDependency */,
+				264B529B2274D4AD00E20D44 /* PBXTargetDependency */,
 			);
 			name = DemoApp;
 			productName = DemoApp;
@@ -264,6 +401,15 @@
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Henrik Panhans";
 				TargetAttributes = {
+					264B525F2274D27200E20D44 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					264B526C2274D29E00E20D44 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					264B52792274D2BB00E20D44 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 					26DF15B62273970C00F474A8 = {
 						CreatedOnToolsVersion = 10.2.1;
 						LastSwiftMigration = 1020;
@@ -276,7 +422,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 26DF15B12273970B00F474A8 /* Build configuration list for PBXProject "HPOpenWeather" */;
+			buildConfigurationList = 26DF15B12273970B00F474A8 /* Build configuration list for PBXProject "HPOpenWeather iOS" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -289,7 +435,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				26DF15B62273970C00F474A8 /* HPOpenWeather */,
+				26DF15B62273970C00F474A8 /* HPOpenWeather iOS */,
+				264B525F2274D27200E20D44 /* HPOpenWeather watchOS */,
+				264B526C2274D29E00E20D44 /* HPOpenWeather tvOS */,
+				264B52792274D2BB00E20D44 /* HPOpenWeather macOS */,
 				26DF15BF2273970C00F474A8 /* HPOpenWeatherTests */,
 				26DF15E42273BA2300F474A8 /* DemoApp */,
 			);
@@ -297,11 +446,31 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		264B525E2274D27200E20D44 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		264B526B2274D29E00E20D44 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		264B52782274D2BB00E20D44 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		26DF15B52273970C00F474A8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26DF15E02273B6FE00F474A8 /* HPOpenWeather.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +495,45 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		264B525C2274D27200E20D44 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				264B528A2274D46000E20D44 /* Forecast.swift in Sources */,
+				264B52872274D46000E20D44 /* WeatherRequest.swift in Sources */,
+				264B52902274D46000E20D44 /* Enums.swift in Sources */,
+				264B52962274D46000E20D44 /* Extension.swift in Sources */,
+				264B528D2274D46000E20D44 /* HPOpenWeather.swift in Sources */,
+				264B52932274D46000E20D44 /* Weather.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		264B52692274D29E00E20D44 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				264B52892274D46000E20D44 /* Forecast.swift in Sources */,
+				264B52862274D46000E20D44 /* WeatherRequest.swift in Sources */,
+				264B528F2274D46000E20D44 /* Enums.swift in Sources */,
+				264B52952274D46000E20D44 /* Extension.swift in Sources */,
+				264B528C2274D46000E20D44 /* HPOpenWeather.swift in Sources */,
+				264B52922274D46000E20D44 /* Weather.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		264B52762274D2BB00E20D44 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				264B528B2274D46000E20D44 /* Forecast.swift in Sources */,
+				264B52882274D46000E20D44 /* WeatherRequest.swift in Sources */,
+				264B52912274D46000E20D44 /* Enums.swift in Sources */,
+				264B52972274D46000E20D44 /* Extension.swift in Sources */,
+				264B528E2274D46000E20D44 /* HPOpenWeather.swift in Sources */,
+				264B52942274D46000E20D44 /* Weather.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		26DF15B32273970C00F474A8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -362,15 +570,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		264B529B2274D4AD00E20D44 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 26DF15B62273970C00F474A8 /* HPOpenWeather iOS */;
+			targetProxy = 264B529A2274D4AD00E20D44 /* PBXContainerItemProxy */;
+		};
 		26DF15C32273970C00F474A8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 26DF15B62273970C00F474A8 /* HPOpenWeather */;
+			target = 26DF15B62273970C00F474A8 /* HPOpenWeather iOS */;
 			targetProxy = 26DF15C22273970C00F474A8 /* PBXContainerItemProxy */;
-		};
-		26DF16042273C06800F474A8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 26DF15B62273970C00F474A8 /* HPOpenWeather */;
-			targetProxy = 26DF16032273C06800F474A8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -394,6 +602,172 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		264B52652274D27200E20D44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FMYBNSCQ2F;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.henrikpanhans.HPOpenWeather-watchOS";
+				PRODUCT_NAME = HPOpenWeather;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Debug;
+		};
+		264B52662274D27200E20D44 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FMYBNSCQ2F;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.henrikpanhans.HPOpenWeather-watchOS";
+				PRODUCT_NAME = HPOpenWeather;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Release;
+		};
+		264B52732274D29E00E20D44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FMYBNSCQ2F;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.henrikpanhans.HPOpenWeather-tvOS";
+				PRODUCT_NAME = HPOpenWeather;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		264B52742274D29E00E20D44 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FMYBNSCQ2F;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.henrikpanhans.HPOpenWeather-tvOS";
+				PRODUCT_NAME = HPOpenWeather;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		264B52802274D2BB00E20D44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FMYBNSCQ2F;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.henrikpanhans.HPOpenWeather-macOS";
+				PRODUCT_NAME = HPOpenWeather;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		264B52812274D2BB00E20D44 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FMYBNSCQ2F;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.henrikpanhans.HPOpenWeather-macOS";
+				PRODUCT_NAME = HPOpenWeather;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		26DF15C92273970C00F474A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -527,7 +901,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = HPOpenWeather/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -535,8 +909,8 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.henrikpanhans.HPOpenWeather;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.henrikpanhans.HPOpenWeather-iOS";
+				PRODUCT_NAME = HPOpenWeather;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -555,7 +929,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = HPOpenWeather/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -563,8 +937,8 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.henrikpanhans.HPOpenWeather;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.henrikpanhans.HPOpenWeather-iOS";
+				PRODUCT_NAME = HPOpenWeather;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -650,7 +1024,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		26DF15B12273970B00F474A8 /* Build configuration list for PBXProject "HPOpenWeather" */ = {
+		264B52672274D27200E20D44 /* Build configuration list for PBXNativeTarget "HPOpenWeather watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				264B52652274D27200E20D44 /* Debug */,
+				264B52662274D27200E20D44 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		264B52722274D29E00E20D44 /* Build configuration list for PBXNativeTarget "HPOpenWeather tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				264B52732274D29E00E20D44 /* Debug */,
+				264B52742274D29E00E20D44 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		264B527F2274D2BB00E20D44 /* Build configuration list for PBXNativeTarget "HPOpenWeather macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				264B52802274D2BB00E20D44 /* Debug */,
+				264B52812274D2BB00E20D44 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		26DF15B12273970B00F474A8 /* Build configuration list for PBXProject "HPOpenWeather iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				26DF15C92273970C00F474A8 /* Debug */,
@@ -659,7 +1060,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		26DF15CB2273970C00F474A8 /* Build configuration list for PBXNativeTarget "HPOpenWeather" */ = {
+		26DF15CB2273970C00F474A8 /* Build configuration list for PBXNativeTarget "HPOpenWeather iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				26DF15CC2273970C00F474A8 /* Debug */,

@@ -6,7 +6,9 @@
 //  Copyright © 2019 Henrik Panhans. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
+
+#import <Foundation/Foundation.h>
 
 //! Project version number for HPOpenWeather.
 FOUNDATION_EXPORT double HPOpenWeatherVersionNumber;
