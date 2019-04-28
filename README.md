@@ -1,6 +1,8 @@
 <p align="center">
     <img src="https://imgur.com/download/GktsEf5" alt="Storage" />
 </p>
+<a href="https://codebeat.co/projects/github-com-henrik-dmg-hpopenweather-master"><img alt="codebeat badge" src="https://codebeat.co/badges/369155e1-b902-4b3c-a44a-59257e5649f8" /></a>
+<a href="https://img.shields.io/badge/Swift-5.0-orange"><img src="https://img.shields.io/badge/Swift-5.0-orange.svg"/></a>
 
 ## Disclaimer: This documentation is outdated, I'm in the process of rewriting the whole library
 
