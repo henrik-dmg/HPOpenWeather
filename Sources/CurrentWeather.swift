@@ -15,7 +15,7 @@ public struct CurrentWeather: WeatherSnapshot, PrecipitationOptional {
     public var cloudCoverage: Int { return _clouds?.all ?? 0 }
     public var timeOfCalculation: Date
     public var main: Main
-    public var condition: WeatherCondition { return _condition!.first! }
+    public var condition: WeatherCondition { return _condition?.first ?? WeatherCondition.unknown }
     public var wind: Wind
     public var snow: Precipitation { return _snow ?? Precipitation.none }
     public var rain: Precipitation { return _rain ?? Precipitation.none }

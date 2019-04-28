@@ -85,20 +85,20 @@ public struct Main: Codable {
     /// The current humidity measured in percent
     public var humidity: Int
     /// The current air pressure measured in hPa
-    public var pressure: Int
+    public var pressure: Double
     /// The minimum temperature reached on the day of the request
     public var temperatureMin: Double
     /// The maximum temperature reached on the day of the request
     public var temperatureMax: Double
     /// The current sea level pressure measured in hPa (Note: Is zero when data is unavailable)
-    public var seaLevelPressure: Int { return _seaLvl ?? 0 }
+    public var seaLevelPressure: Double { return _seaLvl ?? 0.00 }
     /// The current ground level pressure measured in hPa (Note: Is zero when data is unavailable)
-    public var groundLevelPressure: Int { return _groundLvl ?? 0 }
+    public var groundLevelPressure: Double { return _groundLvl ?? 0.00 }
     
     /// Internal type to handle missing sea level pressure data
-    private var _seaLvl: Int?
+    private var _seaLvl: Double?
     /// Internal type to handle missing ground level pressure data
-    private var _groundLvl: Int?
+    private var _groundLvl: Double?
     
     enum CodingKeys: String, CodingKey {
         case temperature = "temp"
@@ -134,6 +134,11 @@ public struct WeatherCondition: Codable {
     public var description: String
     /// The ID of the corresponding weather icon
     public var icon: String
+    
+    static let unknown = WeatherCondition(id: 0,
+                                          main: "Unknown Weather Condition",
+                                          description: "No Description",
+                                          icon: "No Icon")
 }
 
 /// Type that holds information about recent precipitation
@@ -143,14 +148,14 @@ public struct Precipitation: Codable, CustomStringConvertible {
     }
     
     /// Precipitation volume for the last 1 hour, measured in mm
-    public var lastHour: Int { return _1h ?? 0 }
+    public var lastHour: Double { return _1h ?? 0.00 }
     /// Precipitation volume for the last 3 hours, measured in mm
-    public var lastThreeHours: Int { return _3h ?? 0 }
+    public var lastThreeHours: Double { return _3h ?? 0.00 }
     
     /// Internal type to handle missing key in JSON response
-    private var _1h: Int?
+    private var _1h: Double?
     /// Internal type to handle missing key in JSON response
-    private var _3h: Int?
+    private var _3h: Double?
     
     /// Singleton property to indicate there was no precipitation within the last 3 hours
     static let none = Precipitation(_1h: 0, _3h: 0)

@@ -61,6 +61,15 @@ class WeatherView: NibLoadingView {
                 self.tempLabel.text = "\(Int(weather.main.temperature))°"
             }
         }
+        
+        api.requestForecast(with: request, for: .threeHourly) { (forecast, error) in
+            guard let forecast = forecast, error == nil else {
+                print(error?.localizedDescription)
+                return
+            }
+            
+            print(forecast.dataPoints.first?.timeOfCalculation)
+        }
     }
 }
 

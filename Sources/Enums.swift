@@ -12,13 +12,13 @@ import Foundation
 public enum ForecastType: String {
     
     /// Returns hourly forecast for the next 96 hours. Available for Developer, Professional and Enterprise accounts
-    case hourly = "http://api.openweathermap.org/data/2.5/forecast/hourly?"
+    case hourly = "https://api.openweathermap.org/data/2.5/forecast/hourly?"
     
     /// Returns the forecast for the next 5 days in a 3 hour interval. Available for all accounts
-    case threeHourly = "http://api.openweathermap.org/data/2.5/forecast?"
+    case threeHourly = "https://api.openweathermap.org/data/2.5/forecast?"
     
     /// Returns the daily forecast for the next 16 days. Available for all paid accounts
-    case daily = "http://api.openweathermap.org/data/2.5/forecast/daily?"
+    case daily = "https://api.openweathermap.org/data/2.5/forecast/daily?"
     
     /**
     Returns the URL corresponding to the forecast type

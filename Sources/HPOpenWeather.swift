@@ -192,6 +192,18 @@ public class HPOpenWeather {
     }
 }
 
+extension Data {
+    func json() -> [String:Any]? {
+        let model = try? JSONSerialization.jsonObject(with: self, options: [])
+        
+        if let json = model as? [String:Any] {
+            return json
+        }
+        
+        return nil
+    }
+}
+
 extension URL {
     /// URL extension to add URLQueryItems without adding a parameter twice
     mutating func add(_ queryItems: [URLQueryItem]) {
