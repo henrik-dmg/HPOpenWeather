@@ -16,11 +16,16 @@ import Foundation
     public typealias UIImage = NSImage
 #endif
 
+/// Object that handles any API requests and responses.
 public class HPOpenWeather {
     
+    /// The URL endpoint that returns current weather data
     static let baseURL = "https://api.openweathermap.org/data/2.5/weather?"
+    
+    /// Internal property to store API key, language and temperature format as URL parameter
     private var params = [String : URLQueryItem]()
     
+    /// Internal property to store weather icons that were already downloaded once
     private var iconCache = [String : UIImage]()
     
     /// Specifies the temperature format used in the API response
@@ -140,11 +145,16 @@ public class HPOpenWeather {
             do {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .secondsSince1970
+                
+                if let apiError = try? decoder.decode(ApiError.self, from: json) {
+                    completion(nil, apiError)
+                    return
+                }
+                
                 let model = try decoder.decode(CurrentWeather.self, from: json)
                 
                 completion(model, error)
             } catch let parsingError {
-                print("Parsing Error")
                 completion(nil, parsingError)
             }
         }
@@ -200,6 +210,7 @@ extension String {
 }
 
 extension URL {
+    /// URL extension to add URLQueryItems without adding a parameter twice
     mutating func add(_ queryItems: [URLQueryItem]) {
         guard var urlComponents = URLComponents(string: absoluteString) else {
             self = absoluteURL

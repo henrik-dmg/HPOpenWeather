@@ -11,6 +11,7 @@ import CoreLocation
 
 /// Generic protocol that returns the parameters needed for an API call
 public protocol WeatherRequest {
+    /// Returns an array of URLQueryItem which are needed to request the appropriate data for the request
     func parameters() -> [URLQueryItem]
 }
 
@@ -23,8 +24,10 @@ public class LocationRequest: WeatherRequest {
                 URLQueryItem(name: "lon", value: "\(coordinates.longitude)")]
     }
     
+    /// The coordinates specified for the request
     public var coordinates: CLLocationCoordinate2D
     
+    /// Public initialiser to quickly create a new request by supplying coordinates
     public init(_ coordinates: CLLocationCoordinate2D) {
         self.coordinates = coordinates
     }
