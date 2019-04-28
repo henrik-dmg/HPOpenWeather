@@ -53,6 +53,8 @@ class WeatherView: NibLoadingView {
                 return
             }
             
+            print(weather)
+            
             DispatchQueue.main.async {
                 self.mainLabel.text = weather.conditions.first?.main
                 self.cityLabel.text = weather.name

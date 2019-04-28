@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Codable protocol that holds all core information of a weather API response
 public protocol WeatherSnapshot: Codable {
     /// The time of data calculation in UTC time
     var timeOfCalculation: Date { get }
@@ -21,7 +22,9 @@ public protocol WeatherSnapshot: Codable {
     var snow: Precipitation { get }
     /// Information about rainfall in the last one or three hours
     var rain: Precipitation { get }
-    
+}
+
+protocol PrecipitationOptional {
     /// Internal type to handle missing "snow" key in JSON response
     var _snow: Precipitation? { get }
     /// Internal type to handle missing "rain" key in JSON response

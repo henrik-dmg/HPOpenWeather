@@ -1,58 +1,13 @@
 //
-//  Weather.swift
-//  Dunkel Sky Finder
+//  SnapshotSubtypes.swift
+//  HPOpenWeather
 //
-//  Created by Henrik Panhans on 16/01/2017.
-//  Copyright © 2017 Henrik Panhans. All rights reserved.
+//  Created by Henrik Panhans on 28.04.19.
+//  Copyright © 2019 Henrik Panhans. All rights reserved.
 //
 
 import Foundation
 import CoreLocation
-
-/**
- A Codable type that wraps the API response for the current weather request in a usable type
- */
-public struct CurrentWeather: WeatherSnapshot {
-    public var timeOfCalculation: Date
-    
-    public var main: Main
-    
-    public var conditions: [WeatherCondition]
-    
-    public var wind: Wind
-    
-    public var snow: Precipitation { return _snow ?? Precipitation.none }
-    
-    public var rain: Precipitation { return _rain ?? Precipitation.none }
-    
-    public var _snow: Precipitation?
-    
-    public var _rain: Precipitation?
-    
-    /// The ID of the nearest city
-    public var cityId: Int
-    /// The name of the nearest city
-    public var name: String
-    
-    /// The location coordinates of the request
-    public var location: Coordinates
-    /// System data of the request, such as country code, sunrise and sunset
-    public var system: System
-    
-    
-    enum CodingKeys: String, CodingKey {
-        case cityId = "id"
-        case name
-        case timeOfCalculation = "dt"
-        case location = "coord"
-        case system = "sys"
-        case main
-        case wind
-        case conditions = "weather"
-        case _snow = "snow"
-        case _rain = "rain"
-    }
-}
 
 /// Custom Location type which holds latitude and longitude, similar to CLLocationCoordinate2D
 public struct Coordinates: Codable {
@@ -77,7 +32,7 @@ public struct System: Codable {
      [Wikipedia]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes "See full list"
      
      An ISO 3166 country code specifying the country of the request's location. For a full list of codes see [Wikipedia]
-    */
+     */
     public var countryCode: String
     /// The sunrise time of the request's location in UTC time
     public var sunrise: Date

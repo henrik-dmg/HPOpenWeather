@@ -20,6 +20,9 @@ public enum ForecastType: String {
     /// Returns the daily forecast for the next 16 days. Available for all paid accounts
     case daily = "http://api.openweathermap.org/data/2.5/forecast/daily?"
     
+    /**
+    Returns the URL corresponding to the forecast type
+     */
     func url() -> URL {
         // We can force-unwrap URL because we know these API endpoints exist
         return URL(string: self.rawValue)!
