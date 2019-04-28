@@ -11,17 +11,18 @@ import XCTest
 
 class HPOpenWeatherTests: XCTestCase {
 
+    var api: HPOpenWeather?
+    
     override func setUp() {
+        
+        // TODO: Insert your own API key here
+        api = HPOpenWeather(apiKey: "--- YOUR OWN API KEY ---", temperatureFormat: .celsius, language: .english)
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
     override func tearDown() {
+        api = nil
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
     func testQueryItems() {
@@ -33,12 +34,36 @@ class HPOpenWeatherTests: XCTestCase {
                           URLQueryItem(name: "test4", value: "firstTestString4"),
                           URLQueryItem(name: "test5", value: "firstTestString5")]
         
-        var url = HPOpenWeather.baseURL.url()
+        var url = HPOpenWeather.baseUrl
         url.add(firstItems)
         url.add(secondItems)
         
         let components = URLComponents(string: url.absoluteString)
         
         XCTAssert(components?.queryItems?.count == 5)
+    }
+    
+    func testCurrentWeather() {
+        let request = CityNameRequest("Berlin", countryCode: "DE")
+        let promise = expectation(description: "Simple Request")
+        
+        api?.requestCurrentWeather(with: request) { (current, error) in
+            XCTAssertNil(error)
+            promise.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    func testForecast() {
+        let request = CityNameRequest("Berlin", countryCode: "DE")
+        let promise = expectation(description: "Simple Request")
+        
+        api?.requestHourlyForecast(with: request, for: .threeHourly) { (forecast, error) in
+            XCTAssertNil(error)
+            promise.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5, handler: nil)
     }
 }
