@@ -3,7 +3,6 @@ Pod::Spec.new do |s|
   s.name         = "HPOpenWeather"
   s.version      = "2.0.0"
   s.summary      = "Cross-platform framework to communicate with the OpenWeatherMap JSON API"
-  s.swift_version = "5.0"
 
   s.license      = { :type => "MIT", :file => "LICENSE.md" }
   s.homepage     = "https://github.com/henrik-dmg/HPOpenWeather"
