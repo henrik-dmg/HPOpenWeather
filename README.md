@@ -2,7 +2,7 @@
     <img src="https://imgur.com/download/GktsEf5" alt="Storage" />
 </p>
 
-## Disclaimer: This documentation is outdated, I'm the process of rewriting the whole library
+## Disclaimer: This documentation is outdated, I'm in the process of rewriting the whole library
 
 ## Installation
 HPOpenWeather supports iOS 10.0+, watchOS 2.0+
