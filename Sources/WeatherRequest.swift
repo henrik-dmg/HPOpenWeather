@@ -16,7 +16,7 @@ public protocol WeatherRequest {
 }
 
 /**
- A request that uses coordinates
+ Type that uses coordinates to request weather data
 */
 public class LocationRequest: WeatherRequest {
     public func parameters() -> [URLQueryItem] {
@@ -36,7 +36,7 @@ public class LocationRequest: WeatherRequest {
 /**
  [Wikipedia]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes "See full list"
  
- A request that uses a city name and optional country code (use ISO 3166 country codes). For a full list, see [Wikipedia]
+ Type that uses a city name and optional country code (use ISO 3166 country codes). For a full list, see [Wikipedia]
 */
 public class CityNameRequest: WeatherRequest {
     public func parameters() -> [URLQueryItem] {
@@ -48,9 +48,12 @@ public class CityNameRequest: WeatherRequest {
         return [URLQueryItem(name: "q", value: param)]
     }
     
+    /// The city name used in the request
     public var cityName: String
+    /// The country code in ISO 3166 format used to specify a country when requesting weather data.
     public var countryCode: String?
     
+    /// Public initialiser to quickly create a new request by supplying a city name and optional ISO 3166 country code.
     public init(_ cityName: String, countryCode: String?) {
         self.cityName = cityName
         self.countryCode = countryCode
@@ -60,8 +63,7 @@ public class CityNameRequest: WeatherRequest {
 /**
  [OpenWeatherMap]: http://bulk.openweathermap.org/sample/ "See full list"
  
- A request that uses a city ID (see [OpenWeatherMap] for a full list of city IDs)
- 
+ Type that uses a city ID (see [OpenWeatherMap] for a full list of city IDs).
 */
 public class CityIdRequest: WeatherRequest {
     public func parameters() -> [URLQueryItem] {
@@ -78,9 +80,8 @@ public class CityIdRequest: WeatherRequest {
 /**
  [Wikipedia]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes "See full list"
  
- A request that uses a ZIP code and optional country code (if country is not specified then the search works for USA as a default).
+ Type that uses a ZIP code and optional country code (if country is not specified then the search works for USA as a default).
  See [Wikipedia] for full list.
- 
 */
 public class ZipCodeRequest: WeatherRequest {
     public func parameters() -> [URLQueryItem] {
@@ -91,13 +92,14 @@ public class ZipCodeRequest: WeatherRequest {
         return [URLQueryItem(name: "zip", value: param)]
     }
     
+    /// The ZIP code used in the request
     public var zipCode: String
+    /// The ISO 3166 country code used in the request. If no code is specified then the search works for USA as a default.
     public var countryCode: String?
     
+    /// Public initialiser to quickly create a new request by supplying a ZIP code and optional ISO 3166 country code.
     public init(zipCode: String, countryCode: String?) {
         self.zipCode = zipCode
         self.countryCode = countryCode
     }
 }
-
-
