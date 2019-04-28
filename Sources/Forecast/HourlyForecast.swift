@@ -9,10 +9,8 @@
 import Foundation
 
 /// Codable type that holds weather forecast information in an hourly frequency
-public struct HourlyForecast: Codable {
-    /// The nearest city, returned by the API
+public struct HourlyForecast: Forecast {
     public var city: City
-    /// The number of measurements returned by the API
     public var numberOfDataPoints: Int
     /// The datapoints returned by the API
     public var dataPoints: [DataPoint]

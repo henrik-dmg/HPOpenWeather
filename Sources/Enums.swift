@@ -10,10 +10,8 @@ import Foundation
 
 /// Declares which forecast endpoint should be used
 public enum ForecastFrequency: String {
-    
     /// Returns hourly forecast for the next 96 hours. Available for Developer, Professional and Enterprise accounts
     case hourly = "https://api.openweathermap.org/data/2.5/forecast/hourly?"
-    
     /// Returns the forecast for the next 5 days in a 3 hour interval. Available for all accounts
     case threeHourly = "https://api.openweathermap.org/data/2.5/forecast?"
     
