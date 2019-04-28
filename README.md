@@ -10,8 +10,6 @@ HPOpenWeather is a cross-platform Swift framework to communicate with the OpenWe
 HPOpenWeather supports iOS 9.0+, watchOS 2.0+, tvOS 9.0+ and macOS 10.10+.
 To install simply add `pod 'HPOpenWeather'` to your Podfile, or add `github "henrik-dmg/HPOpenWeather" ~> 2.0.0`
 
-
-
 ## Usage
 To get started, you need an API key from [OpenWeatherMap](https://openweathermap.org). Put this API key in the initialiser, additionally you can also specify a custom temperature format and/or language used in the responses (see list for available languages and units below).
 ```swift
@@ -42,15 +40,11 @@ var api = HPOpenWeather(apiKey: "--- YOUR API KEY ---")
 - Croatian
 - Catalan
 
-
-
 **The following temperature units are available**
 
 - Celsius
 - Kelvin
 - Fahrenheit
-
-
 
 ### Creating a request
 To make an request, create a new `WeatherRequest`object, such as:
@@ -105,6 +99,12 @@ api.requestHourlyForecast(with: request, for: .threeHourly) { (forecast, error) 
 }
 ```
 
-
+## TODO List
+- [x] Current weather data
+- [x] Daily and hourly forecast
+- [ ] More Unit Tests
+- [ ] Historical Data
+- [ ] UV Index Data
+- [ ] watchOS and tvOS demo apps
 
 #### This documentation is far from complete, however the code itself is pretty well documented so feel free to just play around and just contact me if you have any suggestions :)
