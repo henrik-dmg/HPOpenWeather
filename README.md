@@ -5,86 +5,106 @@
 <a href="https://codebeat.co/projects/github-com-henrik-dmg-hpopenweather-master"><img alt="codebeat badge" src="https://codebeat.co/badges/369155e1-b902-4b3c-a44a-59257e5649f8" /></a>
 <a href="https://img.shields.io/badge/Swift-5.0-orange"><img src="https://img.shields.io/badge/Swift-5.0-orange.svg"/></a>
 
-## Disclaimer: This documentation is outdated, I'm in the process of rewriting the whole library
-
+HPOpenWeather is a cross-platform Swift framework to communicate with the OpenWeatherMap JSON API. See their [documentation](https://openweathermap.org/api) for further details.
 ## Installation
-HPOpenWeather supports iOS 10.0+, watchOS 2.0+
+HPOpenWeather supports iOS 9.0+, watchOS 2.0+, tvOS 9.0+ and macOS 10.10+.
 To install simply add `pod 'HPOpenWeather'` to your Podfile, or add `github "henrik-dmg/HPOpenWeather" ~> 2.0.0`
 
-**Usage:**
 
+
+## Usage
+To get started, you need an API key from [OpenWeatherMap](https://openweathermap.org). Put this API key in the initialiser, additionally you can also specify a custom temperature format and/or language used in the responses (see list for available languages and units below).
 ```swift
 import HPOpenWeather
 
-var newApi = OpenWeatherSwift(apiKey: "_your_api_key_goes_here", temperatureFormat: .Celsius)
+var api = HPOpenWeather(apiKey: "--- YOUR API KEY ---")
 ```
 
-**The following parameters are available:**
-- Language
-  - English
-  - Russian
-  - Italian
-  - Spanish
-  - Ukrainian
-  - German
-  - Portuguese
-  - Romanian
-  - Polish
-  - Finnish
-  - Dutch
-  - French
-  - Bulgarian
-  - Swedish
-  - Chinese Traditional
-  - Chinese Simplified
-  - Turkish
-  - Croatian
-  - Catalan
-  
-- Temperature Format
-  - Celsius
-  - Kelvin
-  - Fahrenheit
-  
-  
+**The following response languages are available**
 
-**The following functions are available:**
-The result will always be a JSON object, whose values can be accessed. Additionally, you can create a Weather() object to conveniently access the JSON data.
+- English
+- Russian
+- Italian
+- Spanish
+- Ukrainian
+- German
+- Portuguese
+- Romanian
+- Polish
+- Finnish
+- Dutch
+- French
+- Bulgarian
+- Swedish
+- Chinese Traditional
+- Chinese Simplified
+- Turkish
+- Croatian
+- Catalan
 
+
+
+**The following temperature units are available**
+
+- Celsius
+- Kelvin
+- Fahrenheit
+
+
+
+### Creating a request
+To make an request, create a new `WeatherRequest`object, such as:
 ```swift
-newApi.currentWeatherByCoordinates(coords: CLLocationCoordinate2D) { (results) in
-       let weather = Weather(data: results)
+// This will request weather data based on coordinates
+var locationRequest = LocationRequest(userCoordinates)
+
+/*
+This will request weather data based on a city name.
+countryCode is an optional ISO 3166 code to narrow the search down
+*/
+var cityRequest = CityNameRequest("Berlin", countryCode: "DE")
+
+/*
+This will request weather data based on a ZIP code
+Again, countryCode is an optional ISO 3166 code
+*/
+var zipCodeRequest = ZipCodeRequest("10405", countryCode: "DE")
+
+/*
+This will request weather data based on a city ID.
+For a list of city IDs, follow the link below
+*/
+var cityIdRequest = CityIdRequest("2950159")
+```
+Full list of city IDs can be downloaded [here](http://samples.openweathermap.org/data/2.5/weather?id=2172797&appid=b6907d289e10d714a6e88b30761fae22)
+
+### Executing the request
+Currently, only current weather data, and forecast data are available (historical data support will be added later).
+To request the current weather, call
+```swift
+api.requestCurrentWeather(with: request) { (current, error) in
+	guard let current = current, error == nil else {
+		// Handle error here
+		return
+	}
+	
+	// Do something with data here
 }
+```
+Note: The type returned by this call is `CurrentWeather`which is slightly different from `HourlyForecast`and `DailyForecast`.
 
-
-newApi.currentWeatherByCity(name: String) { (result) in
-       let weather = Weather(data: results)
-}
-
-
-newApi.currentWeatherByID(id: String) { (result) in
-       let weather = Weather(data: results)
-}
-
-
-newApi.currentWeatherByZIP(code: String, countryCode: String) { (result) in
-       let weather = Weather(data: results)
-}
-
-
-newApi.forecastWeatherByCoordinates(coords: CLLocationCoordinate2D, type: ForecastType) { (results) in
-       let forecast = Forecast(data: results, type: ForecastType)
-}
-
-
-newApi.forecastWeatherByID(id: String, type: ForecastType) { (results) in
-       let forecast = Forecast(data: results, type: ForecastType)
-}
-
-
-newApi.forecastWeatherByCity(name: String, type: ForecastType) { (results) in
-       let forecast = Forecast(data: results, type: ForecastType)
+To request an hourly forecast, call `requestHourlyForecast(...)`and `requestDailyForecast`respectively.
+```swift
+api.requestHourlyForecast(with: request, for: .threeHourly) { (forecast, error) in
+	guard let forecast = forecast, error == nil else {
+		// Handle error here
+		return
+	}
+            
+	// Do something with forecast here
 }
 ```
 
-Have fun and thanks for using :)
+
+
+#### This documentation is far from complete, however the code itself is pretty well documented so feel free to just play around and just contact me if you have any suggestions :)
