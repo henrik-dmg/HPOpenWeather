@@ -9,6 +9,25 @@
 import Foundation
 import CoreLocation
 
+/// Type that holds information about the reqeuest's nearest city
+public struct City: Codable {
+    /// The ID assigned to the city
+    public var id: Int
+    /// The name of the city
+    public var name: String
+    /// The location of the city
+    public var location: Coordinates
+    /// The country code of the city
+    public var countryCode: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case location = "coord"
+        case countryCode = "country"
+    }
+}
+
 /// Custom Location type which holds latitude and longitude, similar to CLLocationCoordinate2D
 public struct Coordinates: Codable {
     /// Longitude of the object
@@ -27,22 +46,35 @@ public struct Coordinates: Codable {
 }
 
 /// Type that holds system information such as country code, sunrise and sunset times
-public struct System: Codable {
+struct System: Codable {
     /**
      [Wikipedia]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes "See full list"
      
      An ISO 3166 country code specifying the country of the request's location. For a full list of codes see [Wikipedia]
      */
-    public var countryCode: String
+    var countryCode: String
     /// The sunrise time of the request's location in UTC time
-    public var sunrise: Date
+    var sunrise: Date
     /// The sunset time of the request's location in UTC time
-    public var sunset: Date
+    var sunset: Date
     
     enum CodingKeys: String, CodingKey {
         case countryCode = "country"
         case sunrise
         case sunset
+    }
+}
+
+/// Type that holds information about sunrise and sunset times in UTC time
+public struct Sun: Codable {
+    /// Sunset time in UTC time
+    public var set: Date
+    /// Sunrise time in UTC time
+    public var rise: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case set = "sunset"
+        case rise = "sunrise"
     }
 }
 
@@ -131,7 +163,6 @@ public struct Precipitation: Codable, CustomStringConvertible {
 
 /// Type that holds information about cloud coverage
 struct Clouds: Codable {
-    
     /// Cloud Coverage measured in percent
     var all: Int
 }
