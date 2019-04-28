@@ -9,7 +9,7 @@
 import Foundation
 
 /// Codable protocol that holds all core information of a weather API response
-public protocol WeatherSnapshot: Codable {
+protocol WeatherSnapshot: Codable {
     /// The time of data calculation in UTC time
     var timeOfCalculation: Date { get }
     /// Holds the main information of the request, such as temperature, humidity, pressure, etc.

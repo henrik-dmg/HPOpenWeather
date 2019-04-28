@@ -136,7 +136,7 @@ public class HPOpenWeather {
      */
     public func requestCurrentWeather(with request: WeatherRequest, completion: @escaping (_ weather: CurrentWeather?, _ error: Error?) -> ()) {
         var url = HPOpenWeather.baseUrl
-        url.add(request.parameters())
+        url.add(request.queryItems())
         
         self.request(url: &url, for: CurrentWeather.self, completion: completion)
     }
@@ -152,7 +152,7 @@ public class HPOpenWeather {
     */
     public func requestHourlyForecast(with request: WeatherRequest, for frequency: ForecastFrequency, completion: @escaping (_ forecast: HourlyForecast?, _ error: Error?) -> ()) {
         var url = frequency.url()
-        url.add(request.parameters())
+        url.add(request.queryItems())
         
         self.request(url: &url, for: HourlyForecast.self, completion: completion)
     }
@@ -167,7 +167,7 @@ public class HPOpenWeather {
     */
     public func requestDailyForecast(with request: WeatherRequest, completion: @escaping (_ forecast: HourlyForecast?, _ error: Error?) -> ()) {
         var url = HPOpenWeather.dailyForecastUrl
-        url.add(request.parameters())
+        url.add(request.queryItems())
         // TODO: Replace with Daily type
         self.request(url: &url, for: HourlyForecast.self, completion: completion)
     }

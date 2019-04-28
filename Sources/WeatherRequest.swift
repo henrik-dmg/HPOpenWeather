@@ -12,14 +12,14 @@ import CoreLocation
 /// Generic protocol that returns the parameters needed for an API call
 public protocol WeatherRequest {
     /// Returns an array of URLQueryItem which are needed to request the appropriate data for the request
-    func parameters() -> [URLQueryItem]
+    func queryItems() -> [URLQueryItem]
 }
 
 /**
  Type that uses coordinates to request weather data
 */
 public class LocationRequest: WeatherRequest {
-    public func parameters() -> [URLQueryItem] {
+    public func queryItems() -> [URLQueryItem] {
         return [URLQueryItem(name: "lat", value: "\(coordinates.latitude)"),
                 URLQueryItem(name: "lon", value: "\(coordinates.longitude)")]
     }
@@ -39,7 +39,7 @@ public class LocationRequest: WeatherRequest {
  Type that uses a city name and optional country code (use ISO 3166 country codes). For a full list, see [Wikipedia]
 */
 public class CityNameRequest: WeatherRequest {
-    public func parameters() -> [URLQueryItem] {
+    public func queryItems() -> [URLQueryItem] {
         var param = self.cityName
         if self.countryCode != nil {
             param.append(",\(self.countryCode!)")
@@ -66,7 +66,7 @@ public class CityNameRequest: WeatherRequest {
  Type that uses a city ID (see [OpenWeatherMap] for a full list of city IDs).
 */
 public class CityIdRequest: WeatherRequest {
-    public func parameters() -> [URLQueryItem] {
+    public func queryItems() -> [URLQueryItem] {
         return [URLQueryItem(name: "id", value: self.cityId)]
     }
     
@@ -84,7 +84,7 @@ public class CityIdRequest: WeatherRequest {
  See [Wikipedia] for full list.
 */
 public class ZipCodeRequest: WeatherRequest {
-    public func parameters() -> [URLQueryItem] {
+    public func queryItems() -> [URLQueryItem] {
         var param = self.zipCode
         if self.countryCode != nil {
             param.append(",\(self.countryCode!)")
