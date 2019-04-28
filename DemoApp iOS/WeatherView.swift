@@ -53,22 +53,11 @@ class WeatherView: NibLoadingView {
                 return
             }
             
-            print(weather.sun.rise)
-            
             DispatchQueue.main.async {
                 self.mainLabel.text = weather.condition.main
                 self.cityLabel.text = weather.city.name
                 self.tempLabel.text = "\(Int(weather.main.temperature))°"
             }
-        }
-        
-        api.requestForecast(with: request, for: .threeHourly) { (forecast, error) in
-            guard let forecast = forecast, error == nil else {
-                print(error?.localizedDescription)
-                return
-            }
-            
-            print(forecast.dataPoints.first?.timeOfCalculation)
         }
     }
 }

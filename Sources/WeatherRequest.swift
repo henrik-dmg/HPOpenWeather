@@ -36,14 +36,13 @@ public class LocationRequest: WeatherRequest {
 /**
  [Wikipedia]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes "See full list"
  
- Type that uses a city name and optional country code (use ISO 3166 country codes). For a full list, see [Wikipedia]
+ Type that uses a city name and optional country code (use ISO 3166 country codes).
+ For a full list, see [Wikipedia].
 */
 public class CityNameRequest: WeatherRequest {
     public func queryItems() -> [URLQueryItem] {
         var param = self.cityName
-        if self.countryCode != nil {
-            param.append(",\(self.countryCode!)")
-        }
+        param.add(self.countryCode)
         
         return [URLQueryItem(name: "q", value: param)]
     }
@@ -53,7 +52,10 @@ public class CityNameRequest: WeatherRequest {
     /// The country code in ISO 3166 format used to specify a country when requesting weather data.
     public var countryCode: String?
     
-    /// Public initialiser to quickly create a new request by supplying a city name and optional ISO 3166 country code.
+    /**
+     Public initialiser to quickly create a new request by supplying a
+     city name and optional ISO 3166 country code.
+     */
     public init(_ cityName: String, countryCode: String?) {
         self.cityName = cityName
         self.countryCode = countryCode
@@ -86,9 +88,8 @@ public class CityIdRequest: WeatherRequest {
 public class ZipCodeRequest: WeatherRequest {
     public func queryItems() -> [URLQueryItem] {
         var param = self.zipCode
-        if self.countryCode != nil {
-            param.append(",\(self.countryCode!)")
-        }
+        param.add(self.countryCode)
+        
         return [URLQueryItem(name: "zip", value: param)]
     }
     
@@ -101,5 +102,14 @@ public class ZipCodeRequest: WeatherRequest {
     public init(zipCode: String, countryCode: String?) {
         self.zipCode = zipCode
         self.countryCode = countryCode
+    }
+}
+
+fileprivate extension String {
+    mutating func add(_ code: String?) {
+        if let country = code {
+            self.append(",\(country)")
+        }
+        return
     }
 }

@@ -31,10 +31,9 @@ public extension String {
 
 public extension Date {
     func convertToString() -> String {
-        TimeZone.ReferenceType.default = TimeZone(abbreviation: "BST")!
         
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.ReferenceType.default
+        dateFormatter.timeZone = TimeZone(abbreviation: "BST")!
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         return dateFormatter.string(from: self)

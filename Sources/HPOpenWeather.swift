@@ -22,6 +22,7 @@ public class HPOpenWeather {
     /// The URL endpoint that returns current weather data
     static let baseUrl = URL(string: "https://api.openweathermap.org/data/2.5/weather?")!
     
+    /// The URL endpoint that returns daily forecasts
     static let dailyForecastUrl = URL(string: "https://api.openweathermap.org/data/2.5/forecast/daily?")!
     
     /// Internal property to store API key, language and temperature format as URL parameter
