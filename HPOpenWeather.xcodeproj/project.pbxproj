@@ -14,9 +14,9 @@
 		264B52862274D46000E20D44 /* WeatherRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D42273974F00F474A8 /* WeatherRequest.swift */; };
 		264B52872274D46000E20D44 /* WeatherRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D42273974F00F474A8 /* WeatherRequest.swift */; };
 		264B52882274D46000E20D44 /* WeatherRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D42273974F00F474A8 /* WeatherRequest.swift */; };
-		264B52892274D46000E20D44 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D52273974F00F474A8 /* Forecast.swift */; };
-		264B528A2274D46000E20D44 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D52273974F00F474A8 /* Forecast.swift */; };
-		264B528B2274D46000E20D44 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D52273974F00F474A8 /* Forecast.swift */; };
+		264B52892274D46000E20D44 /* HourlyForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D52273974F00F474A8 /* HourlyForecast.swift */; };
+		264B528A2274D46000E20D44 /* HourlyForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D52273974F00F474A8 /* HourlyForecast.swift */; };
+		264B528B2274D46000E20D44 /* HourlyForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D52273974F00F474A8 /* HourlyForecast.swift */; };
 		264B528C2274D46000E20D44 /* HPOpenWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D32273974F00F474A8 /* HPOpenWeather.swift */; };
 		264B528D2274D46000E20D44 /* HPOpenWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D32273974F00F474A8 /* HPOpenWeather.swift */; };
 		264B528E2274D46000E20D44 /* HPOpenWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D32273974F00F474A8 /* HPOpenWeather.swift */; };
@@ -45,7 +45,7 @@
 		26DF15D82273975000F474A8 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D22273974F00F474A8 /* CurrentWeather.swift */; };
 		26DF15D92273975000F474A8 /* HPOpenWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D32273974F00F474A8 /* HPOpenWeather.swift */; };
 		26DF15DA2273975000F474A8 /* WeatherRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D42273974F00F474A8 /* WeatherRequest.swift */; };
-		26DF15DB2273975000F474A8 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D52273974F00F474A8 /* Forecast.swift */; };
+		26DF15DB2273975000F474A8 /* HourlyForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D52273974F00F474A8 /* HourlyForecast.swift */; };
 		26DF15DC2273975000F474A8 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15D62273975000F474A8 /* Enums.swift */; };
 		26DF15E82273BA2300F474A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15E72273BA2300F474A8 /* AppDelegate.swift */; };
 		26DF15EA2273BA2300F474A8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF15E92273BA2300F474A8 /* ViewController.swift */; };
@@ -122,7 +122,7 @@
 		26DF15D22273974F00F474A8 /* CurrentWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		26DF15D32273974F00F474A8 /* HPOpenWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HPOpenWeather.swift; sourceTree = "<group>"; };
 		26DF15D42273974F00F474A8 /* WeatherRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherRequest.swift; sourceTree = "<group>"; };
-		26DF15D52273974F00F474A8 /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+		26DF15D52273974F00F474A8 /* HourlyForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyForecast.swift; sourceTree = "<group>"; };
 		26DF15D62273975000F474A8 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		26DF15DF2273B6FE00F474A8 /* HPOpenWeather.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HPOpenWeather.podspec; sourceTree = "<group>"; };
 		26DF15E52273BA2300F474A8 /* DemoApp iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DemoApp iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,7 +203,7 @@
 				26E874792275E6E6001799F8 /* WeatherSnapshot.swift */,
 				26FE42772275FC060009734D /* WeatherSnapshot+Types.swift */,
 				26DF15D22273974F00F474A8 /* CurrentWeather.swift */,
-				26DF15D52273974F00F474A8 /* Forecast.swift */,
+				26DF15D52273974F00F474A8 /* HourlyForecast.swift */,
 				268C8F3D2275D6A40025C6B2 /* ApiError.swift */,
 				26DF15D62273975000F474A8 /* Enums.swift */,
 				2635DBE2227483BC004BB3CB /* Extension.swift */,
@@ -590,7 +590,7 @@
 				26E8747B2275E6E6001799F8 /* WeatherSnapshot.swift in Sources */,
 				26FE42792275FC060009734D /* WeatherSnapshot+Types.swift in Sources */,
 				268C8F3F2275D6A40025C6B2 /* ApiError.swift in Sources */,
-				264B528A2274D46000E20D44 /* Forecast.swift in Sources */,
+				264B528A2274D46000E20D44 /* HourlyForecast.swift in Sources */,
 				264B52872274D46000E20D44 /* WeatherRequest.swift in Sources */,
 				264B52902274D46000E20D44 /* Enums.swift in Sources */,
 				264B52962274D46000E20D44 /* Extension.swift in Sources */,
@@ -606,7 +606,7 @@
 				26E8747C2275E6E6001799F8 /* WeatherSnapshot.swift in Sources */,
 				26FE427A2275FC060009734D /* WeatherSnapshot+Types.swift in Sources */,
 				268C8F402275D6A40025C6B2 /* ApiError.swift in Sources */,
-				264B52892274D46000E20D44 /* Forecast.swift in Sources */,
+				264B52892274D46000E20D44 /* HourlyForecast.swift in Sources */,
 				264B52862274D46000E20D44 /* WeatherRequest.swift in Sources */,
 				264B528F2274D46000E20D44 /* Enums.swift in Sources */,
 				264B52952274D46000E20D44 /* Extension.swift in Sources */,
@@ -622,7 +622,7 @@
 				26E8747D2275E6E6001799F8 /* WeatherSnapshot.swift in Sources */,
 				26FE427B2275FC060009734D /* WeatherSnapshot+Types.swift in Sources */,
 				268C8F412275D6A40025C6B2 /* ApiError.swift in Sources */,
-				264B528B2274D46000E20D44 /* Forecast.swift in Sources */,
+				264B528B2274D46000E20D44 /* HourlyForecast.swift in Sources */,
 				264B52882274D46000E20D44 /* WeatherRequest.swift in Sources */,
 				264B52912274D46000E20D44 /* Enums.swift in Sources */,
 				264B52972274D46000E20D44 /* Extension.swift in Sources */,
@@ -652,7 +652,7 @@
 				26DF15D92273975000F474A8 /* HPOpenWeather.swift in Sources */,
 				2635DBE3227483BC004BB3CB /* Extension.swift in Sources */,
 				26DF15DC2273975000F474A8 /* Enums.swift in Sources */,
-				26DF15DB2273975000F474A8 /* Forecast.swift in Sources */,
+				26DF15DB2273975000F474A8 /* HourlyForecast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

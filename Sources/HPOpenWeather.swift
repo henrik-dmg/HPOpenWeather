@@ -20,7 +20,9 @@ import Foundation
 public class HPOpenWeather {
     
     /// The URL endpoint that returns current weather data
-    static let baseURL = URL(string: "https://api.openweathermap.org/data/2.5/weather?")!
+    static let baseUrl = URL(string: "https://api.openweathermap.org/data/2.5/weather?")!
+    
+    static let dailyForecastUrl = URL(string: "https://api.openweathermap.org/data/2.5/forecast/daily?")!
     
     /// Internal property to store API key, language and temperature format as URL parameter
     private var params = [String : URLQueryItem]()
@@ -133,24 +135,41 @@ public class HPOpenWeather {
         - error: An error object that indicates why the request failed, or nil if the request was successful.
      */
     public func requestCurrentWeather(with request: WeatherRequest, completion: @escaping (_ weather: CurrentWeather?, _ error: Error?) -> ()) {
-        var url = HPOpenWeather.baseURL
+        var url = HPOpenWeather.baseUrl
         url.add(request.parameters())
         
         self.request(url: &url, for: CurrentWeather.self, completion: completion)
     }
     
     /**
-     Requests a forecast using the specified ForecastRequest object
+     Requests an hourly forecast using the specified WeatherRequest
      
      - Parameters:
         - request: The ForecastRequest object used to make the request
-        - forecastType: Type specifying which API endpoint is used to request the forecast
+        - frequency: Type specifying which API endpoint is used to request the forecast
+        - forecast: A HourlyForecast object which is returned, or nil if the request or parsing failed
+        - error: An error object that indicates why the request failed, or nil if the request was successful.
     */
-    public func requestForecast(with request: WeatherRequest, for forecastType: ForecastType, completion: @escaping (_ weather: Forecast?, _ error: Error?) -> ()) {
-        var url = forecastType.url()
+    public func requestHourlyForecast(with request: WeatherRequest, for frequency: ForecastFrequency, completion: @escaping (_ forecast: HourlyForecast?, _ error: Error?) -> ()) {
+        var url = frequency.url()
         url.add(request.parameters())
         
-        self.request(url: &url, for: Forecast.self, completion: completion)
+        self.request(url: &url, for: HourlyForecast.self, completion: completion)
+    }
+    
+    /**
+     Requests an hourly forecast using the specified WeatherRequest
+     
+     - Parameters:
+        - request: The ForecastRequest object used to make the request
+        - forecast: A DailyForecast object which is returned, or nil if the request or parsing failed
+        - error: An error object that indicates why the request failed, or nil if the request was successful.
+    */
+    public func requestDailyForecast(with request: WeatherRequest, completion: @escaping (_ forecast: HourlyForecast?, _ error: Error?) -> ()) {
+        var url = HPOpenWeather.dailyForecastUrl
+        url.add(request.parameters())
+        // TODO: Replace with Daily type
+        self.request(url: &url, for: HourlyForecast.self, completion: completion)
     }
     
     /**
@@ -192,6 +211,7 @@ public class HPOpenWeather {
     }
 }
 
+// Felt cute, might delete later
 extension Data {
     func json() -> [String:Any]? {
         let model = try? JSONSerialization.jsonObject(with: self, options: [])

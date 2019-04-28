@@ -9,7 +9,7 @@
 import Foundation
 
 // TODO: Document this bitch and clean up internal stuff
-public struct Forecast: Codable {
+public struct HourlyForecast: Codable {
     
     public var city: City
     
