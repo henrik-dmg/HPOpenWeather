@@ -12,32 +12,33 @@ import CoreLocation
 /**
  A Codable type that wraps the API response for the current weather request in a usable type
  */
-public class CurrentWeather: Codable {
+public struct CurrentWeather: WeatherSnapshot {
+    public var timeOfCalculation: Date
+    
+    public var main: Main
+    
+    public var conditions: [WeatherCondition]
+    
+    public var wind: Wind
+    
+    public var snow: Precipitation { return _snow ?? Precipitation.none }
+    
+    public var rain: Precipitation { return _rain ?? Precipitation.none }
+    
+    public var _snow: Precipitation?
+    
+    public var _rain: Precipitation?
+    
     /// The ID of the nearest city
     public var cityId: Int
     /// The name of the nearest city
     public var name: String
-    /// The time of data calculation in UTC time
-    public var timeOfCalculation: Date
+    
     /// The location coordinates of the request
     public var location: Coordinates
     /// System data of the request, such as country code, sunrise and sunset
     public var system: System
-    /// Holds the main information of the request, such as temperature, humidity, pressure, etc.
-    public var main: Main
-    /// Current wind information, like wind speed and degrees
-    public var wind: Wind
-    /// List of current weather conditions
-    public var conditions: [WeatherCondition]
-    /// Information about snowfall in the last one or three hours
-    public var snow: Precipitation { return _snow ?? Precipitation.none }
-    /// Information about rainfall in the last one or three hours
-    public var rain: Precipitation { return _rain ?? Precipitation.none }
     
-    /// Internal type to handle missing "snow" key in JSON response
-    private var _snow: Precipitation?
-    /// Internal type to handle missing "rain" key in JSON response
-    private var _rain: Precipitation?
     
     enum CodingKeys: String, CodingKey {
         case cityId = "id"
