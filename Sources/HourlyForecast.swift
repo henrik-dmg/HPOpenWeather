@@ -8,18 +8,20 @@
 
 import Foundation
 
-// TODO: Document this bitch and clean up internal stuff
+/// Codable type that holds weather forecast information in an hourly frequency
 public struct HourlyForecast: Codable {
-    
+    /// The nearest city, returned by the API
     public var city: City
-    
+    /// The number of measurements returned by the API
     public var numberOfDataPoints: Int
-    
+    /// The datapoints returned by the API
     public var dataPoints: [DataPoint]
     
-    
+    /// Codable type that represents a data points based on an hourly frequency
     public struct DataPoint: WeatherSnapshot, PrecipitationOptional {
+        /// The timestamp of the forecast measurement
         public var forecastTimeStamp: Date
+        /// The time of data calculation on the server. Data is refreshed every 10 minutes
         public var timeOfCalculation: Date {
             return DataPoint.dateFormatter.date(from: _timeOfCalculation ?? "1970-01-01 00:00:00") ?? Date.distantPast
         }

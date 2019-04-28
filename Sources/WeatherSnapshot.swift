@@ -14,13 +14,13 @@ public protocol WeatherSnapshot: Codable {
     var timeOfCalculation: Date { get }
     /// Holds the main information of the request, such as temperature, humidity, pressure, etc.
     var main: Main { get }
-    /// List of current weather conditions
+    /// Holds information about weather condition such description, group and id
     var condition: WeatherCondition { get }
-    /// Current wind information, like wind speed and degrees
+    /// Holds information about wind, like speed and degrees
     var wind: Wind { get }
-    /// Information about snowfall in the last one or three hours
+    /// Holds information about snowfall in the last one or three hours
     var snow: Precipitation { get }
-    /// Information about rainfall in the last one or three hours
+    /// Holds information about rainfall in the last one or three hours
     var rain: Precipitation { get }
     /// The cloud coverage in percent
     var cloudCoverage: Int { get }
