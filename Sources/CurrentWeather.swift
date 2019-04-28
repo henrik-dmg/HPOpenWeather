@@ -12,6 +12,8 @@ import Foundation
  A Codable type that wraps the API response for the current weather request in a usable type
  */
 public struct CurrentWeather: WeatherSnapshot, PrecipitationOptional {
+    public var cloudCoverage: Int { return _clouds?.all ?? 0 }
+    
     public var timeOfCalculation: Date
     
     public var main: Main
@@ -26,6 +28,7 @@ public struct CurrentWeather: WeatherSnapshot, PrecipitationOptional {
     
     internal var _snow: Precipitation?
     internal var _rain: Precipitation?
+    internal var _clouds: Clouds?
     
     /// The ID of the nearest city
     public var cityId: Int
@@ -49,5 +52,6 @@ public struct CurrentWeather: WeatherSnapshot, PrecipitationOptional {
         case conditions = "weather"
         case _snow = "snow"
         case _rain = "rain"
+        case _clouds = "clouds"
     }
 }

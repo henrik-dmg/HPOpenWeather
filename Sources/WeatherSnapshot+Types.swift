@@ -128,3 +128,10 @@ public struct Precipitation: Codable, CustomStringConvertible {
         case _3h = "3h"
     }
 }
+
+/// Type that holds information about cloud coverage
+struct Clouds: Codable {
+    
+    /// Cloud Coverage measured in percent
+    var all: Int
+}

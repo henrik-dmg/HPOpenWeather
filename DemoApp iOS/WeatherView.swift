@@ -53,7 +53,7 @@ class WeatherView: NibLoadingView {
                 return
             }
             
-            print(weather)
+            print(weather.cloudCoverage)
             
             DispatchQueue.main.async {
                 self.mainLabel.text = weather.conditions.first?.main

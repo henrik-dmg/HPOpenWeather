@@ -22,6 +22,8 @@ public protocol WeatherSnapshot: Codable {
     var snow: Precipitation { get }
     /// Information about rainfall in the last one or three hours
     var rain: Precipitation { get }
+    /// The cloud coverage in percent
+    var cloudCoverage: Int { get }
 }
 
 protocol PrecipitationOptional {
