@@ -20,7 +20,7 @@ import Foundation
 public class HPOpenWeather {
     
     /// The URL endpoint that returns current weather data
-    static let baseURL = "https://api.openweathermap.org/data/2.5/weather?"
+    static let baseURL = URL(string: "https://api.openweathermap.org/data/2.5/weather?")!
     
     /// Internal property to store API key, language and temperature format as URL parameter
     private var params = [String : URLQueryItem]()
@@ -132,8 +132,8 @@ public class HPOpenWeather {
         - weather: A CurrentWeather object which is returned, or nil if the request or parsing failed
         - error: An error object that indicates why the request failed, or nil if the request was successful.
      */
-    public func requestCurrentWeather<T: WeatherRequest>(with request: T, completion: @escaping (_ weather: CurrentWeather?, _ error: Error?) -> ()) {
-        var url = HPOpenWeather.baseURL.url()
+    public func requestCurrentWeather(with request: WeatherRequest, completion: @escaping (_ weather: CurrentWeather?, _ error: Error?) -> ()) {
+        var url = HPOpenWeather.baseURL
         url.add(request.parameters())
         
         self.request(url: &url) { (json, error) in
@@ -167,8 +167,8 @@ public class HPOpenWeather {
         - request: The ForecastRequest object used to make the request
         - forecastType: Type specifying which API endpoint is used to request the forecast
     */
-    public func requestForecast<T: WeatherRequest>(with request: T, forecastType: ForecastType) {
-        var url = forecastType.rawValue.url()
+    public func requestForecast(with request: WeatherRequest, forecastType: ForecastType) {
+        var url = forecastType.url()
         url.add(request.parameters())
         
         self.request(url: &url) { (json, error) in
@@ -199,13 +199,6 @@ public class HPOpenWeather {
             
             completion(data, error)
         }.resume()
-    }
-}
-
-// WARNING: Do NOT use this in production, or you'll burn in hell
-extension String {
-    func url() -> URL {
-        return URL(string: self)!
     }
 }
 
