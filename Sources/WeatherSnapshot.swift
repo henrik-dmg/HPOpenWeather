@@ -15,7 +15,7 @@ public protocol WeatherSnapshot: Codable {
     /// Holds the main information of the request, such as temperature, humidity, pressure, etc.
     var main: Main { get }
     /// List of current weather conditions
-    var conditions: [WeatherCondition] { get }
+    var condition: WeatherCondition { get }
     /// Current wind information, like wind speed and degrees
     var wind: Wind { get }
     /// Information about snowfall in the last one or three hours

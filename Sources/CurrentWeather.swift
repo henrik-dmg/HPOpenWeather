@@ -15,7 +15,7 @@ public struct CurrentWeather: WeatherSnapshot, PrecipitationOptional {
     public var cloudCoverage: Int { return _clouds?.all ?? 0 }
     public var timeOfCalculation: Date
     public var main: Main
-    public var conditions: [WeatherCondition]
+    public var condition: WeatherCondition { return _condition!.first! }
     public var wind: Wind
     public var snow: Precipitation { return _snow ?? Precipitation.none }
     public var rain: Precipitation { return _rain ?? Precipitation.none }
@@ -37,7 +37,7 @@ public struct CurrentWeather: WeatherSnapshot, PrecipitationOptional {
     internal var _snow: Precipitation?
     internal var _rain: Precipitation?
     internal var _clouds: Clouds?
-    
+    internal var _condition: [WeatherCondition]?
     /// The ID of the nearest city
     internal var _cityId: Int
     /// The name of the nearest city
@@ -58,9 +58,9 @@ public struct CurrentWeather: WeatherSnapshot, PrecipitationOptional {
         case _system = "sys"
         case main
         case wind
-        case conditions = "weather"
         case _snow = "snow"
         case _rain = "rain"
         case _clouds = "clouds"
+        case _condition = "weather"
     }
 }

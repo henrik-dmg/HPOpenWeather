@@ -136,8 +136,39 @@ public class HPOpenWeather {
         var url = HPOpenWeather.baseURL
         url.add(request.parameters())
         
-        self.request(url: &url) { (json, error) in
-            guard let json = json else {
+        self.request(url: &url, for: CurrentWeather.self, completion: completion)
+    }
+    
+    /**
+     Requests a forecast using the specified ForecastRequest object
+     
+     - Parameters:
+        - request: The ForecastRequest object used to make the request
+        - forecastType: Type specifying which API endpoint is used to request the forecast
+    */
+    public func requestForecast(with request: WeatherRequest, for forecastType: ForecastType, completion: @escaping (_ weather: Forecast?, _ error: Error?) -> ()) {
+        var url = forecastType.url()
+        url.add(request.parameters())
+        
+        self.request(url: &url, for: Forecast.self, completion: completion)
+    }
+    
+    /**
+     Private function to actually make the API calls
+     
+     - Parameters:
+        - url: The completete the GET request is sent to
+        - completion: Completion block that is called when the network call is completed
+        - json: Dictionary containing the response in JSON format
+        - error: An error object that indicates why the request failed, or nil if the request was successful.
+    */
+    private func request<T: Codable>(url: inout URL, for type: T.Type, completion: @escaping (_ data: T?, _ error: Error?) -> ()) {
+        let values = Array(self.params.values)
+        url.add(values)
+        let urlRequest = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            guard let json = data, error == nil else {
                 completion(nil, error)
                 return
             }
@@ -151,53 +182,12 @@ public class HPOpenWeather {
                     return
                 }
                 
-                let model = try decoder.decode(CurrentWeather.self, from: json)
+                let model = try decoder.decode(type, from: json)
                 
                 completion(model, error)
             } catch let parsingError {
                 completion(nil, parsingError)
             }
-        }
-    }
-    
-    /**
-     Requests a forecast using the specified ForecastRequest object
-     
-     - Parameters:
-        - request: The ForecastRequest object used to make the request
-        - forecastType: Type specifying which API endpoint is used to request the forecast
-    */
-    public func requestForecast(with request: WeatherRequest, forecastType: ForecastType) {
-        var url = forecastType.url()
-        url.add(request.parameters())
-        
-        self.request(url: &url) { (json, error) in
-            // TODO: Return actual Forecast object here
-            print(json, error)
-        }
-    }
-    
-    /**
-     Private function to actually make the API calls
-     
-     - Parameters:
-        - url: The completete the GET request is sent to
-        - completion: Completion block that is called when the network call is completed
-        - json: Dictionary containing the response in JSON format
-        - error: An error object that indicates why the request failed, or nil if the request was successful.
-    */
-    private func request(url: inout URL, completion: @escaping (_ data: Data?, _ error: Error?) -> ()) {
-        let values = Array(self.params.values)
-        url.add(values)
-        let urlRequest = URLRequest(url: url)
-        
-        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            guard let data = data, error == nil else {
-                completion(nil, error)
-                return
-            }
-            
-            completion(data, error)
         }.resume()
     }
 }
