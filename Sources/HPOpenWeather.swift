@@ -166,11 +166,11 @@ public class HPOpenWeather {
         - forecast: A DailyForecast object which is returned, or nil if the request or parsing failed
         - error: An error object that indicates why the request failed, or nil if the request was successful.
     */
-    public func requestDailyForecast(with request: WeatherRequest, completion: @escaping (_ forecast: HourlyForecast?, _ error: Error?) -> ()) {
+    public func requestDailyForecast(with request: WeatherRequest, completion: @escaping (_ forecast: DailyForecast?, _ error: Error?) -> ()) {
         var url = HPOpenWeather.dailyForecastUrl
         url.add(request.queryItems())
-        // TODO: Replace with Daily type
-        self.request(url: &url, for: HourlyForecast.self, completion: completion)
+        
+        self.request(url: &url, for: DailyForecast.self, completion: completion)
     }
     
     /**
