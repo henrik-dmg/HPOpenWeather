@@ -215,7 +215,9 @@
 				26E874792275E6E6001799F8 /* WeatherSnapshot.swift */,
 				26FE42772275FC060009734D /* WeatherSnapshot+Types.swift */,
 				26DF15D22273974F00F474A8 /* CurrentWeather.swift */,
-				26FE4286227625390009734D /* Forecast */,
+				26FE42812276231C0009734D /* Forecast.swift */,
+				26DF15D52273974F00F474A8 /* HourlyForecast.swift */,
+				26FE427C227622A80009734D /* DailyForecast.swift */,
 				2635DBE2227483BC004BB3CB /* Extension.swift */,
 				26DF15BB2273970C00F474A8 /* Info.plist */,
 				26DF15BA2273970C00F474A8 /* HPOpenWeather.h */,
@@ -305,16 +307,6 @@
 				26DF15FB2273BDE100F474A8 /* GradientView.swift */,
 			);
 			path = "Helper Classes";
-			sourceTree = "<group>";
-		};
-		26FE4286227625390009734D /* Forecast */ = {
-			isa = PBXGroup;
-			children = (
-				26FE42812276231C0009734D /* Forecast.swift */,
-				26DF15D52273974F00F474A8 /* HourlyForecast.swift */,
-				26FE427C227622A80009734D /* DailyForecast.swift */,
-			);
-			path = Forecast;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
