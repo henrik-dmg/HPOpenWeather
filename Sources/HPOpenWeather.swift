@@ -19,6 +19,9 @@ import Foundation
 /// Object that handles any API requests and responses.
 public class HPOpenWeather {
     
+    /// Private DispatchQueue for thread-safe iconCache access
+    private let cacheQueue = DispatchQueue(label: "com.henrikpanhans.HPOpenWeather", attributes: .concurrent)
+    
     /// The URL endpoint that returns current weather data
     static let baseUrl = URL(string: "https://api.openweathermap.org/data/2.5/weather?")!
     
@@ -99,11 +102,13 @@ public class HPOpenWeather {
     */
     public func getIconFrom(id: String, completion: @escaping (UIImage?) -> ()) {
         if self.enableIconCaching {
-            if self.iconCache[id] != nil {
-                let cachedImage = self.iconCache[id]
-                print("Found cached icon")
-                completion(cachedImage)
-                return
+            self.cacheQueue.sync {
+                if self.iconCache[id] != nil {
+                    let cachedImage = self.iconCache[id]
+                    print("Found cached icon")
+                    completion(cachedImage)
+                    return
+                }
             }
         }
         
@@ -117,8 +122,10 @@ public class HPOpenWeather {
             }
             
             if let image = UIImage(data: data) {
-                if self.enableIconCaching {
-                    self.iconCache[id] = image
+                self.cacheQueue.async {
+                    if self.enableIconCaching {
+                        self.iconCache[id] = image
+                    }
                 }
                 completion(image)
             } else {

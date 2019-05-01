@@ -25,6 +25,24 @@ class HPOpenWeatherTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+//    func testInvalidApiKey() {
+//        api = HPOpenWeather(apiKey: "invalidKey", temperatureFormat: .celsius, language: .english)
+//
+//        let request = CityNameRequest("Berlin", countryCode: "DE")
+//        let promise = expectation(description: "Simple Request")
+//
+//        api?.requestCurrentWeather(with: request) { (current, error) in
+//            if let apiError = error as? ApiError {
+//                XCTAssert(apiError.apiErrorCode == 401)
+//                promise.fulfill()
+//            }
+//
+//            promise.fulfill()
+//        }
+//
+//        waitForExpectations(timeout: 5, handler: nil)
+//    }
+    
     func testQueryItems() {
         let firstItems = [URLQueryItem(name: "test1", value: "firstTestString"),
                           URLQueryItem(name: "test2", value: "firstTestString2"),
