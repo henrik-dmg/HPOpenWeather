@@ -122,7 +122,7 @@ public class HPOpenWeather {
             }
             
             if let image = UIImage(data: data) {
-                self.cacheQueue.async {
+                self.cacheQueue.async(flags: .barrier) {
                     if self.enableIconCaching {
                         self.iconCache[id] = image
                     }
