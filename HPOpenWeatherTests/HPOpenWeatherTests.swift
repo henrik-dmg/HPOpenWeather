@@ -43,6 +43,10 @@ class HPOpenWeatherTests: XCTestCase {
 //        waitForExpectations(timeout: 5, handler: nil)
 //    }
     
+    func testIconCache() {
+        
+    }
+    
     func testQueryItems() {
         let firstItems = [URLQueryItem(name: "test1", value: "firstTestString"),
                           URLQueryItem(name: "test2", value: "firstTestString2"),

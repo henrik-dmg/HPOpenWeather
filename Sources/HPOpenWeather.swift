@@ -100,7 +100,7 @@ public class HPOpenWeather {
         - id: The ID of the the icon to load
         - completion: Completion block which contains optional UIImage
     */
-    public func getIconFrom(id: String, completion: @escaping (UIImage?) -> ()) {
+    public func getIconWith(id: String, completion: @escaping (UIImage?) -> ()) {
         if self.enableIconCaching {
             self.cacheQueue.sync {
                 if self.iconCache[id] != nil {
