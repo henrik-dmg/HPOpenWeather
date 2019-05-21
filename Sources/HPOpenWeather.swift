@@ -105,14 +105,12 @@ public class HPOpenWeather {
             self.cacheQueue.sync {
                 if self.iconCache[id] != nil {
                     let cachedImage = self.iconCache[id]
-                    print("Found cached icon")
                     completion(cachedImage)
                     return
                 }
             }
         }
         
-        print("Icon was not in cache, requesting it now")
         let url = URL(string: "https://openweathermap.org/img/w/\(id).png")!
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data, error == nil else {
@@ -122,7 +120,7 @@ public class HPOpenWeather {
             }
             
             if let image = UIImage(data: data) {
-                self.cacheQueue.async(flags: .barrier) {
+                self.cacheQueue.sync(flags: .barrier) {
                     if self.enableIconCaching {
                         self.iconCache[id] = image
                     }

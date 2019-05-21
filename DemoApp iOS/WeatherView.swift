@@ -13,6 +13,7 @@ import CoreLocation
 
 class WeatherView: NibLoadingView {
     
+    @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
@@ -58,16 +59,21 @@ class WeatherView: NibLoadingView {
                 self.cityLabel.text = weather.city.name
                 self.tempLabel.text = "\(Int(weather.main.temperature))°"
             }
+            
+            self.requestIcon(for: weather.condition.icon)
         }
-        
-        api.requestHourlyForecast(with: request, for: .threeHourly) { (forecast, error) in
-            guard let forecast = forecast, error == nil else {
-                // Handle error here
+    }
+    
+    func requestIcon(for id: String) {
+        api?.getIconWith(id: id, completion: { (image) in
+            guard let image = image else {
                 return
             }
             
-            // Do something with forecast here
-        }
+            DispatchQueue.main.async {
+                self.iconView.image = image
+            }
+        })
     }
 }
 

@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        weatherView.apiKey = "--- YOUR API KEY GOES HERE ---"
+        weatherView.apiKey = "5d254ac1b2cb8ecd6f603cbfac3aaea0"
         weatherView.requestLocationAccess()
     }
     
