@@ -25,7 +25,7 @@ public class LocationRequest: WeatherRequest {
     }
     
     /// The coordinates specified for the request
-    public var coordinates: CLLocationCoordinate2D
+    public let coordinates: CLLocationCoordinate2D
     
     /// Public initialiser to quickly create a new request by supplying coordinates
     public init(_ coordinates: CLLocationCoordinate2D) {
@@ -41,22 +41,19 @@ public class LocationRequest: WeatherRequest {
 */
 public class CityNameRequest: WeatherRequest {
     public func queryItems() -> [URLQueryItem] {
-        var param = self.cityName
-        param.add(self.countryCode)
-        
-        return [URLQueryItem(name: "q", value: param)]
+        return [URLQueryItem(name: "q", value: self.cityName.adding(self.countryCode))]
     }
     
     /// The city name used in the request
-    public var cityName: String
+    public let cityName: String
     /// The country code in ISO 3166 format used to specify a country when requesting weather data.
-    public var countryCode: String?
+    public let countryCode: String?
     
     /**
      Public initialiser to quickly create a new request by supplying a
      city name and optional ISO 3166 country code.
      */
-    public init(_ cityName: String, countryCode: String?) {
+    public init(_ cityName: String, countryCode: String? = nil) {
         self.cityName = cityName
         self.countryCode = countryCode
     }
@@ -72,7 +69,7 @@ public class CityIdRequest: WeatherRequest {
         return [URLQueryItem(name: "id", value: self.cityId)]
     }
     
-    public var cityId: String
+    public let cityId: String
     
     public init(_ cityId: String) {
         self.cityId = cityId
@@ -87,19 +84,16 @@ public class CityIdRequest: WeatherRequest {
 */
 public class ZipCodeRequest: WeatherRequest {
     public func queryItems() -> [URLQueryItem] {
-        var param = self.zipCode
-        param.add(self.countryCode)
-        
-        return [URLQueryItem(name: "zip", value: param)]
+        return [URLQueryItem(name: "zip", value: self.zipCode.adding(self.countryCode))]
     }
     
     /// The ZIP code used in the request
-    public var zipCode: String
+    public let zipCode: String
     /// The ISO 3166 country code used in the request. If no code is specified then the search works for USA as a default.
-    public var countryCode: String?
+    public let countryCode: String?
     
     /// Public initialiser to quickly create a new request by supplying a ZIP code and optional ISO 3166 country code.
-    public init(zipCode: String, countryCode: String?) {
+    public init(zipCode: String, countryCode: String? = nil) {
         self.zipCode = zipCode
         self.countryCode = countryCode
     }
@@ -111,5 +105,13 @@ fileprivate extension String {
             self.append(",\(country)")
         }
         return
+    }
+
+    @discardableResult func adding(_ code: String?) -> String {
+        if let country = code {
+            return self + ",\(country)"
+        } else {
+            return self
+        }
     }
 }

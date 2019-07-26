@@ -13,13 +13,13 @@ import Foundation
  */
 public struct ApiError: LocalizedError, Codable {
     /// A localized message describing what API error occurred.
-    public var errorDescription: String
+    public let errorDescription: String
     /**
      [OpenWeatherMap]:https://openweathermap.org/faq#error401 (full list)
      
      The error code returned by the API. See [OpenWeatherMap] for a list of possible API errors
      */
-    public var apiErrorCode: Int
+    public let apiErrorCode: Int
     
     enum CodingKeys: String, CodingKey {
         case errorDescription = "message"

@@ -12,13 +12,13 @@ import CoreLocation
 /// Type that holds information about the reqeuest's nearest city
 public struct City: Codable {
     /// The ID assigned to the city
-    public var id: Int
+    public let id: Int
     /// The name of the city
-    public var name: String
+    public let name: String
     /// The location of the city
-    public var location: Coordinates
+    public let location: Coordinates
     /// The country code of the city
-    public var countryCode: String
+    public let countryCode: String
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -31,9 +31,9 @@ public struct City: Codable {
 /// Custom Location type which holds latitude and longitude, similar to CLLocationCoordinate2D
 public struct Coordinates: Codable {
     /// Longitude of the object
-    public var longitude: Double
+    public let longitude: Double
     /// Latitude of the object
-    public var latitude: Double
+    public let latitude: Double
     
     func _2d() -> CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -52,11 +52,11 @@ struct System: Codable {
      
      An ISO 3166 country code specifying the country of the request's location. For a full list of codes see [Wikipedia]
      */
-    var countryCode: String
+    let countryCode: String
     /// The sunrise time of the request's location in UTC time
-    var sunrise: Date
+    let sunrise: Date
     /// The sunset time of the request's location in UTC time
-    var sunset: Date
+    let sunset: Date
     
     enum CodingKeys: String, CodingKey {
         case countryCode = "country"
@@ -68,28 +68,36 @@ struct System: Codable {
 /// Type that holds information about sunrise and sunset times in UTC time
 public struct Sun: Codable {
     /// Sunset time in UTC time
-    public var set: Date
+    public let sunSet: Date
     /// Sunrise time in UTC time
-    public var rise: Date
+    public let sunRise: Date
+
+    public var localSunset: Date {
+        return sunSet
+    }
+
+    public var localSunrise: Date {
+        return sunRise
+    }
     
     enum CodingKeys: String, CodingKey {
-        case set = "sunset"
-        case rise = "sunrise"
+        case sunSet = "sunset"
+        case sunRise = "sunrise"
     }
 }
 
 /// Type that holds the main information of the request, such as temperature, humidity, etc.
 public struct Main: Codable {
     /// The current temperature in the format specified in the request
-    public var temperature: Double
+    public let temperature: Double
     /// The current humidity measured in percent
-    public var humidity: Int
+    public let humidity: Int
     /// The current air pressure measured in hPa
-    public var pressure: Double
+    public let pressure: Double
     /// The minimum temperature reached on the day of the request
-    public var temperatureMin: Double
+    public let temperatureMin: Double
     /// The maximum temperature reached on the day of the request
-    public var temperatureMax: Double
+    public let temperatureMax: Double
     /// The current sea level pressure measured in hPa (Note: Is zero when data is unavailable)
     public var seaLevelPressure: Double { return _seaLvl ?? 0.00 }
     /// The current ground level pressure measured in hPa (Note: Is zero when data is unavailable)
@@ -114,9 +122,9 @@ public struct Main: Codable {
 /// Type that holds information about wind speed and direction measured in degrees
 public struct Wind: Codable {
     /// The current wind speed depending on the request's unit (metric: meter/second, imperial: miles/hour)
-    public var speed: Double
+    public let speed: Double
     /// The wind direction measured in degrees from North
-    public var degrees: Double
+    public let degrees: Double
     
     enum CodingKeys: String, CodingKey {
         case speed
@@ -127,13 +135,13 @@ public struct Wind: Codable {
 /// Type that holds information about weather conditions
 public struct WeatherCondition: Codable {
     /// The weather condition ID
-    public var id: Int
+    public let id: Int
     /// Group of weather parameters
-    public var main: String
+    public let main: String
     /// The weather condition within the group
-    public var description: String
+    public let description: String
     /// The ID of the corresponding weather icon
-    public var icon: String
+    public let icon: String
     
     static let unknown = WeatherCondition(id: 0,
                                           main: "Unknown Weather Condition",
@@ -169,5 +177,5 @@ public struct Precipitation: Codable, CustomStringConvertible {
 /// Type that holds information about cloud coverage
 struct Clouds: Codable {
     /// Cloud Coverage measured in percent
-    var all: Int
+    let all: Int
 }

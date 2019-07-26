@@ -14,10 +14,10 @@ import Foundation
 public struct CurrentWeather: WeatherSnapshot, PrecipitationOptional {
     // Already has documentation
     public var cloudCoverage: Int { return _clouds?.all ?? 0 }
-    public var timeOfCalculation: Date
-    public var main: Main
+    public let timeOfCalculation: Date
+    public let main: Main
     public var condition: WeatherCondition { return _condition?.first ?? WeatherCondition.unknown }
-    public var wind: Wind
+    public let wind: Wind
     public var snow: Precipitation { return _snow ?? Precipitation.none }
     public var rain: Precipitation { return _rain ?? Precipitation.none }
     
@@ -31,8 +31,8 @@ public struct CurrentWeather: WeatherSnapshot, PrecipitationOptional {
     
     /// Holds information about sunset und sunrise times in UTC time at the location of the request
     public var sun: Sun {
-        return Sun(set: self._system.sunset,
-                   rise: self._system.sunrise)
+        return Sun(sunSet: self._system.sunset,
+                   sunRise: self._system.sunrise)
     }
     
     /// Internal property to handle missing "snow" key in JSON reponse

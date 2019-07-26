@@ -53,7 +53,7 @@ class WeatherView: NibLoadingView {
                 print(String(describing: error?.localizedDescription))
                 return
             }
-            
+
             DispatchQueue.main.async {
                 self.mainLabel.text = weather.condition.main
                 self.cityLabel.text = weather.city.name

@@ -18,7 +18,7 @@ public enum ForecastFrequency: String {
     /**
     Returns the URL corresponding to the forecast type
      */
-    func url() -> URL {
+    var url: URL {
         // We can force-unwrap URL because we know these API endpoints exist
         return URL(string: self.rawValue)!
     }

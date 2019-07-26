@@ -17,16 +17,16 @@ import Foundation
 #endif
 
 /// Object that handles any API requests and responses.
-public class HPOpenWeather {
+final public class HPOpenWeather {
     
     /// Private DispatchQueue for thread-safe iconCache access
     private let cacheQueue = DispatchQueue(label: "com.henrikpanhans.HPOpenWeather", attributes: .concurrent)
     
     /// The URL endpoint that returns current weather data
-    static let baseUrl = URL(string: "https://api.openweathermap.org/data/2.5/weather?")!
+    private static let baseUrl = URL(string: "https://api.openweathermap.org/data/2.5/weather?")!
     
     /// The URL endpoint that returns daily forecasts
-    static let dailyForecastUrl = URL(string: "https://api.openweathermap.org/data/2.5/forecast/daily?")!
+    private static let dailyForecastUrl = URL(string: "https://api.openweathermap.org/data/2.5/forecast/daily?")!
     
     /// Internal property to store API key, language and temperature format as URL parameter
     private var params = [String : URLQueryItem]()
@@ -86,7 +86,7 @@ public class HPOpenWeather {
     public init(apiKey: String, temperatureFormat: TemperatureUnit = .celsius, language: Language = .english) {
         setter(apiKey, tempFormat: temperatureFormat, lang: language)
     }
-    
+
     private func setter(_ apiKey: String, tempFormat: TemperatureUnit, lang: Language) {
         self.apiKey = apiKey
         self.temperatureFormat = tempFormat
@@ -157,7 +157,7 @@ public class HPOpenWeather {
         - error: An error object that indicates why the request failed, or nil if the request was successful.
     */
     public func requestHourlyForecast(with request: WeatherRequest, for frequency: ForecastFrequency, completion: @escaping (_ forecast: HourlyForecast?, _ error: Error?) -> ()) {
-        var url = frequency.url()
+        var url = frequency.url
         url.add(request.queryItems())
         
         self.request(url: &url, for: HourlyForecast.self, completion: completion)
