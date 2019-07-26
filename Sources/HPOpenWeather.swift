@@ -191,7 +191,7 @@ final public class HPOpenWeather {
         let values = Array(self.params.values)
         url.add(values)
         let urlRequest = URLRequest(url: url)
-        
+
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard let json = data, error == nil else {
                 completion(nil, error)
@@ -201,9 +201,9 @@ final public class HPOpenWeather {
             do {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .secondsSince1970
-                
-                if let apiError = try? decoder.decode(ApiError.self, from: json) {
-                    completion(nil, apiError)
+
+                if let apiError = try? decoder.decode(APIError.self, from: json) {
+                    completion(nil, apiError.nserror)
                     return
                 }
                 
@@ -221,7 +221,7 @@ final public class HPOpenWeather {
 extension Data {
     func json() -> [String:Any]? {
         let model = try? JSONSerialization.jsonObject(with: self, options: [])
-        
+
         if let json = model as? [String:Any] {
             return json
         }
