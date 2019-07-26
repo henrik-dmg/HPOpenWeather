@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 /**
  A Codable type that wraps the API response for the current weather request in a usable type
@@ -48,7 +49,7 @@ public struct CurrentWeather: WeatherSnapshot, PrecipitationOptional {
     /// The name of the nearest city
     internal var _name: String
     /// The location coordinates of the request
-    internal var _location: Coordinates
+    internal var _location: CLLocationCoordinate2D
     /// System data of the request, such as country code, sunrise and sunset
     internal var _system: System
     
