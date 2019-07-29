@@ -28,4 +28,11 @@ public struct WeatherCondition: Codable {
                                           main: "Unknown Weather Condition",
                                           description: "No Description",
                                           iconString: "No Icon")
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case main
+        case description
+        case iconString = "icon"
+    }
 }

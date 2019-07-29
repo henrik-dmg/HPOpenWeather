@@ -13,15 +13,10 @@ import CoreLocation
 
 class WeatherView: NibLoadingView {
     
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var mainLabel: UILabel!
-    @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var tempLabel: UILabel!
-    @IBOutlet weak var pressureLabel: UILabel!
-    @IBOutlet weak var cloudLabel: UILabel!
-    @IBOutlet weak var humidityLabel: UILabel!
-    @IBOutlet weak var windLabel: UILabel!
-    @IBOutlet weak var sunLabel: UILabel!
+    @IBOutlet private var iconView: UIImageView!
+    @IBOutlet private var mainLabel: UILabel!
+    @IBOutlet private var cityLabel: UILabel!
+    @IBOutlet private var tempLabel: UILabel!
 
     private var api: HPOpenWeather?
     private var locationManager: CLLocationManager?
@@ -55,9 +50,9 @@ class WeatherView: NibLoadingView {
             
             DispatchQueue.main.async {
                 guard let weather = weather, error == nil else {
-                                self.findViewController()?.notifyUserOfError(error! as NSError)
-                                return
-                            }
+                    self.findViewController()?.notifyUserOfError(error! as NSError)
+                    return
+                }
                 
                 self.mainLabel.text = weather.condition.main
                 self.cityLabel.text = weather.city.name

@@ -16,7 +16,7 @@ class HPOpenWeatherTests: XCTestCase {
     override func setUp() {
         
         // TODO: Insert your own API key here
-        api = HPOpenWeather(apiKey: "5d254ac1b2cb8ecd6f603cbfac3aaea0", temperatureFormat: .celsius, language: .english)
+        api = HPOpenWeather(apiKey: "--- YOUR_API_KEY ---", temperatureFormat: .celsius, language: .english)
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
@@ -50,14 +50,6 @@ class HPOpenWeatherTests: XCTestCase {
         }
 
         waitForExpectations(timeout: 15, handler: nil)
-    }
-    
-    func testIconCache() {
-        DispatchQueue.concurrentPerform(iterations: 10) { (index) in
-            print("Iteration: \(index)")
-            api?.getIconWith(id: "01d.png", completion: { (image) in
-            })
-        }
     }
     
     func testQueryItems() {
