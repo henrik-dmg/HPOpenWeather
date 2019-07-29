@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2639440622EF5A8A00900583 /* WeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2639440522EF5A8A00900583 /* WeatherIcon.swift */; };
+		2639440722EF5A8A00900583 /* WeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2639440522EF5A8A00900583 /* WeatherIcon.swift */; };
+		2639440822EF5A8A00900583 /* WeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2639440522EF5A8A00900583 /* WeatherIcon.swift */; };
+		2639440922EF5A8A00900583 /* WeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2639440522EF5A8A00900583 /* WeatherIcon.swift */; };
 		264B52832274D43F00E20D44 /* HPOpenWeather.h in Headers */ = {isa = PBXBuildFile; fileRef = 26DF15BA2273970C00F474A8 /* HPOpenWeather.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		264B52842274D44000E20D44 /* HPOpenWeather.h in Headers */ = {isa = PBXBuildFile; fileRef = 26DF15BA2273970C00F474A8 /* HPOpenWeather.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		264B52852274D44000E20D44 /* HPOpenWeather.h in Headers */ = {isa = PBXBuildFile; fileRef = 26DF15BA2273970C00F474A8 /* HPOpenWeather.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -134,6 +138,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2639440522EF5A8A00900583 /* WeatherIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherIcon.swift; path = ../../../../../System/Volumes/Data/Users/henrikpanhans/Xcode/HPOpenWeather/Sources/WeatherIcon.swift; sourceTree = "<group>"; };
 		264B52602274D27200E20D44 /* HPOpenWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HPOpenWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		264B526D2274D29E00E20D44 /* HPOpenWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HPOpenWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		264B527A2274D2BB00E20D44 /* HPOpenWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HPOpenWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -252,9 +257,10 @@
 				26DF15BA2273970C00F474A8 /* HPOpenWeather.h */,
 				26DF15D32273974F00F474A8 /* HPOpenWeather.swift */,
 				26DF15BB2273970C00F474A8 /* Info.plist */,
-				269E92EE22EBB83E004FDE0A /* Types */,
+				269E92EE22EBB83E004FDE0A /* Data Types */,
 				26DF15D42273974F00F474A8 /* WeatherRequest.swift */,
 				26E874792275E6E6001799F8 /* WeatherSnapshot.swift */,
+				2639440522EF5A8A00900583 /* WeatherIcon.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -283,7 +289,7 @@
 			path = "DemoApp macOS";
 			sourceTree = "<group>";
 		};
-		269E92EE22EBB83E004FDE0A /* Types */ = {
+		269E92EE22EBB83E004FDE0A /* Data Types */ = {
 			isa = PBXGroup;
 			children = (
 				269E92F122EBB83E004FDE0A /* City.swift */,
@@ -296,7 +302,7 @@
 				269E92EF22EBB83E004FDE0A /* WeatherCondition.swift */,
 				269E92F522EBB83F004FDE0A /* Wind.swift */,
 			);
-			path = Types;
+			path = "Data Types";
 			sourceTree = "<group>";
 		};
 		26DF15AD2273970B00F474A8 = {
@@ -664,6 +670,7 @@
 				269FF2B922EBB8A8006BFFF6 /* Sun.swift in Sources */,
 				269FF2B422EBB8A8006BFFF6 /* Clouds.swift in Sources */,
 				269FF2BA22EBB8A8006BFFF6 /* MainInformation.swift in Sources */,
+				2639440722EF5A8A00900583 /* WeatherIcon.swift in Sources */,
 				26FE42832276231C0009734D /* Forecast.swift in Sources */,
 				269FF2BB22EBB8A8006BFFF6 /* City.swift in Sources */,
 				264B52932274D46000E20D44 /* CurrentWeather.swift in Sources */,
@@ -689,6 +696,7 @@
 				269FF2C122EBB8A9006BFFF6 /* Sun.swift in Sources */,
 				269FF2BC22EBB8A9006BFFF6 /* Clouds.swift in Sources */,
 				269FF2C222EBB8A9006BFFF6 /* MainInformation.swift in Sources */,
+				2639440822EF5A8A00900583 /* WeatherIcon.swift in Sources */,
 				26FE42842276231C0009734D /* Forecast.swift in Sources */,
 				269FF2C322EBB8A9006BFFF6 /* City.swift in Sources */,
 				264B52922274D46000E20D44 /* CurrentWeather.swift in Sources */,
@@ -714,6 +722,7 @@
 				269FF2C922EBB8AA006BFFF6 /* Sun.swift in Sources */,
 				269FF2C422EBB8AA006BFFF6 /* Clouds.swift in Sources */,
 				269FF2CA22EBB8AA006BFFF6 /* MainInformation.swift in Sources */,
+				2639440922EF5A8A00900583 /* WeatherIcon.swift in Sources */,
 				26FE42852276231C0009734D /* Forecast.swift in Sources */,
 				269FF2CB22EBB8AA006BFFF6 /* City.swift in Sources */,
 				264B52942274D46000E20D44 /* CurrentWeather.swift in Sources */,
@@ -748,6 +757,7 @@
 				269FF2B122EBB8A8006BFFF6 /* Sun.swift in Sources */,
 				269FF2AC22EBB8A8006BFFF6 /* Clouds.swift in Sources */,
 				269FF2B222EBB8A8006BFFF6 /* MainInformation.swift in Sources */,
+				2639440622EF5A8A00900583 /* WeatherIcon.swift in Sources */,
 				26FE42822276231C0009734D /* Forecast.swift in Sources */,
 				269FF2B322EBB8A8006BFFF6 /* City.swift in Sources */,
 				26DF15DB2273975000F474A8 /* HourlyForecast.swift in Sources */,
