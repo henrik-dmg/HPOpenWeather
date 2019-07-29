@@ -24,24 +24,33 @@ class HPOpenWeatherTests: XCTestCase {
         api = nil
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+
+    func testWeatherIcon() {
+        let mockIcon = WeatherIcon.clearSky
+        let testIcon = WeatherIcon(from: "01d")
+        let failingIcon = WeatherIcon(from: "12d")
+
+        XCTAssertNotNil(testIcon)
+        XCTAssertNil(failingIcon)
+        XCTAssert(mockIcon == testIcon)
+    }
     
-//    func testInvalidApiKey() {
-//        api = HPOpenWeather(apiKey: "invalidKey", temperatureFormat: .celsius, language: .english)
-//
-//        let request = CityNameRequest("Berlin", countryCode: "DE")
-//        let promise = expectation(description: "Simple Request")
-//
-//        api?.requestCurrentWeather(with: request) { (current, error) in
-//            if let apiError = error as? ApiError {
-//                XCTAssert(apiError.apiErrorCode == 401)
-//                promise.fulfill()
-//            }
-//
-//            promise.fulfill()
-//        }
-//
-//        waitForExpectations(timeout: 5, handler: nil)
-//    }
+    func testInvalidApiKey() {
+        api = HPOpenWeather(apiKey: "invalidKey", temperatureFormat: .celsius, language: .english)
+
+        let request = CityNameRequest("Berlin", countryCode: "DE")
+        let promise = expectation(description: "Simple Request")
+
+        api?.requestCurrentWeather(with: request) { (current, error) in
+            if let error = error as NSError? {
+                XCTAssert(error.code == 401)
+            }
+
+            promise.fulfill()
+        }
+
+        waitForExpectations(timeout: 15, handler: nil)
+    }
     
     func testIconCache() {
         DispatchQueue.concurrentPerform(iterations: 10) { (index) in
@@ -60,7 +69,7 @@ class HPOpenWeatherTests: XCTestCase {
                           URLQueryItem(name: "test4", value: "firstTestString4"),
                           URLQueryItem(name: "test5", value: "firstTestString5")]
         
-        var url = HPOpenWeather.baseUrl
+        var url = URL(string: "https://panhans.dev")!
         url.add(firstItems)
         url.add(secondItems)
         
@@ -78,18 +87,18 @@ class HPOpenWeatherTests: XCTestCase {
             promise.fulfill()
         }
         
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
     }
     
     func testForecast() {
         let request = CityNameRequest("Berlin", countryCode: "DE")
-        let promise = expectation(description: "Simple Request")
+        let promise = expectation(description: "Simple Forecast")
         
         api?.requestHourlyForecast(with: request, for: .threeHourly) { (forecast, error) in
             XCTAssertNil(error)
             promise.fulfill()
         }
         
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
     }
 }

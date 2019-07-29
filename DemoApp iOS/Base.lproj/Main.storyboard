@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14845" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14799.2"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,11 +23,20 @@
                                     <constraint firstAttribute="height" constant="150" id="gLc-lI-l0U"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mho-5k-Q2R">
+                                <rect key="frame" x="188.5" y="433" width="37" height="30"/>
+                                <state key="normal" title="Retry"/>
+                                <connections>
+                                    <action selector="retryWeather:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c6u-uk-Tl6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="WEm-9Y-Ryy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1HQ-Si-PY8"/>
+                            <constraint firstItem="mho-5k-Q2R" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jra-1j-Lrq"/>
                             <constraint firstItem="WEm-9Y-Ryy" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hty-rv-AVP"/>
+                            <constraint firstItem="mho-5k-Q2R" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="iev-i8-nEI"/>
                             <constraint firstItem="WEm-9Y-Ryy" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="jf2-TB-1NV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

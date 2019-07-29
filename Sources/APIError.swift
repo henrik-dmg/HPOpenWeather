@@ -14,6 +14,7 @@ import Foundation
 public struct APIError: LocalizedError, Codable {
     /// A localized message describing what API error occurred.
     public let errorDescription: String
+
     /**
      [OpenWeatherMap]:https://openweathermap.org/faq#error401 (full list)
      

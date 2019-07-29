@@ -12,6 +12,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var weatherView: WeatherView!
     
+    @IBAction func retryWeather(_ sender: UIButton) {
+        weatherView.requestWeather(for: weatherView.lastLocation)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

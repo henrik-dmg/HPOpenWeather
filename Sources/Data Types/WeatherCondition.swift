@@ -17,10 +17,15 @@ public struct WeatherCondition: Codable {
     /// The weather condition within the group
     public let description: String
     /// The ID of the corresponding weather icon
-    public let icon: String
+    public let iconString: String
+    /// The corresponding system weather icon
+    @available(iOS 13.0, *)
+    public var systemIcon: WeatherSystemIcon? {
+        return WeatherIcon.make(from: iconString)
+    }
 
     static let unknown = WeatherCondition(id: 0,
                                           main: "Unknown Weather Condition",
                                           description: "No Description",
-                                          icon: "No Icon")
+                                          iconString: "No Icon")
 }

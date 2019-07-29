@@ -35,13 +35,37 @@ public enum WeatherIcon {
 
     @available(iOS 13.0, *)
     static func make(from iconName: String) -> WeatherSystemIcon? {
-        guard iconName.count == 3 else {
+        guard iconName.count == 3, let iconType = WeatherIcon(from: iconName) else {
             return nil
         }
 
-        let subString = iconName
+        let isNightIcon = iconName.last! == "n"
+        return isNightIcon ? iconType.night : iconType.day
+    }
 
-        return nil
+    init?(from apiImageCode: String) {
+        switch String(apiImageCode.dropLast(1)) {
+        case "01":
+            self = .clearSky
+        case "02":
+            self = .fewClouds
+        case "03":
+            self = .scatteredClouds
+        case "04":
+            self = .brokenClouds
+        case "09":
+            self = .showerRain
+        case "10":
+            self = .rain
+        case "11":
+            self = .thunderstorm
+        case "13":
+            self = .snow
+        case "50":
+            self = .mist
+        default:
+            return nil
+        }
     }
 }
 
