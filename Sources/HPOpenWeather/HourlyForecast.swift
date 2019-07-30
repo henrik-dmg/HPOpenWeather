@@ -16,7 +16,7 @@ public struct HourlyForecast: Forecast {
     public let dataPoints: [DataPoint]
     
     /// Codable type that represents a data points based on an hourly frequency
-    public struct DataPoint: WeatherSnapshot, PrecipitationOptional {
+    public struct DataPoint: WeatherSnapshot {
         public let main: Main
         public var condition: WeatherCondition {
             return self._condition?.first ?? WeatherCondition.unknown

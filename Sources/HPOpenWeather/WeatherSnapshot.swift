@@ -25,11 +25,3 @@ protocol WeatherSnapshot: Codable {
     /// The cloud coverage in percent
     var cloudCoverage: Int { get }
 }
-
-/// Protocol to handle missing snow or rainfall keys in JSON response
-protocol PrecipitationOptional {
-    /// Internal type to handle missing "snow" key in JSON response
-    var _snow: Precipitation? { get }
-    /// Internal type to handle missing "rain" key in JSON response
-    var _rain: Precipitation? { get }
-}

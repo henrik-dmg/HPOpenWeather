@@ -10,6 +10,7 @@ import Foundation
 
 /// Type that holds the main information of the request, such as temperature, humidity, etc.
 public struct Main: Codable {
+
     /// The current temperature in the format specified in the request
     public let temperature: Double
     /// The current humidity measured in percent
@@ -39,4 +40,5 @@ public struct Main: Codable {
         case _seaLvl = "sea_level"
         case _groundLvl = "grnd_level"
     }
+
 }
