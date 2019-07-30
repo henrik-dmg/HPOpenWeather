@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => 'https://github.com/henrik-dmg/HPOpenWeather.git', :tag => "2.1.0" }
 
-  s.source_files = "Sources/**/*.{h,swift}"
+  s.source_files = "Sources/**/*.swift"
   s.framework = "Foundation"
   s.ios.framework = "UIKit"
   s.watchos.framework = "UIKit"
