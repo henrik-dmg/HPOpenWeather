@@ -12,7 +12,7 @@ import CoreLocation
 /**
  A Codable type that wraps the API response for the current weather request in a usable type
  */
-public struct CurrentWeather: WeatherSnapshot, PrecipitationOptional {
+public struct CurrentWeather: WeatherSnapshot {
     // Already has documentation
     public var cloudCoverage: Int { return _clouds?.all ?? 0 }
     public let timeOfCalculation: Date
