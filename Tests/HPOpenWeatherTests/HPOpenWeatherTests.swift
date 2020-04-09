@@ -1,15 +1,36 @@
 import XCTest
+import HPNetwork
 @testable import HPOpenWeather
 
 final class HPOpenWeatherTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertTrue(true)
+
+    override class func setUp() {
+        super.setUp()
+
+        HPOpenWeather.shared.apiKey = "a8079f7388cb52b6ec144a2727c7c08b"
     }
 
-    static var allTests = [
-        ("testExample", testExample),
-    ]
+    override func tearDown() {
+        super.tearDown()
+
+        HPOpenWeather.shared.apiKey = nil
+    }
+
+    func testCurrentRequest() {
+        let request = CurrentWeather.makeCityRequest(cityComponents: ["Berlin"], configuration: .init())
+        let exp = XCTestExpectation(description: "Fetched data")
+
+        Network.shared.dataTask(request) { result in
+            exp.fulfill()
+            switch result {
+            case .success:
+                break
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+            }
+        }
+
+        wait(for: [exp], timeout: 10)
+    }
+
 }
