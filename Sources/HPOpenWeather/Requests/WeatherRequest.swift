@@ -4,7 +4,6 @@ import HPNetwork
 public protocol WeatherRequest: NetworkRequest {
 
     var configuration: RequestConfiguration { get }
-    var requestType: RequestConfiguration.WeatherType { get }
 
 }
 

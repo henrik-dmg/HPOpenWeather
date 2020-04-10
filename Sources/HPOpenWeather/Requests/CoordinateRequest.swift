@@ -2,15 +2,15 @@ import Foundation
 import CoreLocation
 import HPNetwork
 
-public class CoordinateRequest<R: Decodable>: DecodableRequest<R>, WeatherRequest {
+public class CoordinateRequest: DecodableRequest<OpenWeatherResponse>, WeatherRequest {
 
-    public typealias Output = R
+    public typealias Output = OpenWeatherResponse
 
     public override var url: URL? {
         URLQueryItemsBuilder("api.openweathermap.org")
             .addingPathComponent("data")
             .addingPathComponent("2.5")
-            .addingPathComponent(requestType.rawValue)
+            .addingPathComponent("onecall")
             .addingQueryItem(coordinate.latitude, name: "lat", digits: 5)
             .addingQueryItem(coordinate.longitude, name: "lon", digits: 5)
             .addingQueryItem(configuration.apiKey, name: "appid")
@@ -28,51 +28,11 @@ public class CoordinateRequest<R: Decodable>: DecodableRequest<R>, WeatherReques
     private let coordinate: CLLocationCoordinate2D
 
     public let configuration: RequestConfiguration
-    public let requestType: RequestConfiguration.WeatherType
 
-    init(
-        coordinate: CLLocationCoordinate2D,
-        configuration: RequestConfiguration,
-        requestType: RequestConfiguration.WeatherType)
-    {
+    public init(coordinate: CLLocationCoordinate2D, configuration: RequestConfiguration) {
         self.coordinate = coordinate
         self.configuration = configuration
-        self.requestType = requestType
         super.init(urlString: "www.google.com")
-    }
-
-    public init(
-        coordinate: CLLocationCoordinate2D,
-        configuration: RequestConfiguration)
-    {
-        self.coordinate = coordinate
-        self.configuration = configuration
-        self.requestType = .current
-        super.init(urlString: "www.google.com")
-    }
-
-}
-
-extension CurrentWeather {
-
-    public static func makeCoordinateRequest(coordinate: CLLocationCoordinate2D, configuration: RequestConfiguration) -> CoordinateRequest<Self> {
-        CoordinateRequest<Self>(coordinate: coordinate, configuration: configuration, requestType: .current)
-    }
-
-}
-
-extension HourlyForecast {
-
-    public static func makeCoordinateRequest(coordinate: CLLocationCoordinate2D, configuration: RequestConfiguration) -> CoordinateRequest<Self> {
-        CoordinateRequest<Self>(coordinate: coordinate, configuration: configuration, requestType: .oneHourlyForecast)
-    }
-
-}
-
-extension DailyForecast {
-
-    public static func makeCoordinateRequest(coordinate: CLLocationCoordinate2D, configuration: RequestConfiguration) -> CoordinateRequest<Self> {
-        CoordinateRequest<Self>(coordinate: coordinate, configuration: configuration, requestType: .threeHourlyForecast)
     }
 
 }

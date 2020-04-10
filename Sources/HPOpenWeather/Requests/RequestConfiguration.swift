@@ -57,12 +57,6 @@ public struct RequestConfiguration {
         case imperial
     }
 
-    public enum WeatherType: String {
-        case current = "weather"
-        case oneHourlyForecast = "forecast/hourly"
-        case threeHourlyForecast = "forecast"
-    }
-
     // MARK: - Properties
 
     let apiKey : String?
@@ -71,14 +65,12 @@ public struct RequestConfiguration {
 
     // MARK: - Init
 
-    public init(
-        language: Language = .english,
-        units: Units = .metric,
-        apiKey: String? = HPOpenWeather.shared.apiKey)
-    {
+    public init(language: Language = .english, units: Units = .metric, apiKey: String? = HPOpenWeather.shared.apiKey) {
         self.language = language
         self.units = units
         self.apiKey = apiKey
     }
+
+    public static let `default` = RequestConfiguration()
 
 }

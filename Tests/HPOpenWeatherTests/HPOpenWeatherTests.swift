@@ -17,14 +17,15 @@ final class HPOpenWeatherTests: XCTestCase {
     }
 
     func testCurrentRequest() {
-        let request = CurrentWeather.makeCityRequest(cityComponents: ["Berlin"], configuration: .init())
+        let request = CoordinateRequest(coordinate: .init(latitude: 40, longitude: 30), configuration: .default)
         let exp = XCTestExpectation(description: "Fetched data")
 
         HPOpenWeather.shared.requestWeather(request) { result in
             exp.fulfill()
             switch result {
-            case .success:
-                break
+            case .success(let response):
+                print(response.hourlyForecasts.first)
+                print(response.current.condition)
             case .failure(let error as NSError):
                 print(error)
                 XCTFail(error.localizedDescription)

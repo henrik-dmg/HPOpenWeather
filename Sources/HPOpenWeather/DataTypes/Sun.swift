@@ -4,13 +4,8 @@ import Foundation
 public struct Sun: Codable, Equatable, Hashable {
 
     /// Sunset time in UTC time
-    public let sunSet: Date
+    public let sunset: Date
     /// Sunrise time in UTC time
-    public let sunRise: Date
-
-    enum CodingKeys: String, CodingKey {
-        case sunSet = "sunset"
-        case sunRise = "sunrise"
-    }
+    public let sunrise: Date
 
 }
