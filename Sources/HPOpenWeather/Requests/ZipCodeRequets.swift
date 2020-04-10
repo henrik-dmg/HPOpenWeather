@@ -58,7 +58,7 @@ public class ZipCodeRequest<R: Decodable>: DecodableRequest<R>, WeatherRequest {
 
 extension CurrentWeather {
 
-    public static func makeCoordinateRequest(zipCode: String, countryCode: String, configuration: RequestConfiguration) -> ZipCodeRequest<Self> {
+    public static func makeZipCodeRequest(zipCode: String, countryCode: String, configuration: RequestConfiguration) -> ZipCodeRequest<Self> {
         ZipCodeRequest<Self>(zipCode: zipCode, countryCode: countryCode, configuration: configuration, requestType: .current)
     }
 
@@ -66,7 +66,7 @@ extension CurrentWeather {
 
 extension HourlyForecast {
 
-    public static func makeCoordinateRequest(zipCode: String, countryCode: String, configuration: RequestConfiguration) -> ZipCodeRequest<Self> {
+    public static func makeZipCodeRequest(zipCode: String, countryCode: String, configuration: RequestConfiguration) -> ZipCodeRequest<Self> {
         ZipCodeRequest<Self>(zipCode: zipCode, countryCode: countryCode, configuration: configuration, requestType: .oneHourlyForecast)
     }
 
@@ -74,7 +74,7 @@ extension HourlyForecast {
 
 extension DailyForecast {
 
-    public static func makeCoordinateRequest(zipCode: String, countryCode: String, configuration: RequestConfiguration) -> ZipCodeRequest<Self> {
+    public static func makeZipCodeRequest(zipCode: String, countryCode: String, configuration: RequestConfiguration) -> ZipCodeRequest<Self> {
         ZipCodeRequest<Self>(zipCode: zipCode, countryCode: countryCode, configuration: configuration, requestType: .threeHourlyForecast)
     }
 

@@ -7,7 +7,7 @@ public final class HPOpenWeather {
 
     public var apiKey: String?
 
-
+    @discardableResult
     public func requestWeather<R: WeatherRequest>(
         _ request: R,
         completion: @escaping (Result<R.Output, Error>) -> Void) -> NetworkTask

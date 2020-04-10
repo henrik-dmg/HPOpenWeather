@@ -20,12 +20,13 @@ final class HPOpenWeatherTests: XCTestCase {
         let request = CurrentWeather.makeCityRequest(cityComponents: ["Berlin"], configuration: .init())
         let exp = XCTestExpectation(description: "Fetched data")
 
-        Network.shared.dataTask(request) { result in
+        HPOpenWeather.shared.requestWeather(request) { result in
             exp.fulfill()
             switch result {
             case .success:
                 break
-            case .failure(let error):
+            case .failure(let error as NSError):
+                print(error)
                 XCTFail(error.localizedDescription)
             }
         }
