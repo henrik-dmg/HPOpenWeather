@@ -7,7 +7,7 @@ final class HPOpenWeatherTests: XCTestCase {
     override class func setUp() {
         super.setUp()
 
-        HPOpenWeather.shared.apiKey = "fa0355d40a89af27650111cc80667159"
+        HPOpenWeather.shared.apiKey = TestSecret.apiKey
     }
 
     override func tearDown() {
@@ -22,17 +22,31 @@ final class HPOpenWeatherTests: XCTestCase {
 
         HPOpenWeather.shared.requestWeather(request) { result in
             exp.fulfill()
-            switch result {
-            case .success(let response):
-                print(response.hourlyForecasts.first)
-                print(response.current.condition)
-            case .failure(let error as NSError):
-                print(error)
-                XCTFail(error.localizedDescription)
-            }
+            XCTAssertResult(result)
         }
 
         wait(for: [exp], timeout: 10)
     }
 
+}
+
+extension Encodable {
+
+    func encodeAndDecode<T: Decodable>(type: T.Type) throws -> T {
+        let jsonEncoder = JSONEncoder()
+        jsonEncoder.dateEncodingStrategy = .secondsSince1970
+        let encodedData = try jsonEncoder.encode(self)
+
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.dateDecodingStrategy = .secondsSince1970
+        return try jsonDecoder.decode(type.self, from: encodedData)
+    }
+
+}
+
+/// Asserts that the result is not a failure
+func XCTAssertResult<T, E: Error>(_ result: Result<T, E>) {
+    if case .failure(let error) = result {
+        XCTFail(error.localizedDescription)
+    }
 }

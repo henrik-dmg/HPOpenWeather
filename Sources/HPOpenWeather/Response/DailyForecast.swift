@@ -80,12 +80,15 @@ public struct DailyForecast: BasicWeatherResponse, SunResponse {
         try container.encode(timestamp, forKey: .timestamp)
         try container.encode(pressure, forKey: .pressure)
         try container.encode(humidity, forKey: .humidity)
-        try container.encode(dewPoint, forKey: .uvIndex)
-        try container.encode(visibility, forKey: .cloudCoverage)
+        try container.encode(dewPoint, forKey: .dewPoint)
+        try container.encode(uvIndex, forKey: .uvIndex)
+        try container.encode(visibility, forKey: .visibility)
+        try container.encode(cloudCoverage, forKey: .cloudCoverage)
+
         try container.encode(wind.speed, forKey: .windSpeed)
         try container.encode(wind.degrees, forKey: .windDirection)
         try container.encode(wind.gust, forKey: .windGust)
-        try container.encode(sun.sunset, forKey: .sunrise)
+        try container.encode(sun.sunset, forKey: .sunset)
         try container.encode(sun.sunrise, forKey: .sunrise)
         try container.encode(weatherArray, forKey: .weatherArray)
     }

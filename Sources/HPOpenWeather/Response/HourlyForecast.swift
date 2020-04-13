@@ -21,7 +21,7 @@ public struct HourlyForecast: BasicWeatherResponse {
     }
 
     enum CodingKeys: String, CodingKey {
-        case temp
+        case temperature = "temp"
         case feelsLike = "feels_like"
         case snow
         case rain
@@ -52,7 +52,7 @@ public struct HourlyForecast: BasicWeatherResponse {
         visibility = try container.decodeIfPresent(Double.self, forKey: .visibility)
         cloudCoverage = try container.decodeIfPresent(Double.self, forKey: .cloudCoverage)
 
-        let temp = try container.decode(Double.self, forKey: .temp)
+        let temp = try container.decode(Double.self, forKey: .temperature)
         let feelsLike = try container.decode(Double.self, forKey: .feelsLike)
         temperature = Temperature(actual: temp, feelsLike: feelsLike)
 
@@ -65,15 +65,18 @@ public struct HourlyForecast: BasicWeatherResponse {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
-        try container.encode(temperature.actual, forKey: .temp)
+        try container.encode(temperature.actual, forKey: .temperature)
         try container.encode(temperature.feelsLike, forKey: .feelsLike)
-        try container.encode(snow, forKey: .snow)
-        try container.encode(rain, forKey: .rain)
         try container.encode(timestamp, forKey: .timestamp)
         try container.encode(pressure, forKey: .pressure)
         try container.encode(humidity, forKey: .humidity)
-        try container.encode(dewPoint, forKey: .uvIndex)
-        try container.encode(visibility, forKey: .cloudCoverage)
+        try container.encode(dewPoint, forKey: .dewPoint)
+        try container.encode(uvIndex, forKey: .uvIndex)
+        try container.encode(visibility, forKey: .visibility)
+        try container.encode(cloudCoverage, forKey: .cloudCoverage)
+        try container.encode(rain, forKey: .rain)
+        try container.encode(snow, forKey: .snow)
+
         try container.encode(wind.speed, forKey: .windSpeed)
         try container.encode(wind.degrees, forKey: .windDirection)
         try container.encode(wind.gust, forKey: .windGust)
