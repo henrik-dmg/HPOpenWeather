@@ -1,6 +1,6 @@
 import Foundation
 
-public struct DailyTemperature: Codable {
+public struct DailyTemperature: Codable, Equatable, Hashable {
 
     public let day: Double
     public let night: Double

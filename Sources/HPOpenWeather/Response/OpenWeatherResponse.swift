@@ -1,6 +1,6 @@
 import Foundation
 
-public struct OpenWeatherResponse: Decodable {
+public struct OpenWeatherResponse: Codable {
 
     public let timezone: TimeZone
     public let current: CurrentWeather
@@ -26,6 +26,15 @@ public struct OpenWeatherResponse: Decodable {
         self.current = try container.decode(CurrentWeather.self, forKey: .current)
         self.hourlyForecasts = try container.decode([HourlyForecast].self, forKey: .hourly)
         self.dailyForecasts = try container.decode([DailyForecast].self, forKey: .daily)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(timezone.identifier, forKey: .timezone)
+        try container.encode(current, forKey: .current)
+        try container.encode(hourlyForecasts, forKey: .hourly)
+        try container.encode(dailyForecasts, forKey: .daily)
     }
 
 }

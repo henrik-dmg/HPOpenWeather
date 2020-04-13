@@ -7,7 +7,7 @@ final class HPOpenWeatherTests: XCTestCase {
     override class func setUp() {
         super.setUp()
 
-        HPOpenWeather.shared.apiKey = "a8079f7388cb52b6ec144a2727c7c08b"
+        HPOpenWeather.shared.apiKey = "fa0355d40a89af27650111cc80667159"
     }
 
     override func tearDown() {
