@@ -4,6 +4,7 @@ import SwiftUI
 #endif
 
 public enum WeatherIcon {
+
     case clearSky
     case fewClouds
     case scatteredClouds
@@ -58,6 +59,7 @@ public enum WeatherIcon {
             return nil
         }
     }
+    
 }
 
 @available(iOS 13.0, *)
