@@ -1,4 +1,4 @@
-#if os(iOS)
+#if canImport(UIKit)
 import UIKit
 import SwiftUI
 #endif
@@ -15,17 +15,17 @@ public enum WeatherIcon {
     case snow
     case mist
 
-    @available(iOS 13.0, *)
+    @available(iOS 13.0, tvOS 13.0, *)
     var day: WeatherSystemIcon {
         return WeatherSystemIcon(icon: self, night: false)
     }
 
-    @available(iOS 13.0, *)
+    @available(iOS 13.0, tvOS 13.0, *)
     var night: WeatherSystemIcon {
         return WeatherSystemIcon(icon: self, night: true)
     }
 
-    @available(iOS 13.0, *)
+    @available(iOS 13.0, tvOS 13.0, *)
     static func make(from iconName: String) -> WeatherSystemIcon? {
         guard iconName.count == 3, let iconType = WeatherIcon(from: iconName) else {
             return nil
@@ -62,7 +62,7 @@ public enum WeatherIcon {
     
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
 public struct WeatherSystemIcon {
 
     fileprivate init(icon: WeatherIcon, night: Bool) {
