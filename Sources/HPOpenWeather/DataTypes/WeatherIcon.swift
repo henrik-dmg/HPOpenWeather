@@ -54,13 +54,13 @@ public enum WeatherIcon: String {
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public struct WeatherSystemIcon {
 
+    private let icon: WeatherIcon
+    private let isNightIcon: Bool
+
     fileprivate init(icon: WeatherIcon, night: Bool) {
         self.icon = icon
         self.isNightIcon = night
     }
-
-    private let icon: WeatherIcon
-    private let isNightIcon: Bool
 
     public var regularUIIcon: UIImage {
         UIImage(systemName: iconName(filled: false))!
@@ -70,7 +70,7 @@ public struct WeatherSystemIcon {
         UIImage(systemName: iconName(filled: true))!
     }
 
-    private func iconName(filled: Bool) -> String {
+    public func iconName(filled: Bool) -> String {
         var iconName = ""
         switch self.icon {
         case .clearSky:
