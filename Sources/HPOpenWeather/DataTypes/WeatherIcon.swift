@@ -1,5 +1,5 @@
-import SwiftUI
 #if canImport(UIKit)
+import SwiftUI
 import UIKit
 
 extension WeatherCondition {
@@ -66,16 +66,8 @@ public struct WeatherSystemIcon {
         UIImage(systemName: iconName(filled: false))!
     }
 
-    public var regularImageIcon: Image {
-        Image(systemName: iconName(filled: false))
-    }
-
     public var filledUIIcon: UIImage {
         UIImage(systemName: iconName(filled: true))!
-    }
-
-    public var filledImageIcon: Image {
-        Image(systemName: iconName(filled: true))
     }
 
     private func iconName(filled: Bool) -> String {
