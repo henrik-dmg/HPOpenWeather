@@ -1,68 +1,57 @@
+import SwiftUI
 #if canImport(UIKit)
 import UIKit
-import SwiftUI
-#endif
 
-public enum WeatherIcon {
+extension WeatherCondition {
 
-    case clearSky
-    case fewClouds
-    case scatteredClouds
-    case brokenClouds
-    case showerRain
-    case rain
-    case thunderstorm
-    case snow
-    case mist
+    /// The corresponding system weather icon
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    public var systemIcon: WeatherSystemIcon? {
+        return WeatherIcon.make(from: iconString)
+    }
 
-    @available(iOS 13.0, tvOS 13.0, *)
+}
+
+public enum WeatherIcon: String {
+
+    case clearSky = "01"
+    case fewClouds = "02"
+    case scatteredClouds = "03"
+    case brokenClouds = "04"
+    case showerRain = "09"
+    case rain = "10"
+    case thunderstorm = "11"
+    case snow = "13"
+    case mist = "50"
+
+    init?(apiCode: String) {
+        let code = String(apiCode.dropLast())
+        self.init(rawValue: code)
+    }
+
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     var day: WeatherSystemIcon {
         return WeatherSystemIcon(icon: self, night: false)
     }
 
-    @available(iOS 13.0, tvOS 13.0, *)
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     var night: WeatherSystemIcon {
         return WeatherSystemIcon(icon: self, night: true)
     }
 
-    @available(iOS 13.0, tvOS 13.0, *)
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     static func make(from iconName: String) -> WeatherSystemIcon? {
-        guard iconName.count == 3, let iconType = WeatherIcon(from: iconName) else {
+        guard iconName.count == 3, let iconType = WeatherIcon(apiCode: iconName) else {
             return nil
         }
 
         let isNightIcon = iconName.last! == "n"
         return isNightIcon ? iconType.night : iconType.day
     }
-
-    init?(from apiImageCode: String) {
-        switch String(apiImageCode.dropLast(1)) {
-        case "01":
-            self = .clearSky
-        case "02":
-            self = .fewClouds
-        case "03":
-            self = .scatteredClouds
-        case "04":
-            self = .brokenClouds
-        case "09":
-            self = .showerRain
-        case "10":
-            self = .rain
-        case "11":
-            self = .thunderstorm
-        case "13":
-            self = .snow
-        case "50":
-            self = .mist
-        default:
-            return nil
-        }
-    }
     
 }
 
-@available(iOS 13.0, tvOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public struct WeatherSystemIcon {
 
     fileprivate init(icon: WeatherIcon, night: Bool) {
@@ -120,3 +109,5 @@ public struct WeatherSystemIcon {
     }
 
 }
+
+#endif

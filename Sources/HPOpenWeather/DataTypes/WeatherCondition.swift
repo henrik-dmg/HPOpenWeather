@@ -12,12 +12,6 @@ public struct WeatherCondition: Codable, Equatable, Hashable {
     /// The ID of the corresponding weather icon
     public let iconString: String
 
-    /// The corresponding system weather icon
-    @available(iOS 13.0, tvOS 13.0, *)
-    public var systemIcon: WeatherSystemIcon? {
-        return WeatherIcon.make(from: iconString)
-    }
-
     static let unknown = WeatherCondition(
         id: 0,
         main: "Unknown Weather Condition",
