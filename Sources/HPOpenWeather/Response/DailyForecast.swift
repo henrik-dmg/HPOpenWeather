@@ -18,8 +18,8 @@ public struct DailyForecast: BasicWeatherResponse, SunResponse {
     public let sun: Sun
     private let weatherArray: [WeatherCondition]
 
-    public var weather: [WeatherCondition] {
-        weatherArray
+    public var condition: WeatherCondition {
+        weatherArray.first ?? WeatherCondition.unknown
     }
 
     enum CodingKeys: String, CodingKey {
