@@ -2,17 +2,19 @@ import Foundation
 import CoreLocation
 import HPNetwork
 
-public class CoordinateRequest: DecodableRequest<OpenWeatherResponse>, WeatherRequest {
+public class TimeMachineRequest: DecodableRequest<TimeMachineResponse>, OpenWeatherRequest {
 
-    public typealias Output = OpenWeatherResponse
+    public typealias Output = TimeMachineResponse
 
     public override var url: URL? {
         URLQueryItemsBuilder("api.openweathermap.org")
             .addingPathComponent("data")
             .addingPathComponent("2.5")
             .addingPathComponent("onecall")
+            .addingPathComponent("timemachine")
             .addingQueryItem(coordinate.latitude, name: "lat", digits: 5)
             .addingQueryItem(coordinate.longitude, name: "lon", digits: 5)
+            .addingQueryItem("\(Int(date.timeIntervalSince1970))", name: "dt")
             .addingQueryItem(configuration.apiKey, name: "appid")
             .addingQueryItem(configuration.units.rawValue, name: "units")
             .addingQueryItem(configuration.language.rawValue, name: "lang")
@@ -26,11 +28,18 @@ public class CoordinateRequest: DecodableRequest<OpenWeatherResponse>, WeatherRe
     }
 
     private let coordinate: CLLocationCoordinate2D
+    private let date: Date
 
     public let configuration: RequestConfiguration
 
-    public init(coordinate: CLLocationCoordinate2D, configuration: RequestConfiguration) {
+    /// Returns nil, if `date` is less than 6 hours before current date
+    public init?(coordinate: CLLocationCoordinate2D, date: Date, configuration: RequestConfiguration) {
+        guard date.timeIntervalSinceNow < -6 * .hour else {
+            return nil
+        }
+
         self.coordinate = coordinate
+        self.date = date
         self.configuration = configuration
         super.init(urlString: "www.google.com")
     }

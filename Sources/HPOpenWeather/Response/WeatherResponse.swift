@@ -1,6 +1,6 @@
 import Foundation
 
-public struct OpenWeatherResponse: Codable, Equatable, Hashable {
+public struct WeatherResponse: Codable, Equatable, Hashable {
 
     public let timezone: TimeZone
     public let current: CurrentWeather
