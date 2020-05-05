@@ -7,6 +7,10 @@ public final class HPOpenWeather {
 
     public var apiKey: String?
 
+    public init(apiKey: String? = nil) {
+        self.apiKey = apiKey
+    }
+
     @discardableResult
     public func requestWeather<R: OpenWeatherRequest>(
         _ request: R?,
