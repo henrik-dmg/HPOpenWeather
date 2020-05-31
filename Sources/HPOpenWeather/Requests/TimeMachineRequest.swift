@@ -7,13 +7,13 @@ public class TimeMachineRequest: DecodableRequest<TimeMachineResponse>, OpenWeat
     public typealias Output = TimeMachineResponse
 
     public override var url: URL? {
-        URLQueryItemsBuilder("api.openweathermap.org")
+        URLQueryItemsBuilder(host: "api.openweathermap.org")
             .addingPathComponent("data")
             .addingPathComponent("2.5")
             .addingPathComponent("onecall")
             .addingPathComponent("timemachine")
-            .addingQueryItem(coordinate.latitude, name: "lat", digits: 5)
-            .addingQueryItem(coordinate.longitude, name: "lon", digits: 5)
+            .addingQueryItem(coordinate.latitude, digits: 5, name: "lat")
+            .addingQueryItem(coordinate.longitude, digits: 5, name: "lon")
             .addingQueryItem("\(Int(date.timeIntervalSince1970))", name: "dt")
             .addingQueryItem(configuration.apiKey, name: "appid")
             .addingQueryItem(configuration.units.rawValue, name: "units")

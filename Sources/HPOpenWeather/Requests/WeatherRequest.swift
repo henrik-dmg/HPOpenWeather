@@ -7,12 +7,12 @@ public class WeatherRequest: DecodableRequest<WeatherResponse>, OpenWeatherReque
     public typealias Output = WeatherResponse
 
     public override var url: URL? {
-        URLQueryItemsBuilder("api.openweathermap.org")
+        URLQueryItemsBuilder(host: "api.openweathermap.org")
             .addingPathComponent("data")
             .addingPathComponent("2.5")
             .addingPathComponent("onecall")
-            .addingQueryItem(coordinate.latitude, name: "lat", digits: 5)
-            .addingQueryItem(coordinate.longitude, name: "lon", digits: 5)
+            .addingQueryItem(coordinate.latitude, digits: 5, name: "lat")
+            .addingQueryItem(coordinate.longitude, digits: 5, name: "lon")
             .addingQueryItem(configuration.apiKey, name: "appid")
             .addingQueryItem(configuration.units.rawValue, name: "units")
             .addingQueryItem(configuration.language.rawValue, name: "lang")
