@@ -10,14 +10,14 @@ final class HPOpenWeatherTests: XCTestCase {
         HPOpenWeather.shared.apiKey = TestSecret.apiKey
     }
 
-    override func tearDown() {
+    override class func tearDown() {
         super.tearDown()
 
         HPOpenWeather.shared.apiKey = nil
     }
 
     func testCurrentRequest() {
-        let request = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30), configuration: .default)
+        let request = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30))
         let exp = XCTestExpectation(description: "Fetched data")
 
         HPOpenWeather.shared.requestWeather(request) { result in
@@ -29,7 +29,7 @@ final class HPOpenWeatherTests: XCTestCase {
     }
 
     func testTimeMachineRequestFailing() {
-        let request = TimeMachineRequest(coordinate: .init(latitude: 40, longitude: 30), date: Date().addingTimeInterval(-3600), configuration: .default)
+        let request = TimeMachineRequest(coordinate: .init(latitude: 40, longitude: 30), date: Date().addingTimeInterval(-1 * .hour))
         let exp = XCTestExpectation(description: "Fetched data")
 
         HPOpenWeather.shared.requestWeather(request) { result in
@@ -41,7 +41,7 @@ final class HPOpenWeatherTests: XCTestCase {
     }
 
     func testTimeMachineRequest() {
-        let request = TimeMachineRequest(coordinate: .init(latitude: 40, longitude: 30), date: Date().addingTimeInterval(-7 * .hour), configuration: .default)
+        let request = TimeMachineRequest(coordinate: .init(latitude: 40, longitude: 30), date: Date().addingTimeInterval(-7 * .hour))
         let exp = XCTestExpectation(description: "Fetched data")
 
         HPOpenWeather.shared.requestWeather(request) { result in
@@ -71,7 +71,6 @@ extension Encodable {
 /// Asserts that the result is not a failure
 func XCTAssertResult<T, E: Error>(_ result: Result<T, E>) {
     if case .failure(let error as NSError) = result {
-        print(error)
         XCTFail(error.localizedDescription)
     }
 }

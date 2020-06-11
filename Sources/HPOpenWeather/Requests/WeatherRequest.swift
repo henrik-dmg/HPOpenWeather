@@ -2,7 +2,30 @@ import Foundation
 import CoreLocation
 import HPNetwork
 
-public class WeatherRequest: DecodableRequest<WeatherResponse>, OpenWeatherRequest {
+extension NSError {
+
+    static let noApiKey = NSError(description: "API key was not provided", code: 2)
+    static let timeMachineDate = NSError(description: "TimeMachineRequest's date has to be at least 6 hours in the past", code: 3)
+
+}
+
+public struct WeatherRequest: OpenWeatherRequest {
+
+    public typealias Output = WeatherResponse
+
+    public let coordinate: CLLocationCoordinate2D
+
+    public init(coordinate: CLLocationCoordinate2D) {
+        self.coordinate = coordinate
+    }
+
+    public func makeNetworkRequest(settings: HPOpenWeather.Settings) throws -> DecodableRequest<WeatherResponse> {
+        WeatherNetworkRequest(request: self, settings: settings)
+    }
+    
+}
+
+class WeatherNetworkRequest: DecodableRequest<WeatherResponse> {
 
     public typealias Output = WeatherResponse
 
@@ -13,9 +36,9 @@ public class WeatherRequest: DecodableRequest<WeatherResponse>, OpenWeatherReque
             .addingPathComponent("onecall")
             .addingQueryItem(coordinate.latitude, digits: 5, name: "lat")
             .addingQueryItem(coordinate.longitude, digits: 5, name: "lon")
-            .addingQueryItem(configuration.apiKey, name: "appid")
-            .addingQueryItem(configuration.units.rawValue, name: "units")
-            .addingQueryItem(configuration.language.rawValue, name: "lang")
+            .addingQueryItem(settings.apiKey, name: "appid")
+            .addingQueryItem(settings.units.rawValue, name: "units")
+            .addingQueryItem(settings.language.rawValue, name: "lang")
             .build()
     }
 
@@ -26,12 +49,11 @@ public class WeatherRequest: DecodableRequest<WeatherResponse>, OpenWeatherReque
     }
 
     private let coordinate: CLLocationCoordinate2D
+    private let settings: HPOpenWeather.Settings
 
-    public let configuration: RequestConfiguration
-
-    public init(coordinate: CLLocationCoordinate2D, configuration: RequestConfiguration) {
-        self.coordinate = coordinate
-        self.configuration = configuration
+    init(request: WeatherRequest, settings: HPOpenWeather.Settings) {
+        self.coordinate = request.coordinate
+        self.settings = settings
         super.init(urlString: "www.google.com")
     }
 

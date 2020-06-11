@@ -1,16 +1,13 @@
+import CoreLocation
 import Foundation
 import HPNetwork
 
-public protocol OpenWeatherRequest: NetworkRequest {
+public protocol OpenWeatherRequest {
 
-    var configuration: RequestConfiguration { get }
+    associatedtype Output: Decodable
 
-}
+    var coordinate: CLLocationCoordinate2D { get }
 
-extension OpenWeatherRequest {
-
-    var hasAPIKey: Bool {
-        configuration.apiKey != nil
-    }
+    func makeNetworkRequest(settings: HPOpenWeather.Settings) throws -> DecodableRequest<Output>
 
 }
