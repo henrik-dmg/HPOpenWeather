@@ -1,6 +1,7 @@
 import Foundation
 
 public enum RequestLanguage: String {
+
     case afrikaans = "af"
     case arabic = "ar"
     case azerbaijani = "az"
@@ -46,4 +47,5 @@ public enum RequestLanguage: String {
     case chineseSimplified = "zh_cn"
     case chineseTraditional = "zh_tw"
     case zulu = "zu"
+
 }
