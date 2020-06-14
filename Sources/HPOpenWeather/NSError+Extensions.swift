@@ -3,7 +3,7 @@ import HPNetwork
 
 extension NSError {
 
-    convenience init(domain: String = "com.henrikpanhans.HPOpenWeather", description: String, code: Int) {
+    convenience init(domain: String = "com.henrikpanhans.HPOpenWeather", code: Int, description: String) {
         self.init(
             domain: domain,
             code: code,

@@ -4,8 +4,8 @@ import HPNetwork
 
 extension NSError {
 
-    static let noApiKey = NSError(description: "API key was not provided", code: 2)
-    static let timeMachineDate = NSError(description: "TimeMachineRequest's date has to be at least 6 hours in the past", code: 3)
+    static let noApiKey = NSError(code: 2, description: "API key was not provided")
+    static let timeMachineDate = NSError(code: 3, description: "TimeMachineRequest's date has to be at least 6 hours in the past")
 
 }
 
@@ -14,13 +14,15 @@ public struct WeatherRequest: OpenWeatherRequest {
     public typealias Output = WeatherResponse
 
     public let coordinate: CLLocationCoordinate2D
+    private let finishingQueue: DispatchQueue
 
-    public init(coordinate: CLLocationCoordinate2D) {
+    public init(coordinate: CLLocationCoordinate2D, finishingQueue: DispatchQueue = .main) {
         self.coordinate = coordinate
+        self.finishingQueue = finishingQueue
     }
 
     public func makeNetworkRequest(settings: HPOpenWeather.Settings) throws -> DecodableRequest<WeatherResponse> {
-        WeatherNetworkRequest(request: self, settings: settings)
+        WeatherNetworkRequest(request: self, settings: settings, finishingQueue: finishingQueue)
     }
     
 }
@@ -51,10 +53,10 @@ class WeatherNetworkRequest: DecodableRequest<WeatherResponse> {
     private let coordinate: CLLocationCoordinate2D
     private let settings: HPOpenWeather.Settings
 
-    init(request: WeatherRequest, settings: HPOpenWeather.Settings) {
+    init(request: WeatherRequest, settings: HPOpenWeather.Settings, finishingQueue: DispatchQueue) {
         self.coordinate = request.coordinate
         self.settings = settings
-        super.init(urlString: "www.google.com")
+        super.init(urlString: "www.google.com", finishingQueue: finishingQueue)
     }
 
 }

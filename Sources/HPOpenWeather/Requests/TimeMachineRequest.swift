@@ -8,17 +8,19 @@ public struct TimeMachineRequest: OpenWeatherRequest {
 
     public let coordinate: CLLocationCoordinate2D
     public let date: Date
+    private let finishingQueue: DispatchQueue
 
-    public init(coordinate: CLLocationCoordinate2D, date: Date) {
+    public init(coordinate: CLLocationCoordinate2D, date: Date, finishingQueue: DispatchQueue = .main) {
         self.coordinate = coordinate
         self.date = date
+        self.finishingQueue = finishingQueue
     }
 
     public func makeNetworkRequest(settings: HPOpenWeather.Settings) throws -> DecodableRequest<TimeMachineResponse> {
         guard date.timeIntervalSinceNow < -6 * .hour else {
             throw NSError.timeMachineDate
         }
-        return TimeMachineNetworkRequest(request: self, settings: settings)
+        return TimeMachineNetworkRequest(request: self, settings: settings, finishingQueue: finishingQueue)
     }
 
 }
@@ -49,11 +51,11 @@ class TimeMachineNetworkRequest: DecodableRequest<TimeMachineResponse> {
     private let settings: HPOpenWeather.Settings
     private let date: Date
 
-    init(request: TimeMachineRequest, settings: HPOpenWeather.Settings) {
+    init(request: TimeMachineRequest, settings: HPOpenWeather.Settings, finishingQueue: DispatchQueue) {
         self.coordinate = request.coordinate
         self.settings = settings
         self.date = request.date
-        super.init(urlString: "www.google.com")
+        super.init(urlString: "www.google.com", finishingQueue: finishingQueue)
     }
 
 }

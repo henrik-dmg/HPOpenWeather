@@ -17,7 +17,7 @@ public struct TimeMachineResponse: Codable, Equatable, Hashable {
 
         let timezoneString = try container.decode(String.self, forKey: .timezone)
         guard let timezone = TimeZone(identifier: timezoneString) else {
-            throw NSError(description: "Invalid timezone identifier in weather response", code: 4)
+            throw NSError(code: 4, description: "Invalid timezone identifier in weather response")
         }
 
         self.timezone = timezone
