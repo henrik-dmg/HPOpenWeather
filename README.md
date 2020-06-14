@@ -4,7 +4,7 @@
 
 <a href="https://www.codefactor.io/repository/github/henrik-dmg/hpopenweather"><img src="https://www.codefactor.io/repository/github/henrik-dmg/hpopenweather/badge" alt="CodeFactor" /></a>
 <a href="https://img.shields.io/badge/Swift-5.0-orange"><img src="https://img.shields.io/badge/Swift-5.0-orange.svg"/></a>
-<a href="https://github.com/henrik-dmg/HPOpenWeather/workflows/.github/workflows/swift.yml"><img src="https://github.com/henrik-dmg/HPOpenWeather/workflows/Swift/badge.svg" alt="Github Actions"/></a>
+<a href="https://github.com/henrik-dmg/HPOpenWeather/blob/master/.github/workflows/swift.yml"><img src="https://github.com/henrik-dmg/HPOpenWeather/workflows/Swift/badge.svg" alt="Github Actions"/></a>
 [![GitHub license](https://img.shields.io/github/license/henrik-dmg/HPOpenWeather)](https://github.com/henrik-dmg/HPOpenWeather/blob/master/LICENSE.md)
 
 HPOpenWeather is a cross-platform Swift framework to communicate with the OpenWeatherMap JSON API. See their [documentation](https://openweathermap.org/api) for further details.
