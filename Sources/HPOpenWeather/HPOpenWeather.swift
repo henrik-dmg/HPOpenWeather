@@ -26,11 +26,11 @@ public final class HPOpenWeather {
     public static let shared = HPOpenWeather()
 
     /// The OpenWeatherMap API key to authorize requests
-    var apiKey : String?
+    public var apiKey : String?
     /// The language that should be used in API responses
-    var language: RequestLanguage = .english
+    public var language: RequestLanguage = .english
     /// The units that should be used to format the API responses
-    var units: RequestUnits = .metric
+    public var units: RequestUnits = .metric
 
     // MARK: - Init
 
