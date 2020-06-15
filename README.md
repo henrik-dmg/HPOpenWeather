@@ -33,31 +33,40 @@ import HPOpenWeather
 // Assign API key
 HPOpenWeather.shared.apiKey = "--- YOUR API KEY ---"
 ```
+You can also customise the response data units and language by accessing the `language` and `units` propertis.
 
 ## Making  a request
 
 To make a request, initialize a new request object like this
 
 ```swift
-let configuration = RequestConfiguration(
-	language: .english,
-	units: .metric,
-	apiKey: HPOpenWeather.shared.apiKey)
-
-let request = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30), configuration: configuration)
+let request = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30))
 ```
 
-And to post it:
+Or to request weather data from the past:
+
+```swift
+let timemachineRequest = TimeMachineRequest(coordinate: .init(latitude: 40, longitude: 30), date: someDate)
+```
+
+**Note:** the date has to be at least 6 hours in the past
+
+To post a request, call the `requestWeather` on `HPOpenWeather`:
 
 ```swift
 HPOpenWeather.shared.requestWeather(request) { result in
-	// Handle result
+	switch result {
+    case .success(let response):
+    	// do something with weather data here
+    case .failure(let error):
+        // handle error
+    }
 }
 ```
 
 **The following response languages are available**
 
-- English
+- English (default)
 - Russian
 - Italian
 - Spanish
@@ -79,15 +88,15 @@ HPOpenWeather.shared.requestWeather(request) { result in
 
 **The following temperature units are available**
 
-- Celsius
+- Celsius (default)
 - Kelvin
 - Fahrenheit
 
 ## TODO List
 - [x] Current weather data
 - [x] Daily and hourly forecast
-- [ ] More Unit Tests
-- [ ] Historical Data
+- [x] More Unit Tests
+- [x] Historical Data
 - [ ] UV Index Data
 - [ ] watchOS and tvOS demo apps
 
