@@ -8,11 +8,13 @@ public struct TimeMachineRequest: OpenWeatherRequest {
 
     public let coordinate: CLLocationCoordinate2D
     public let date: Date
+    private let urlSession: URLSession
     private let finishingQueue: DispatchQueue
 
-    public init(coordinate: CLLocationCoordinate2D, date: Date, finishingQueue: DispatchQueue = .main) {
+    public init(coordinate: CLLocationCoordinate2D, date: Date, urlSession: URLSession = .shared, finishingQueue: DispatchQueue = .main) {
         self.coordinate = coordinate
         self.date = date
+        self.urlSession = urlSession
         self.finishingQueue = finishingQueue
     }
 
@@ -20,7 +22,7 @@ public struct TimeMachineRequest: OpenWeatherRequest {
         guard date.timeIntervalSinceNow < -6 * .hour else {
             throw NSError.timeMachineDate
         }
-        return TimeMachineNetworkRequest(request: self, settings: settings, finishingQueue: finishingQueue)
+        return TimeMachineNetworkRequest(request: self, settings: settings, urlSession: urlSession, finishingQueue: finishingQueue)
     }
 
 }
@@ -51,11 +53,11 @@ class TimeMachineNetworkRequest: DecodableRequest<TimeMachineResponse> {
     private let settings: HPOpenWeather.Settings
     private let date: Date
 
-    init(request: TimeMachineRequest, settings: HPOpenWeather.Settings, finishingQueue: DispatchQueue) {
+    init(request: TimeMachineRequest, settings: HPOpenWeather.Settings, urlSession: URLSession, finishingQueue: DispatchQueue) {
         self.coordinate = request.coordinate
         self.settings = settings
         self.date = request.date
-        super.init(urlString: "www.google.com", finishingQueue: finishingQueue)
+        super.init(urlString: "www.google.com", urlSession: urlSession, finishingQueue: finishingQueue)
     }
 
 }

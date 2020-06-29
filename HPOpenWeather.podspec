@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "HPOpenWeather"
-  s.version      = "3.3.1"
+  s.version      = "3.4.0"
   s.summary      = "Cross-platform framework to communicate with the OpenWeatherMap JSON API"
 
   s.license      = { :type => "MIT", :file => "LICENSE.md" }
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.author             = { "henrik-dmg" => "henrik@panhans.dev" }
   s.social_media_url   = "https://twitter.com/henrik_dmg"
 
-  s.ios.deployment_target = "8.0"
+  s.ios.deployment_target = "9.0"
   s.osx.deployment_target = "10.11"
   s.watchos.deployment_target = "3.0"
   s.tvos.deployment_target = "9.0"

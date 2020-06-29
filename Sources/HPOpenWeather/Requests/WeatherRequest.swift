@@ -14,15 +14,17 @@ public struct WeatherRequest: OpenWeatherRequest {
     public typealias Output = WeatherResponse
 
     public let coordinate: CLLocationCoordinate2D
+    private let urlSession: URLSession
     private let finishingQueue: DispatchQueue
 
-    public init(coordinate: CLLocationCoordinate2D, finishingQueue: DispatchQueue = .main) {
+    public init(coordinate: CLLocationCoordinate2D, urlSession: URLSession = .shared, finishingQueue: DispatchQueue = .main) {
         self.coordinate = coordinate
+        self.urlSession = urlSession
         self.finishingQueue = finishingQueue
     }
 
     public func makeNetworkRequest(settings: HPOpenWeather.Settings) throws -> DecodableRequest<WeatherResponse> {
-        WeatherNetworkRequest(request: self, settings: settings, finishingQueue: finishingQueue)
+        WeatherNetworkRequest(request: self, settings: settings, urlSession: urlSession, finishingQueue: finishingQueue)
     }
     
 }
@@ -53,10 +55,10 @@ class WeatherNetworkRequest: DecodableRequest<WeatherResponse> {
     private let coordinate: CLLocationCoordinate2D
     private let settings: HPOpenWeather.Settings
 
-    init(request: WeatherRequest, settings: HPOpenWeather.Settings, finishingQueue: DispatchQueue) {
+    init(request: WeatherRequest, settings: HPOpenWeather.Settings, urlSession: URLSession, finishingQueue: DispatchQueue) {
         self.coordinate = request.coordinate
         self.settings = settings
-        super.init(urlString: "www.google.com", finishingQueue: finishingQueue)
+        super.init(urlString: "www.google.com", urlSession: urlSession, finishingQueue: finishingQueue)
     }
 
 }
