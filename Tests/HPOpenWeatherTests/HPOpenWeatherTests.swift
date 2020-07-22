@@ -53,6 +53,7 @@ final class HPOpenWeatherTests: XCTestCase {
     }
 
 
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     func testPublisher() {
         let request = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30))
 
@@ -60,16 +61,18 @@ final class HPOpenWeatherTests: XCTestCase {
         let expectationReceive = expectation(description: "receiveValue")
         //let expectationFailure = expectation(description: "failure")
 
-        let cancellable = request.makePublisher(apiKey: TestSecret.apiKey).sink { result in
-            switch result {
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            case .finished:
-                expectationFinished.fulfill()
+        let cancellable = request.makePublisher(apiKey: TestSecret.apiKey).sink(
+            receiveCompletion: { result in
+                    switch result {
+                    case .failure(let error):
+                        XCTFail(error.localizedDescription)
+                    case .finished:
+                        expectationFinished.fulfill()
+                    }
+            }, receiveValue: { response in
+                expectationReceive.fulfill()
             }
-        } receiveValue: { response in
-            expectationReceive.fulfill()
-        }
+        )
 
         wait(for: [expectationFinished, expectationReceive], timeout: 10)
     }
