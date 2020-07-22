@@ -52,6 +52,28 @@ final class HPOpenWeatherTests: XCTestCase {
         wait(for: [exp], timeout: 10)
     }
 
+
+    func testPublisher() {
+        let request = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30))
+
+        let expectationFinished = expectation(description: "finished")
+        let expectationReceive = expectation(description: "receiveValue")
+        //let expectationFailure = expectation(description: "failure")
+
+        let cancellable = request.makePublisher(apiKey: TestSecret.apiKey).sink { result in
+            switch result {
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+            case .finished:
+                expectationFinished.fulfill()
+            }
+        } receiveValue: { response in
+            expectationReceive.fulfill()
+        }
+
+        wait(for: [expectationFinished, expectationReceive], timeout: 10)
+    }
+
 }
 
 extension Encodable {

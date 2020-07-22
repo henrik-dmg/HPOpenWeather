@@ -18,7 +18,6 @@ public final class HPOpenWeather {
             self.apiKey = apiKey
         }
 
-
     }
 
     // MARK: - Properties

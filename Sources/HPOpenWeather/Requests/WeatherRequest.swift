@@ -14,8 +14,8 @@ public struct WeatherRequest: OpenWeatherRequest {
     public typealias Output = WeatherResponse
 
     public let coordinate: CLLocationCoordinate2D
-    private let urlSession: URLSession
-    private let finishingQueue: DispatchQueue
+    public let urlSession: URLSession
+    public let finishingQueue: DispatchQueue
 
     public init(coordinate: CLLocationCoordinate2D, urlSession: URLSession = .shared, finishingQueue: DispatchQueue = .main) {
         self.coordinate = coordinate
@@ -23,17 +23,7 @@ public struct WeatherRequest: OpenWeatherRequest {
         self.finishingQueue = finishingQueue
     }
 
-    public func makeNetworkRequest(settings: HPOpenWeather.Settings) throws -> DecodableRequest<WeatherResponse> {
-        WeatherNetworkRequest(request: self, settings: settings, urlSession: urlSession, finishingQueue: finishingQueue)
-    }
-    
-}
-
-class WeatherNetworkRequest: DecodableRequest<WeatherResponse> {
-
-    public typealias Output = WeatherResponse
-
-    public override var url: URL? {
+    public func makeURL(settings: HPOpenWeather.Settings) -> URL {
         URLQueryItemsBuilder(host: "api.openweathermap.org")
             .addingPathComponent("data")
             .addingPathComponent("2.5")
@@ -43,7 +33,21 @@ class WeatherNetworkRequest: DecodableRequest<WeatherResponse> {
             .addingQueryItem(settings.apiKey, name: "appid")
             .addingQueryItem(settings.units.rawValue, name: "units")
             .addingQueryItem(settings.language.rawValue, name: "lang")
-            .build()
+            .build()!
+    }
+
+    public func makeNetworkRequest(settings: HPOpenWeather.Settings) throws -> DecodableRequest<WeatherResponse> {
+        WeatherNetworkRequest(url: makeURL(settings: settings), urlSession: urlSession, finishingQueue: finishingQueue)
+    }
+    
+}
+
+class WeatherNetworkRequest: DecodableRequest<WeatherResponse> {
+
+    public typealias Output = WeatherResponse
+
+    override var url: URL? {
+        _url
     }
 
     public override var decoder: JSONDecoder {
@@ -52,12 +56,10 @@ class WeatherNetworkRequest: DecodableRequest<WeatherResponse> {
         return decoder
     }
 
-    private let coordinate: CLLocationCoordinate2D
-    private let settings: HPOpenWeather.Settings
+    private let _url: URL
 
-    init(request: WeatherRequest, settings: HPOpenWeather.Settings, urlSession: URLSession, finishingQueue: DispatchQueue) {
-        self.coordinate = request.coordinate
-        self.settings = settings
+    init(url: URL, urlSession: URLSession, finishingQueue: DispatchQueue) {
+        self._url = url
         super.init(urlString: "www.google.com", urlSession: urlSession, finishingQueue: finishingQueue)
     }
 
