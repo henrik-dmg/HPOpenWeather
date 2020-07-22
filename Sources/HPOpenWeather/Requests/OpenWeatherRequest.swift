@@ -16,7 +16,7 @@ public protocol OpenWeatherRequest {
 
 }
 
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, *)
+@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public extension OpenWeatherRequest {
 
     func makePublisher(apiKey: String, language: RequestLanguage = .english, units: RequestUnits = .metric) -> AnyPublisher<Output, Error> {
