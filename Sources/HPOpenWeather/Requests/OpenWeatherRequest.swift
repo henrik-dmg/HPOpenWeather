@@ -1,7 +1,6 @@
 import CoreLocation
 import Foundation
 import HPNetwork
-import Combine
 
 public protocol OpenWeatherRequest {
 
@@ -15,6 +14,9 @@ public protocol OpenWeatherRequest {
     func makeNetworkRequest(settings: HPOpenWeather.Settings) throws -> DecodableRequest<Output>
 
 }
+
+#if canImport(Combine)
+import Combine
 
 @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public extension OpenWeatherRequest {
@@ -66,3 +68,4 @@ final class NetworkingError: NSError {
     }
 
 }
+#endif
