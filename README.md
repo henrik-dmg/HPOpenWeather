@@ -20,10 +20,6 @@ Add `.package(url: "https://github.com/henrik-dmg/HPOpenWeather", from: "3.0.0")
 
 Add `pod 'HPOpenWeather'` to your `Podfile` and run `pod install`
 
-#### Carthage
-
-Add `github "henrik-dmg/HPOpenWeather" ~> 3.0.0` to your `Cartfile`
-
 ## Usage
 
 To get started, you need an API key from [OpenWeatherMap](https://openweathermap.org). Put this API key in the initialiser, additionally you can also specify a custom temperature format and/or language used in the responses (see list for available languages and units below).
