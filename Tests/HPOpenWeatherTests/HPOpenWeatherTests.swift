@@ -74,7 +74,9 @@ final class HPOpenWeatherTests: XCTestCase {
             }
         )
 
-        wait(for: [expectationFinished, expectationReceive], timeout: 10)
+        waitForExpectations(timeout: 10) { error in
+            cancellable.cancel()
+        }
     }
 
 }
