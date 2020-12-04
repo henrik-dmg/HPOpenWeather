@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary      = "Cross-platform framework to communicate with the OpenWeatherMap JSON API"
 
   s.license      = { :type => "MIT", :file => "LICENSE.md" }
-  s.homepage     = "https://panhans.dev/hpopenweather"
+  s.homepage     = "https://panhans.dev/opensource/hpopenweather"
 
   s.author             = { "henrik-dmg" => "henrik@panhans.dev" }
   s.social_media_url   = "https://twitter.com/henrik_dmg"
