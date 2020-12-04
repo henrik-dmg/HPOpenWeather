@@ -51,7 +51,7 @@ public final class HPOpenWeather {
         completion: @escaping (Result<R.Output, Error>) -> Void) -> NetworkTask
     {
         guard let apiKey = apiKey else {
-            DispatchQueue.main.async {
+			request.finishingQueue.async {
                 completion(.failure(NSError.noApiKey))
             }
             return NetworkTask()
@@ -63,7 +63,7 @@ public final class HPOpenWeather {
             let networkRequest = try request.makeNetworkRequest(settings: settings)
             return Network.shared.dataTask(networkRequest, completion: completion)
         } catch let error {
-            DispatchQueue.main.async {
+			request.finishingQueue.async {
                 completion(.failure(error))
             }
             return NetworkTask()

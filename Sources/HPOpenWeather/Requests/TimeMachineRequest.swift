@@ -55,7 +55,7 @@ class TimeMachineNetworkRequest: DecodableRequest<TimeMachineResponse> {
 
     private let _url: URL
 
-    init(url: URL, urlSession: URLSession, finishingQueue: DispatchQueue) {
+	override init(url: URL, urlSession: URLSession, finishingQueue: DispatchQueue) {
         self._url = url
         super.init(urlString: "www.google.com", urlSession: urlSession, finishingQueue: finishingQueue)
     }

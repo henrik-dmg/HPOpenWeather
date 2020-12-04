@@ -7,7 +7,8 @@ extension NSError {
         self.init(
             domain: domain,
             code: code,
-            userInfo: [NSLocalizedDescriptionKey: description])
+            userInfo: [NSLocalizedDescriptionKey: description]
+		)
     }
 
 }
