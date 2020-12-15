@@ -18,7 +18,7 @@ final class HPOpenWeatherTests: XCTestCase {
         let request = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30))
         let exp = XCTestExpectation(description: "Fetched data")
 
-        OpenWeather.shared.requestWeather(request) { result in
+        OpenWeather.shared.sendWeatherRequest(request) { result in
             exp.fulfill()
             XCTAssertResult(result)
         }
@@ -30,7 +30,7 @@ final class HPOpenWeatherTests: XCTestCase {
         let request = TimeMachineRequest(coordinate: .init(latitude: 40, longitude: 30), date: Date().addingTimeInterval(-1 * .hour))
         let exp = XCTestExpectation(description: "Fetched data")
 
-        OpenWeather.shared.requestWeather(request) { result in
+        OpenWeather.shared.sendWeatherRequest(request) { result in
             exp.fulfill()
             XCTAssertResultError(result)
         }
@@ -42,7 +42,7 @@ final class HPOpenWeatherTests: XCTestCase {
         let request = TimeMachineRequest(coordinate: .init(latitude: 40, longitude: 30), date: Date().addingTimeInterval(-7 * .hour))
         let exp = XCTestExpectation(description: "Fetched data")
 
-        OpenWeather.shared.requestWeather(request) { result in
+        OpenWeather.shared.sendWeatherRequest(request) { result in
             exp.fulfill()
             XCTAssertResult(result)
         }

@@ -50,7 +50,7 @@ public final class OpenWeather {
 	///   - completion: <#completion description#>
 	/// - Returns: A network task that can be used to cancel the request
 	@discardableResult
-    public func requestWeather<R: OpenWeatherRequest>(_ request: R, completion: @escaping (Result<R.Output, Error>) -> Void) -> NetworkTask {
+    public func sendWeatherRequest<R: OpenWeatherRequest>(_ request: R, completion: @escaping (Result<R.Output, Error>) -> Void) -> NetworkTask {
         guard let apiKey = apiKey else {
 			request.finishingQueue.async {
                 completion(.failure(NSError.noApiKey))
