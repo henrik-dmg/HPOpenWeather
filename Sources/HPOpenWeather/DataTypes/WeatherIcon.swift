@@ -31,24 +31,32 @@ public enum WeatherIcon: String, Codable, CaseIterable {
 @available(iOS 13.0, macOS 11.0, tvOS 13.0, watchOS 6.0, *)
 public extension WeatherIcon {
 
+	var systemImageName: String {
+		makeIconName(filled: false)
+	}
+
+	var systemImageNameFilled: String {
+		makeIconName(filled: true)
+	}
+
 	#if canImport(UIKit)
 
 	func filledUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
-		UIImage(systemName: makeIconName(filled: true), withConfiguration: configuration)
+		UIImage(systemName: systemImageNameFilled, withConfiguration: configuration)
 	}
 
 	func outlineUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
-		UIImage(systemName: makeIconName(filled: false), withConfiguration: configuration)
+		UIImage(systemName: systemImageName, withConfiguration: configuration)
 	}
 
 	#elseif canImport(AppKit)
 
 	func filledNSImage(accessibilityDescription: String? = nil) -> NSImage? {
-		NSImage(systemSymbolName: makeIconName(filled: true), accessibilityDescription: accessibilityDescription)
+		NSImage(systemSymbolName: systemImageNameFilled, accessibilityDescription: accessibilityDescription)
 	}
 
 	func outlineNSImage(accessibilityDescription: String? = nil) -> NSImage? {
-		NSImage(systemSymbolName: makeIconName(filled: false), accessibilityDescription: accessibilityDescription)
+		NSImage(systemSymbolName: systemImageName, accessibilityDescription: accessibilityDescription)
 	}
 
 	#endif
@@ -86,22 +94,3 @@ public extension WeatherIcon {
 	}
 
 }
-
-#if canImport(SwiftUI)
-
-import SwiftUI
-
-@available(iOS 13.0, macOS 11.0, tvOS 13.0, watchOS 6.0, *)
-public extension WeatherIcon {
-
-	func filledImage() -> SwiftUI.Image {
-		SwiftUI.Image(systemName: makeIconName(filled: true))
-	}
-
-	func outlineImage() -> SwiftUI.Image {
-		SwiftUI.Image(systemName: makeIconName(filled: false))
-	}
-
-}
-
-#endif
