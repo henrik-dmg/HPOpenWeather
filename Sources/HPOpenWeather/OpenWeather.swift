@@ -71,4 +71,14 @@ public final class OpenWeather {
         }
     }
 
+	// MARK: - Applying Settings
+
+	/// Applies new settings to the weather client
+	/// - Parameter settings: The weather client settings, including an API key, language and units
+	public func apply(_ settings: Settings) {
+		apiKey = settings.apiKey
+		language = settings.language
+		units = settings.units
+	}
+
 }
