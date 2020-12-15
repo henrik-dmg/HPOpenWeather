@@ -3,7 +3,6 @@ import UIKit
 #elseif canImport(AppKit)
 import AppKit
 #endif
-import SwiftUI
 import Foundation
 
 public enum WeatherIcon: String, Codable, CaseIterable {
@@ -29,38 +28,30 @@ public enum WeatherIcon: String, Codable, CaseIterable {
 
 }
 
-@available(OSX 11.0, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-extension WeatherIcon {
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+public extension WeatherIcon {
 
 	#if canImport(UIKit)
 
-	public func filledUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
+	func filledUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
 		UIImage(systemName: makeIconName(filled: true), withConfiguration: configuration)
 	}
 
-	public func outlineUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
+	func outlineUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
 		UIImage(systemName: makeIconName(filled: false), withConfiguration: configuration)
 	}
 
 	#elseif canImport(AppKit)
 
-	public func filledNSImage(accessibilityDescription: String? = nil) -> NSImage? {
+	func filledNSImage(accessibilityDescription: String? = nil) -> NSImage? {
 		NSImage(systemSymbolName: makeIconName(filled: true), accessibilityDescription: accessibilityDescription)
 	}
 
-	public func outlineNSImage(accessibilityDescription: String? = nil) -> NSImage? {
+	func outlineNSImage(accessibilityDescription: String? = nil) -> NSImage? {
 		NSImage(systemSymbolName: makeIconName(filled: false), accessibilityDescription: accessibilityDescription)
 	}
 
 	#endif
-
-	public func filledImage() -> Image {
-		Image(systemName: makeIconName(filled: true))
-	}
-
-	public func outlineImage() -> Image {
-		Image(systemName: makeIconName(filled: false))
-	}
 
 	private func makeIconName(filled: Bool) -> String {
 		let iconName: String
@@ -95,3 +86,22 @@ extension WeatherIcon {
 	}
 
 }
+
+#if canImport(SwiftUI)
+
+import SwiftUI
+
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+public extension WeatherIcon {
+
+	func filledImage() -> SwiftUI.Image {
+		SwiftUI.Image(systemName: makeIconName(filled: true))
+	}
+
+	func outlineImage() -> SwiftUI.Image {
+		SwiftUI.Image(systemName: makeIconName(filled: false))
+	}
+
+}
+
+#endif
