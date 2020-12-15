@@ -1,105 +1,97 @@
 #if canImport(UIKit)
-import SwiftUI
 import UIKit
-
-extension WeatherCondition {
-
-    /// The corresponding system weather icon
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    public var systemIcon: WeatherSystemIcon? {
-        return WeatherIcon.make(from: iconString)
-    }
-
-}
-
-public enum WeatherIcon: String {
-
-    case clearSky = "01"
-    case fewClouds = "02"
-    case scatteredClouds = "03"
-    case brokenClouds = "04"
-    case showerRain = "09"
-    case rain = "10"
-    case thunderstorm = "11"
-    case snow = "13"
-    case mist = "50"
-
-    init?(apiCode: String) {
-        let code = String(apiCode.dropLast())
-        self.init(rawValue: code)
-    }
-
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    var day: WeatherSystemIcon {
-        return WeatherSystemIcon(icon: self, night: false)
-    }
-
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    var night: WeatherSystemIcon {
-        return WeatherSystemIcon(icon: self, night: true)
-    }
-
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    static func make(from iconName: String) -> WeatherSystemIcon? {
-        guard iconName.count == 3, let iconType = WeatherIcon(apiCode: iconName) else {
-            return nil
-        }
-
-        let isNightIcon = iconName.last! == "n"
-        return isNightIcon ? iconType.night : iconType.day
-    }
-    
-}
-
-@available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-public struct WeatherSystemIcon {
-
-    private let icon: WeatherIcon
-    private let isNightIcon: Bool
-
-    fileprivate init(icon: WeatherIcon, night: Bool) {
-        self.icon = icon
-        self.isNightIcon = night
-    }
-
-    public var regularUIIcon: UIImage {
-        UIImage(systemName: iconName(filled: false))!
-    }
-
-    public var filledUIIcon: UIImage {
-        UIImage(systemName: iconName(filled: true))!
-    }
-
-    public func iconName(filled: Bool) -> String {
-        var iconName = ""
-        switch self.icon {
-        case .clearSky:
-            iconName = isNightIcon ? "moon" : "sun.max"
-        case .fewClouds:
-            iconName = isNightIcon ? "cloud.moon" : "cloud.sun"
-        case .scatteredClouds:
-            iconName = "cloud"
-        case .brokenClouds:
-            iconName = "smoke"
-        case .showerRain:
-            iconName = "cloud.rain"
-        case .rain:
-            iconName = isNightIcon ? "cloud.moon.rain" : "cloud.sun.rain"
-        case .thunderstorm:
-            iconName = "cloud.bolt.rain"
-        case .snow:
-            return "snow"
-        case .mist:
-            iconName = "cloud.fog"
-        }
-
-        if filled {
-            iconName.append(".fill")
-        }
-
-        return iconName
-    }
-
-}
-
+#elseif canImport(AppKit)
+import AppKit
 #endif
+import SwiftUI
+import Foundation
+
+public enum WeatherIcon: String, Codable, CaseIterable {
+
+    case clearSky = "01d"
+	case clearSkyNight = "01n"
+    case fewClouds = "02d"
+	case fewCloudsNight = "02n"
+	case scatteredClouds = "03d"
+	case scatteredCloudsNight = "03n"
+	case brokenClouds = "04d"
+	case brokenCloudsNight = "04n"
+	case showerRain = "09d"
+	case showerRainNight = "09n"
+	case rain = "10d"
+	case rainNight = "10n"
+	case thunderstorm = "11d"
+	case thunderstormNight = "11n"
+	case snow = "13d"
+	case snowNight = "13n"
+	case mist = "50d"
+	case mistNight = "50n"
+
+}
+
+@available(OSX 11.0, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+extension WeatherIcon {
+
+	#if canImport(UIKit)
+
+	public func filledUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
+		UIImage(systemName: makeIconName(filled: true), withConfiguration: configuration)
+	}
+
+	public func outlineUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
+		UIImage(systemName: makeIconName(filled: false), withConfiguration: configuration)
+	}
+
+	#elseif canImport(AppKit)
+
+	public func filledNSImage(accessibilityDescription: String? = nil) -> NSImage? {
+		NSImage(systemSymbolName: makeIconName(filled: true), accessibilityDescription: accessibilityDescription)
+	}
+
+	public func outlineNSImage(accessibilityDescription: String? = nil) -> NSImage? {
+		NSImage(systemSymbolName: makeIconName(filled: false), accessibilityDescription: accessibilityDescription)
+	}
+
+	#endif
+
+	public func filledImage() -> Image {
+		Image(systemName: makeIconName(filled: true))
+	}
+
+	public func outlineImage() -> Image {
+		Image(systemName: makeIconName(filled: false))
+	}
+
+	private func makeIconName(filled: Bool) -> String {
+		let iconName: String
+		switch self {
+		case .clearSky:
+			iconName = "sun.max"
+		case .clearSkyNight:
+			iconName = "moon"
+		case .fewClouds:
+			iconName = "cloud.sun"
+		case .fewCloudsNight:
+			iconName = "cloud.moon"
+		case .scatteredClouds, .scatteredCloudsNight:
+			iconName = "cloud"
+		case .brokenClouds, .brokenCloudsNight:
+			iconName = "smoke"
+		case .showerRain, .showerRainNight:
+			iconName = "cloud.rain"
+		case .rain:
+			iconName = "cloud.sun.rain"
+		case .rainNight:
+			iconName = "cloud.moon.rain"
+		case .thunderstorm, .thunderstormNight:
+			iconName = "cloud.bolt.rain"
+		case .snow, .snowNight:
+			return "snow"
+		case .mist, .mistNight:
+			iconName = "cloud.fog"
+		}
+
+		return iconName + (filled ? ".fill" : "")
+	}
+
+}

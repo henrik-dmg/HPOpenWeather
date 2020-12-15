@@ -1,5 +1,6 @@
 import Foundation
 
+/// The language that should be used in API responses for example for weather condition descriptions
 public enum RequestLanguage: String {
 
     case afrikaans = "af"

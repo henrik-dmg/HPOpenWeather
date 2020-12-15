@@ -6,21 +6,19 @@ final class HPOpenWeatherTests: XCTestCase {
 
     override class func setUp() {
         super.setUp()
-
-        HPOpenWeather.shared.apiKey = TestSecret.apiKey
+        OpenWeather.shared.apiKey = TestSecret.apiKey
     }
 
     override class func tearDown() {
         super.tearDown()
-
-        HPOpenWeather.shared.apiKey = nil
+        OpenWeather.shared.apiKey = nil
     }
 
     func testCurrentRequest() {
         let request = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30))
         let exp = XCTestExpectation(description: "Fetched data")
 
-        HPOpenWeather.shared.requestWeather(request) { result in
+        OpenWeather.shared.sendWeatherRequest(request) { result in
             exp.fulfill()
             XCTAssertResult(result)
         }
@@ -32,7 +30,7 @@ final class HPOpenWeatherTests: XCTestCase {
         let request = TimeMachineRequest(coordinate: .init(latitude: 40, longitude: 30), date: Date().addingTimeInterval(-1 * .hour))
         let exp = XCTestExpectation(description: "Fetched data")
 
-        HPOpenWeather.shared.requestWeather(request) { result in
+        OpenWeather.shared.sendWeatherRequest(request) { result in
             exp.fulfill()
             XCTAssertResultError(result)
         }
@@ -44,7 +42,7 @@ final class HPOpenWeatherTests: XCTestCase {
         let request = TimeMachineRequest(coordinate: .init(latitude: 40, longitude: 30), date: Date().addingTimeInterval(-7 * .hour))
         let exp = XCTestExpectation(description: "Fetched data")
 
-        HPOpenWeather.shared.requestWeather(request) { result in
+        OpenWeather.shared.sendWeatherRequest(request) { result in
             exp.fulfill()
             XCTAssertResult(result)
         }
@@ -61,7 +59,7 @@ final class HPOpenWeatherTests: XCTestCase {
         let expectationReceive = expectation(description: "receiveValue")
         //let expectationFailure = expectation(description: "failure")
 
-        let cancellable = request.makePublisher(apiKey: TestSecret.apiKey).sink(
+        let cancellable = request.publisher(apiKey: TestSecret.apiKey).sink(
             receiveCompletion: { result in
                     switch result {
                     case .failure(let error):
@@ -98,6 +96,7 @@ extension Encodable {
 /// Asserts that the result is not a failure
 func XCTAssertResult<T, E: Error>(_ result: Result<T, E>) {
     if case .failure(let error as NSError) = result {
+		print(error)
         XCTFail(error.localizedDescription)
     }
 }

@@ -1,13 +1,12 @@
 import Foundation
 import HPNetwork
 
-public final class HPOpenWeather {
+public final class OpenWeather {
 
     // MARK: - Nested Types
 
     /// Type that can be used to configure all settings at once
     public struct Settings {
-        /// The OpenWeatherMap API key to authorize requests
         let apiKey : String
         let language: RequestLanguage
         let units: RequestUnits
@@ -17,12 +16,12 @@ public final class HPOpenWeather {
             self.units = units
             self.apiKey = apiKey
         }
-
     }
 
     // MARK: - Properties
 
-    public static let shared = HPOpenWeather()
+	/// A shared instance of the weather client
+    public static let shared = OpenWeather()
 
     /// The OpenWeatherMap API key to authorize requests
     public var apiKey : String?
@@ -45,11 +44,13 @@ public final class HPOpenWeather {
 
     // MARK: - Sending Requests
 
-    @discardableResult
-    public func requestWeather<R: OpenWeatherRequest>(
-        _ request: R,
-        completion: @escaping (Result<R.Output, Error>) -> Void) -> NetworkTask
-    {
+	/// <#Description#>
+	/// - Parameters:
+	///   - request: <#request description#>
+	///   - completion: <#completion description#>
+	/// - Returns: A network task that can be used to cancel the request
+	@discardableResult
+    public func sendWeatherRequest<R: OpenWeatherRequest>(_ request: R, completion: @escaping (Result<R.Output, Error>) -> Void) -> NetworkTask {
         guard let apiKey = apiKey else {
 			request.finishingQueue.async {
                 completion(.failure(NSError.noApiKey))
@@ -69,5 +70,15 @@ public final class HPOpenWeather {
             return NetworkTask()
         }
     }
+
+	// MARK: - Applying Settings
+
+	/// Applies new settings to the weather client
+	/// - Parameter settings: The weather client settings, including an API key, language and units
+	public func apply(_ settings: Settings) {
+		apiKey = settings.apiKey
+		language = settings.language
+		units = settings.units
+	}
 
 }

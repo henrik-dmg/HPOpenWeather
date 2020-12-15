@@ -11,4 +11,7 @@ extension NSError {
 		)
     }
 
+	static let noApiKey = NSError(code: 2, description: "API key was not provided")
+	static let timeMachineDate = NSError(code: 3, description: "TimeMachineRequest's date has to be at least 6 hours in the past")
+
 }
