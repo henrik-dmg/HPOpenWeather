@@ -4,12 +4,18 @@ import HPNetwork
 
 public struct TimeMachineRequest: OpenWeatherRequest {
 
+	// MARK: - Associated Types
+
     public typealias Output = TimeMachineResponse
+
+	// MARK: - Properties
 
     public let coordinate: CLLocationCoordinate2D
     public let date: Date
     public let urlSession: URLSession
     public let finishingQueue: DispatchQueue
+
+	// MARK: - Init
 
     public init(coordinate: CLLocationCoordinate2D, date: Date, urlSession: URLSession = .shared, finishingQueue: DispatchQueue = .main) {
         self.coordinate = coordinate
@@ -18,7 +24,9 @@ public struct TimeMachineRequest: OpenWeatherRequest {
         self.finishingQueue = finishingQueue
     }
 
-    public func makeURL(settings: HPOpenWeather.Settings) -> URL {
+	// MARK: - OpenWeatherRequest
+
+    public func makeURL(settings: OpenWeather.Settings) -> URL {
         URLQueryItemsBuilder.weatherBase
             .addingPathComponent("timemachine")
             .addingQueryItem(coordinate.latitude, digits: 5, name: "lat")
@@ -30,34 +38,11 @@ public struct TimeMachineRequest: OpenWeatherRequest {
             .build()!
     }
 
-    public func makeNetworkRequest(settings: HPOpenWeather.Settings) throws -> DecodableRequest<TimeMachineResponse> {
+    public func makeNetworkRequest(settings: OpenWeather.Settings) throws -> APINetworkRequest<Output> {
         guard date.timeIntervalSinceNow < -6 * .hour else {
             throw NSError.timeMachineDate
         }
-        return TimeMachineNetworkRequest(url: makeURL(settings: settings), urlSession: urlSession, finishingQueue: finishingQueue)
-    }
-
-}
-
-class TimeMachineNetworkRequest: DecodableRequest<TimeMachineResponse> {
-
-    public typealias Output = TimeMachineResponse
-
-    public override var url: URL? {
-        _url
-    }
-
-    public override var decoder: JSONDecoder {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .secondsSince1970
-        return decoder
-    }
-
-    private let _url: URL
-
-	override init(url: URL, urlSession: URLSession, finishingQueue: DispatchQueue) {
-        self._url = url
-        super.init(urlString: "www.google.com", urlSession: urlSession, finishingQueue: finishingQueue)
+        return APINetworkRequest(url: makeURL(settings: settings), urlSession: urlSession, finishingQueue: finishingQueue)
     }
 
 }
