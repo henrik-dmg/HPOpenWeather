@@ -26,6 +26,7 @@ public enum WeatherIcon: String, Codable, CaseIterable {
 	case snowNight = "13n"
 	case mist = "50d"
 	case mistNight = "50n"
+
 }
 
 @available(OSX 11.0, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
