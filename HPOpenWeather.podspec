@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   s.tvos.framework = "UIKit"
   s.osx.framework = "AppKit"
 
-  s.swift_version = "5.1"
+  s.swift_version = "5.3"
   s.requires_arc = true
   s.dependency "HPNetwork"
 
