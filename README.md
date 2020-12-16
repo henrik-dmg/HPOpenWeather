@@ -48,7 +48,7 @@ let request = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30))
 Or to request weather data from the past:
 
 ```swift
-let timemachineRequest = TimeMachineRequest(coordinate: .init(latitude: 40, longitude: 30), date: someDate)
+let timemachineRequest = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30), date: someDate)
 ```
 
 **Note:** the date has to be at least 6 hours in the past
@@ -56,7 +56,7 @@ let timemachineRequest = TimeMachineRequest(coordinate: .init(latitude: 40, long
 To post a request, call  `sendWeatherRequest` on `OpenWeather`:
 
 ```swift
-OpenWeather.shared.sendWeatherRequest(request) { result in
+OpenWeather.shared.performWeatherRequest(request) { result in
 	switch result {
     case .success(let response):
     	// do something with weather data here

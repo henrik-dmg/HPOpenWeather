@@ -1,3 +1,4 @@
+import CoreLocation
 import Foundation
 import HPNetwork
 
@@ -44,13 +45,32 @@ public final class OpenWeather {
 
     // MARK: - Sending Requests
 
-	/// <#Description#>
+	@discardableResult
+	public func requestWeather(
+		coordinate: CLLocationCoordinate2D,
+		excludedFields: [ExcludableField]? = nil,
+		date: Date? = nil,
+		urlSession: URLSession = .shared,
+		finishingQueue: DispatchQueue = .main,
+		completion: @escaping (Result<WeatherResponse, Error>) -> Void
+	) -> NetworkTask {
+		let request = WeatherRequest(
+			coordinate: coordinate,
+			excludedFields: excludedFields,
+			date: date,
+			urlSession: urlSession,
+			finishingQueue: finishingQueue
+		)
+		return performWeatherRequest(request, completion: completion)
+	}
+
+	/// Sends the specified request to the OpenWeather API
 	/// - Parameters:
-	///   - request: <#request description#>
-	///   - completion: <#completion description#>
+	///   - request: The request object that holds information about request location, date, etc.
+	///   - completion: The completion block that will be called once the networking finishes
 	/// - Returns: A network task that can be used to cancel the request
 	@discardableResult
-    public func sendWeatherRequest<R: OpenWeatherRequest>(_ request: R, completion: @escaping (Result<R.Output, Error>) -> Void) -> NetworkTask {
+	public func performWeatherRequest(_ request: WeatherRequest, completion: @escaping (Result<WeatherRequest.Output, Error>) -> Void) -> NetworkTask {
         guard let apiKey = apiKey else {
 			request.finishingQueue.async {
                 completion(.failure(NSError.noApiKey))

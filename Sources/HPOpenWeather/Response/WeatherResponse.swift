@@ -3,11 +3,11 @@ import Foundation
 public struct WeatherResponse: Codable, Equatable, Hashable {
 
     private let timezoneIdentifier: String
-    public let current: CurrentWeather
-	@DecodableDefault.EmptyList public var hourlyForecasts: [HourlyForecast]
-	@DecodableDefault.EmptyList public var dailyForecasts: [DailyForecast]
+    public let currentWeather: CurrentWeather?
+	public let hourlyForecasts: [HourlyForecast]?
+	public let dailyForecasts: [DailyForecast]?
 	/// Government weather alerts data from major national weather warning systems
-	@DecodableDefault.EmptyList public var alerts: [Alert]
+	public let alerts: [Alert]?
 
 	public var timezone: TimeZone {
 		TimeZone(identifier: timezoneIdentifier)!
@@ -15,7 +15,7 @@ public struct WeatherResponse: Codable, Equatable, Hashable {
 
     enum CodingKeys: String, CodingKey {
         case timezoneIdentifier = "timezone"
-        case current
+        case currentWeather = "current"
         case hourlyForecasts = "hourly"
         case dailyForecasts = "daily"
 		case alerts

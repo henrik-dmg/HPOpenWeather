@@ -2,7 +2,7 @@ import Foundation
 import CoreLocation
 import HPNetwork
 
-public struct WeatherRequest: OpenWeatherRequest {
+public struct WeatherRequest {
 
 	// MARK: - Associated Types
 
@@ -11,42 +11,67 @@ public struct WeatherRequest: OpenWeatherRequest {
 	// MARK: - Properties
 
     public let coordinate: CLLocationCoordinate2D
+	public let excludedFields: [ExcludableField]?
+    public let date: Date?
     public let urlSession: URLSession
     public let finishingQueue: DispatchQueue
 
 	// MARK: - Init
 
-    public init(coordinate: CLLocationCoordinate2D, urlSession: URLSession = .shared, finishingQueue: DispatchQueue = .main) {
+    public init(
+		coordinate: CLLocationCoordinate2D,
+		excludedFields: [ExcludableField]? = nil,
+		date: Date? = nil,
+		urlSession: URLSession = .shared,
+		finishingQueue: DispatchQueue = .main
+	) {
         self.coordinate = coordinate
+		self.excludedFields = excludedFields?.hp_nilIfEmpty()
+        self.date = date
         self.urlSession = urlSession
         self.finishingQueue = finishingQueue
     }
 
 	// MARK: - OpenWeatherRequest
 
-    public func makeURL(settings: OpenWeather.Settings) -> URL {
-        URLQueryItemsBuilder(host: "api.openweathermap.org")
-            .addingPathComponent("data")
-            .addingPathComponent("2.5")
-            .addingPathComponent("onecall")
+    func makeURL(settings: OpenWeather.Settings) -> URL? {
+        URLQueryItemsBuilder.weatherBase
+			.addingPathComponent(date != nil ? "timemachine" : nil)
             .addingQueryItem(coordinate.latitude, digits: 5, name: "lat")
             .addingQueryItem(coordinate.longitude, digits: 5, name: "lon")
+			.addingQueryItem(date.flatMap({ "\(Int($0.timeIntervalSince1970))" }), name: "dt")
+			.addingQueryItem(excludedFields.flatMap(makeExcludedFieldsString), name: "exclude")
             .addingQueryItem(settings.apiKey, name: "appid")
             .addingQueryItem(settings.units.rawValue, name: "units")
             .addingQueryItem(settings.language.rawValue, name: "lang")
-            .build()!
+            .build()
     }
 
-    public func makeNetworkRequest(settings: OpenWeather.Settings) throws -> APINetworkRequest<Output> {
-        APINetworkRequest(url: makeURL(settings: settings), urlSession: urlSession, finishingQueue: finishingQueue)
+    func makeNetworkRequest(settings: OpenWeather.Settings) throws -> APINetworkRequest<Output> {
+		if let date = date, abs(date.timeIntervalSinceNow) <= 6 * .hour {
+			throw NSError.timeMachineDate
+		}
+        return APINetworkRequest(url: makeURL(settings: settings), urlSession: urlSession, finishingQueue: finishingQueue)
     }
-    
+
+	private func makeExcludedFieldsString(_ excludedFields: [ExcludableField]) -> String {
+		excludedFields.map { $0.rawValue }.joined(separator: ",")
+	}
+
+}
+
+extension Collection {
+
+	func hp_nilIfEmpty() -> Self? {
+		isEmpty ? nil : self
+	}
+
 }
 
 extension TimeInterval {
 
-    static let minute = 60.00
-    static let hour = 3600.00
-    static let day = 86400.00
+	static let minute = 60.00
+	static let hour = 3600.00
+	static let day = 86400.00
 
 }
