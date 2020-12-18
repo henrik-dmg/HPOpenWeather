@@ -1,9 +1,9 @@
 import HPNetwork
 
-extension URLQueryItemsBuilder {
+extension URLBuilder {
 
-    static let weatherBase: URLQueryItemsBuilder = {
-        URLQueryItemsBuilder(host: "api.openweathermap.org")
+    static let weatherBase: URLBuilder = {
+        URLBuilder(host: "api.openweathermap.org")
             .addingPathComponent("data")
             .addingPathComponent("2.5")
             .addingPathComponent("onecall")

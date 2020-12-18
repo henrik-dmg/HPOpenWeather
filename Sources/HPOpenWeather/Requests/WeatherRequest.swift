@@ -35,12 +35,12 @@ public struct WeatherRequest {
 	// MARK: - OpenWeatherRequest
 
     func makeURL(settings: OpenWeather.Settings) -> URL? {
-        URLQueryItemsBuilder.weatherBase
+        URLBuilder.weatherBase
 			.addingPathComponent(date != nil ? "timemachine" : nil)
             .addingQueryItem(coordinate.latitude, digits: 5, name: "lat")
             .addingQueryItem(coordinate.longitude, digits: 5, name: "lon")
-			.addingQueryItem(date.flatMap({ "\(Int($0.timeIntervalSince1970))" }), name: "dt")
-			.addingQueryItem(excludedFields.flatMap(makeExcludedFieldsString), name: "exclude")
+			.addingQueryItem(date.flatMap({ Int($0.timeIntervalSince1970) }), name: "dt")
+			.addingQueryItem(excludedFields?.compactMap({ $0.rawValue }), name: "exclude")
             .addingQueryItem(settings.apiKey, name: "appid")
             .addingQueryItem(settings.units.rawValue, name: "units")
             .addingQueryItem(settings.language.rawValue, name: "lang")
@@ -53,10 +53,6 @@ public struct WeatherRequest {
 		}
         return APINetworkRequest(url: makeURL(settings: settings), urlSession: urlSession, finishingQueue: finishingQueue)
     }
-
-	private func makeExcludedFieldsString(_ excludedFields: [ExcludableField]) -> String {
-		excludedFields.map { $0.rawValue }.joined(separator: ",")
-	}
 
 }
 
