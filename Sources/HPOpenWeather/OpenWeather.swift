@@ -45,15 +45,15 @@ public final class OpenWeather {
 
     // MARK: - Sending Requests
 
-	@discardableResult
 	public func requestWeather(
 		coordinate: CLLocationCoordinate2D,
 		excludedFields: [ExcludableField]? = nil,
 		date: Date? = nil,
 		urlSession: URLSession = .shared,
 		finishingQueue: DispatchQueue = .main,
+		progressHandler: ProgressHandler? = nil,
 		completion: @escaping (Result<WeatherResponse, Error>) -> Void
-	) -> NetworkTask {
+	) {
 		let request = WeatherRequest(
 			coordinate: coordinate,
 			excludedFields: excludedFields,
@@ -61,7 +61,7 @@ public final class OpenWeather {
 			urlSession: urlSession,
 			finishingQueue: finishingQueue
 		)
-		return performWeatherRequest(request, completion: completion)
+		schedule(request, progressHandler: progressHandler, completion: completion)
 	}
 
 	/// Sends the specified request to the OpenWeather API
@@ -69,25 +69,27 @@ public final class OpenWeather {
 	///   - request: The request object that holds information about request location, date, etc.
 	///   - completion: The completion block that will be called once the networking finishes
 	/// - Returns: A network task that can be used to cancel the request
-	@discardableResult
-	public func performWeatherRequest(_ request: WeatherRequest, completion: @escaping (Result<WeatherRequest.Output, Error>) -> Void) -> NetworkTask {
+	public func schedule(
+		_ request: WeatherRequest,
+		progressHandler: ProgressHandler? = nil,
+		completion: @escaping (Result<WeatherRequest.Output, Error>) -> Void
+	) {
         guard let apiKey = apiKey else {
 			request.finishingQueue.async {
                 completion(.failure(NSError.noApiKey))
             }
-            return NetworkTask()
+			return
         }
 
         let settings = Settings(apiKey: apiKey, language: language, units: units)
 
         do {
             let networkRequest = try request.makeNetworkRequest(settings: settings)
-            return Network.shared.dataTask(networkRequest, completion: completion)
+			return Network.shared.schedule(request: networkRequest, progressHandler: progressHandler, completion: completion)
         } catch let error {
 			request.finishingQueue.async {
                 completion(.failure(error))
             }
-            return NetworkTask()
         }
     }
 
