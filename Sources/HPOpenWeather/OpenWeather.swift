@@ -52,8 +52,8 @@ public final class OpenWeather {
 		urlSession: URLSession = .shared,
 		finishingQueue: DispatchQueue = .main,
 		progressHandler: ProgressHandler? = nil,
-		completion: @escaping (Result<WeatherResponse, Error>) -> Void
-	) {
+		completion: @escaping (Result<WeatherResponse, Error>) -> Void)
+	{
 		let request = WeatherRequest(
 			coordinate: coordinate,
 			excludedFields: excludedFields,
@@ -72,8 +72,8 @@ public final class OpenWeather {
 	public func schedule(
 		_ request: WeatherRequest,
 		progressHandler: ProgressHandler? = nil,
-		completion: @escaping (Result<WeatherRequest.Output, Error>) -> Void
-	) {
+		completion: @escaping (Result<WeatherRequest.Output, Error>) -> Void)
+	{
         guard let apiKey = apiKey else {
 			request.finishingQueue.async {
                 completion(.failure(NSError.noApiKey))
@@ -85,7 +85,7 @@ public final class OpenWeather {
 
         do {
             let networkRequest = try request.makeNetworkRequest(settings: settings)
-			return Network.shared.schedule(request: networkRequest, progressHandler: progressHandler, completion: completion)
+			Network.shared.schedule(request: networkRequest, progressHandler: progressHandler, completion: completion)
         } catch let error {
 			request.finishingQueue.async {
                 completion(.failure(error))
