@@ -48,7 +48,7 @@ public struct WeatherRequest {
 	}
 
 	func makeNetworkRequest(settings: OpenWeather.Settings) throws -> APINetworkRequest<Output> {
-		if let date = date, abs(date.timeIntervalSinceNow) <= 6 * .hour {
+		if let date = date, date < Date(), abs(date.timeIntervalSinceNow) <= 6 * .hour {
 			throw NSError.timeMachineDate
 		}
 		return APINetworkRequest(url: makeURL(settings: settings), urlSession: urlSession, finishingQueue: finishingQueue)
