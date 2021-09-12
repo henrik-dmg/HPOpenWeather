@@ -1,6 +1,4 @@
-<p align="center">
-    <img src="https://imgur.com/download/EQ5Zj06" alt="Storage" />
-</p>
+# HPOpenWeather
 
 <a href="https://www.codefactor.io/repository/github/henrik-dmg/hpopenweather"><img src="https://www.codefactor.io/repository/github/henrik-dmg/hpopenweather/badge" alt="CodeFactor" /></a>
 <a href="https://img.shields.io/badge/Swift-5.0-orange"><img src="https://img.shields.io/badge/Swift-5.0-orange.svg"/></a>
@@ -8,21 +6,23 @@
 [![GitHub license](https://img.shields.io/github/license/henrik-dmg/HPOpenWeather)](https://github.com/henrik-dmg/HPOpenWeather/blob/master/LICENSE.md)
 
 HPOpenWeather is a cross-platform Swift framework to communicate with the OpenWeather One-Call API. See their [documentation](https://openweathermap.org/api/one-call-api) for further details.
+
 ## Installation
 
 HPOpenWeather supports iOS 9.0+, watchOS 3.0+, tvOS 9.0+ and macOS 10.10+.
 
-#### SPM
+### SPM
 
 Add `.package(url: "https://github.com/henrik-dmg/HPOpenWeather", from: "4.0.0")` to your `Package.swift` file
 
-#### CocoaPods
+### CocoaPods
 
 Add `pod 'HPOpenWeather'` to your `Podfile` and run `pod install`
 
 ## Usage
 
 To get started, you need an API key from [OpenWeather](https://openweathermap.org). Put this API key in the initialiser, additionally you can also specify a custom temperature format and/or language used in the responses (see list for available languages and units below).
+
 ```swift
 import HPOpenWeather
 
@@ -35,9 +35,10 @@ OpenWeather.shared.units = .metric
 let settings = OpenWeather.Settings(apiKey: "yourAPIKey", language: .german, units: .metric)
 OpenWeather.shared.apply(settings)
 ```
+
 You can also customise the response data units and language by accessing the `language` and `units` propertis.
 
-## Making  a request
+### Making a request
 
 To make a request, initialize a new request object like this
 
@@ -53,7 +54,7 @@ let timemachineRequest = WeatherRequest(coordinate: .init(latitude: 40, longitud
 
 **Note:** the date has to be at least 6 hours in the past
 
-To post a request, call  `sendWeatherRequest` on `OpenWeather`:
+To post a request, call `sendWeatherRequest` on `OpenWeather`:
 
 ```swift
 OpenWeather.shared.performWeatherRequest(request) { result in
@@ -66,9 +67,9 @@ OpenWeather.shared.performWeatherRequest(request) { result in
 }
 ```
 
-**The following response languages are available**
+### Available languages (default in bold)
 
-- English (default)
+- **English**
 - Russian
 - Italian
 - Spanish
@@ -88,8 +89,8 @@ OpenWeather.shared.performWeatherRequest(request) { result in
 - Croatian
 - Catalan
 
-**The following temperature units are available**
+### Available units (default in bold)
 
-- Celsius (default)
-- Kelvin
-- Fahrenheit
+- **Metric** (wind speed in m/s, temperature in Celsius)
+- Imperial (wind speed in mph, temperature in Fahrenheit)
+- Standard (wind speed in m/s, temperature in Kelvin)
