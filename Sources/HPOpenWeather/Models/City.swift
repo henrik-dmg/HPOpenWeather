@@ -2,7 +2,7 @@ import Foundation
 import CoreLocation
 
 /// Type that holds information about the reqeuest's nearest city
-public struct City: Codable, Equatable, Hashable {
+public struct City: Codable, Equatable, Hashable, Identifiable {
 
     /// The ID assigned to the city
     public let id: Int

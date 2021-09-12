@@ -1,19 +1,25 @@
 import Foundation
 import HPNetwork
 
-public struct APINetworkRequest<Output: Decodable>: DecodableRequest {
+struct APINetworkRequest: DecodableRequest {
 
-	public let url: URL?
-	public let urlSession: URLSession
-	public let finishingQueue: DispatchQueue
-	public let requestMethod: NetworkRequestMethod = .get
-	public let headerFields = [NetworkRequestHeaderField.contentTypeJSON]
+	typealias Output = WeatherResponse
 
-	public let decoder: JSONDecoder = {
+	static let decoder: JSONDecoder = {
 		let decoder = JSONDecoder()
 		decoder.dateDecodingStrategy = .secondsSince1970
 		return decoder
 	}()
+
+	let url: URL?
+	let urlSession: URLSession
+	let finishingQueue: DispatchQueue
+	let requestMethod: NetworkRequestMethod = .get
+	let headerFields = [NetworkRequestHeaderField.contentTypeJSON]
+
+	var decoder: JSONDecoder {
+		APINetworkRequest.decoder
+	}
 
 	public func makeURL() throws -> URL {
 		guard let url = url else {

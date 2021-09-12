@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "HPOpenWeather"
-  s.version      = "4.1.5"
+  s.version      = "5.0.0"
   s.summary      = "Cross-platform framework to communicate with the OpenWeatherMap JSON API"
 
   s.license      = { :type => "MIT", :file => "LICENSE.md" }
@@ -27,6 +27,6 @@ Pod::Spec.new do |s|
 
   s.swift_version = "5.1"
   s.requires_arc = true
-  s.dependency "HPNetwork"
+  s.dependency "HPNetwork", "~> 2.0.2"
 
 end

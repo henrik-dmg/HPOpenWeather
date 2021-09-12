@@ -10,4 +10,17 @@ public struct Wind: Codable, Equatable, Hashable {
     /// The wind direction measured in degrees from North
     public let degrees: Double?
 
+	@available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
+	public var speedMeasurement: Measurement<UnitSpeed>? {
+		speedMeasurement(units: OpenWeather.shared.units)
+	}
+
+	@available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
+	public func speedMeasurement(units: WeatherResponse.Units) -> Measurement<UnitSpeed>? {
+		guard let speed = speed else {
+			return nil
+		}
+		return Measurement(value: speed, unit: units.windSpeedUnit)
+	}
+
 }

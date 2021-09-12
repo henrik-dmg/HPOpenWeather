@@ -1,7 +1,7 @@
 import Foundation
 
 /// Type that holds information about weather alerts
-public struct Alert: Codable, Hashable, Equatable {
+public struct WeatherAlert: Codable, Hashable, Equatable {
 
 	/// Name of the alert source. Please read here the full list of alert sources
 	public let senderName: String

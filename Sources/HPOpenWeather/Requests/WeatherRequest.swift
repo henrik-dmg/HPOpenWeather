@@ -2,7 +2,7 @@ import Foundation
 import CoreLocation
 import HPNetwork
 
-public struct WeatherRequest {
+public struct WeatherRequest: Codable {
 
 	// MARK: - Associated Types
 
@@ -13,23 +13,13 @@ public struct WeatherRequest {
 	public let coordinate: CLLocationCoordinate2D
 	public let excludedFields: [ExcludableField]?
 	public let date: Date?
-	public let urlSession: URLSession
-	public let finishingQueue: DispatchQueue
 
 	// MARK: - Init
 
-	public init(
-		coordinate: CLLocationCoordinate2D,
-		excludedFields: [ExcludableField]? = nil,
-		date: Date? = nil,
-		urlSession: URLSession = .shared,
-		finishingQueue: DispatchQueue = .main
-	) {
+	public init(coordinate: CLLocationCoordinate2D, excludedFields: [ExcludableField]? = nil, date: Date? = nil) {
 		self.coordinate = coordinate
 		self.excludedFields = excludedFields?.hp_nilIfEmpty()
 		self.date = date
-		self.urlSession = urlSession
-		self.finishingQueue = finishingQueue
 	}
 
 	// MARK: - OpenWeatherRequest
@@ -47,7 +37,7 @@ public struct WeatherRequest {
 			.build()
 	}
 
-	func makeNetworkRequest(settings: OpenWeather.Settings) throws -> APINetworkRequest<Output> {
+	func makeNetworkRequest(settings: OpenWeather.Settings, urlSession: URLSession, finishingQueue: DispatchQueue) throws -> APINetworkRequest {
 		if let date = date, date < Date(), abs(date.timeIntervalSinceNow) <= 6 * .hour {
 			throw NSError.timeMachineDate
 		}
