@@ -13,8 +13,8 @@ public struct WeatherResponse: Codable, Equatable, Hashable {
 		TimeZone(identifier: timezoneIdentifier)
 	}
 
-	public internal(set) var units: Units!
-	public internal(set) var language: Language!
+	public internal(set) var units: Units = .metric
+	public internal(set) var language: Language = .english
 
     enum CodingKeys: String, CodingKey {
         case timezoneIdentifier = "timezone"
