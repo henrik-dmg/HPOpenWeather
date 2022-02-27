@@ -10,6 +10,6 @@ public struct WeatherCondition: Codable, Equatable, Hashable {
     /// The weather condition within the group
     public let description: String
     /// The ID of the corresponding weather icon
-	public let icon: WeatherIcon
+    public let icon: WeatherIcon
 
 }

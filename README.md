@@ -9,11 +9,11 @@ HPOpenWeather is a cross-platform Swift framework to communicate with the OpenWe
 
 ## Installation
 
-HPOpenWeather supports iOS 9.0+, watchOS 3.0+, tvOS 9.0+ and macOS 10.10+.
+HPOpenWeather supports iOS 13.0+, watchOS 7.0+, tvOS 13.0+ and macOS 10.15+.
 
 ### SPM
 
-Add `.package(url: "https://github.com/henrik-dmg/HPOpenWeather", from: "4.0.0")` to your `Package.swift` file
+Add `.package(url: "https://github.com/henrik-dmg/HPOpenWeather", from: "5.0.0")` to your `Package.swift` file
 
 ### CocoaPods
 

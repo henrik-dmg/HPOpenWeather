@@ -16,7 +16,7 @@ final class HPOpenWeatherTests: XCTestCase {
 
     func testCurrentRequest() async throws {
 		do {
-			_ = try await OpenWeather.shared.requestWeather(coordinate: .init(latitude: 52.5200, longitude: 13.4050))
+			_ = try await OpenWeather.shared.weatherResponse(coordinate: .init(latitude: 52.5200, longitude: 13.4050))
 		} catch let error as NSError {
 			print(error)
 			throw error
@@ -27,7 +27,7 @@ final class HPOpenWeatherTests: XCTestCase {
         let request = WeatherRequest(coordinate: .init(latitude: 52.5200, longitude: 13.4050), date: Date().addingTimeInterval(-1 * .hour))
 
 		await HPAssertThrowsError {
-			try await OpenWeather.shared.response(request)
+			try await OpenWeather.shared.weatherResponse(request)
 		}
     }
 
@@ -35,12 +35,10 @@ final class HPOpenWeatherTests: XCTestCase {
         let request = WeatherRequest(coordinate: .init(latitude: 52.5200, longitude: 13.4050), date: Date().addingTimeInterval(-7 * .hour))
 
 		await HPAssertThrowsNoError {
-			try await OpenWeather.shared.response(request)
+			try await OpenWeather.shared.weatherResponse(request)
 		}
     }
 
-
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     func testPublisher() {
         let request = WeatherRequest(coordinate: .init(latitude: 52.5200, longitude: 13.4050))
 
