@@ -6,8 +6,17 @@
         "repositoryURL": "https://github.com/henrik-dmg/HPNetwork",
         "state": {
           "branch": null,
-          "revision": "7e888cdaabf7cb6e8c6640db57cb4325099f79b2",
-          "version": "2.0.2"
+          "revision": "2bdaaa3f1c9d52a30e5afb8f737c3b72f5afba0c",
+          "version": "3.1.1"
+        }
+      },
+      {
+        "package": "HPURLBuilder",
+        "repositoryURL": "https://github.com/henrik-dmg/HPURLBuilder",
+        "state": {
+          "branch": null,
+          "revision": "49ad1fb6f10914e7134dc9f8e5c21f48a52e3d37",
+          "version": "1.1.0"
         }
       }
     ]

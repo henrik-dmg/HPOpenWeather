@@ -3,17 +3,17 @@ import Foundation
 /// Type that holds information about daily temperature changes
 public struct DailyTemperature: Codable, Equatable, Hashable {
 
-	/// Day temperature.
+    /// Day temperature.
     public let day: Double
-	/// Night temperature.
+    /// Night temperature.
     public let night: Double
-	/// Minimum daily temperature.
+    /// Minimum daily temperature.
     public let min: Double?
-	/// Max daily temperature.
+    /// Max daily temperature.
     public let max: Double?
-	/// Evening temperature.
+    /// Evening temperature.
     public let evening: Double
-	/// Morning temperature.
+    /// Morning temperature.
     public let morning: Double
 
     enum CodingKeys: String, CodingKey {

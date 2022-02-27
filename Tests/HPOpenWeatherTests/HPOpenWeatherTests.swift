@@ -14,46 +14,33 @@ final class HPOpenWeatherTests: XCTestCase {
         OpenWeather.shared.apiKey = nil
     }
 
-    func testCurrentRequest() {
-        let request = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30))
-        let exp = XCTestExpectation(description: "Fetched data")
-
-        OpenWeather.shared.schedule(request) { result in
-            exp.fulfill()
-            XCTAssertResult(result)
-        }
-
-        wait(for: [exp], timeout: 10)
+    func testCurrentRequest() async throws {
+		do {
+			_ = try await OpenWeather.shared.weatherResponse(coordinate: .init(latitude: 52.5200, longitude: 13.4050))
+		} catch let error as NSError {
+			print(error)
+			throw error
+		}
     }
 
-    func testTimeMachineRequestFailing() {
-        let request = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30), date: Date().addingTimeInterval(-1 * .hour))
-        let exp = XCTestExpectation(description: "Fetched data")
+    func testTimeMachineRequestFailing() async throws {
+        let request = WeatherRequest(coordinate: .init(latitude: 52.5200, longitude: 13.4050), date: Date().addingTimeInterval(-1 * .hour))
 
-        OpenWeather.shared.schedule(request) { result in
-            exp.fulfill()
-            XCTAssertResultError(result)
-        }
-
-        wait(for: [exp], timeout: 10)
+		await HPAssertThrowsError {
+			try await OpenWeather.shared.weatherResponse(request)
+		}
     }
 
-    func testTimeMachineRequest() {
-        let request = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30), date: Date().addingTimeInterval(-7 * .hour))
-        let exp = XCTestExpectation(description: "Fetched data")
+    func testTimeMachineRequest() async {
+        let request = WeatherRequest(coordinate: .init(latitude: 52.5200, longitude: 13.4050), date: Date().addingTimeInterval(-7 * .hour))
 
-        OpenWeather.shared.schedule(request) { result in
-            exp.fulfill()
-            XCTAssertResult(result)
-        }
-
-        wait(for: [exp], timeout: 10)
+		await HPAssertThrowsNoError {
+			try await OpenWeather.shared.weatherResponse(request)
+		}
     }
 
-
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     func testPublisher() {
-        let request = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30))
+        let request = WeatherRequest(coordinate: .init(latitude: 52.5200, longitude: 13.4050))
 
         let expectationFinished = expectation(description: "finished")
         let expectationReceive = expectation(description: "receiveValue")
@@ -93,11 +80,27 @@ extension Encodable {
 
 }
 
+func HPAssertThrowsError<T>(_ work: () async throws -> T) async {
+	do {
+		_ = try await work()
+		XCTFail("Block should throw")
+	} catch {
+		return
+	}
+}
+
+func HPAssertThrowsNoError<T>(_ work: () async throws -> T) async {
+	do {
+		_ = try await work()
+	} catch let error {
+		XCTFail(error.localizedDescription)
+	}
+}
+
 /// Asserts that the result is not a failure
 func XCTAssertResult<T, E: Error>(_ result: Result<T, E>) {
     if case .failure(let error as NSError) = result {
-		print(error)
-        XCTFail(error.localizedDescription)
+		XCTFail(error.localizedDescription)
     }
 }
 
