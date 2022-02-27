@@ -1,6 +1,7 @@
 import Foundation
 import CoreLocation
 import HPNetwork
+import HPURLBuilder
 
 public struct WeatherRequest: Codable {
 
@@ -25,23 +26,27 @@ public struct WeatherRequest: Codable {
 	// MARK: - OpenWeatherRequest
 
 	func makeURL(settings: OpenWeather.Settings) -> URL? {
-		URLBuilder.weatherBase
-			.addingPathComponent(date != nil ? "timemachine" : nil)
-			.addingQueryItem(name: "lat", value: coordinate.latitude, digits: 5)
-			.addingQueryItem(name: "lon", value: coordinate.longitude, digits: 5)
-			.addingQueryItem(name: "dt", value: date.flatMap({ Int($0.timeIntervalSince1970) }))
-			.addingQueryItem(name: "exclude", value: excludedFields?.compactMap({ $0.rawValue }))
-			.addingQueryItem(name: "appid", value: settings.apiKey)
-			.addingQueryItem(name: "units", value: settings.units.rawValue)
-			.addingQueryItem(name: "lang", value: settings.language.rawValue)
-			.build()
+		URL.build {
+			Host("api.openweathermap.org")
+			PathComponent("data")
+			PathComponent("2.5")
+			PathComponent("onecall")
+			PathComponent(date != nil ? "timemachine" : nil)
+			QueryItem(name: "lat", value: coordinate.latitude, digits: 5)
+			QueryItem(name: "lon", value: coordinate.longitude, digits: 5)
+			QueryItem(name: "dt", value: date.flatMap({ Int($0.timeIntervalSince1970) }))
+			QueryItem(name: "exclude", value: excludedFields?.compactMap({ $0.rawValue }))
+			QueryItem(name: "appid", value: settings.apiKey)
+			QueryItem(name: "units", value: settings.units.rawValue)
+			QueryItem(name: "lang", value: settings.language.rawValue)
+		}
 	}
 
-	func makeNetworkRequest(settings: OpenWeather.Settings, urlSession: URLSession, finishingQueue: DispatchQueue) throws -> APINetworkRequest {
+	func makeNetworkRequest(settings: OpenWeather.Settings, urlSession: URLSession) throws -> APINetworkRequest {
 		if let date = date, date < Date(), abs(date.timeIntervalSinceNow) <= 6 * .hour {
 			throw NSError.timeMachineDate
 		}
-		return APINetworkRequest(url: makeURL(settings: settings), urlSession: urlSession, finishingQueue: finishingQueue)
+		return APINetworkRequest(url: makeURL(settings: settings), urlSession: urlSession)
 	}
 
 }

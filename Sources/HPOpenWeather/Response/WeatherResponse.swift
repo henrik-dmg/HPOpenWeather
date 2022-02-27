@@ -9,12 +9,12 @@ public struct WeatherResponse: Codable, Equatable, Hashable {
 	/// Government weather alerts data from major national weather warning systems
 	public let alerts: [WeatherAlert]?
 
+    public internal(set) var language: WeatherResponse.Language?
+    public internal(set) var units: WeatherResponse.Units?
+
 	public var timezone: TimeZone? {
 		TimeZone(identifier: timezoneIdentifier)
 	}
-
-	public internal(set) var units: Units = .metric
-	public internal(set) var language: Language = .english
 
     enum CodingKeys: String, CodingKey {
         case timezoneIdentifier = "timezone"
@@ -22,8 +22,14 @@ public struct WeatherResponse: Codable, Equatable, Hashable {
         case hourlyForecasts = "hourly"
         case dailyForecasts = "daily"
 		case alerts
-		case units
-		case language
     }
+
+}
+
+public struct WeatherResponseContainer: Codable, Equatable, Hashable {
+
+	public let response: WeatherResponse
+	public let language: WeatherResponse.Language
+	public let units: WeatherResponse.Units
 
 }

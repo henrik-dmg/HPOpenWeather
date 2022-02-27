@@ -1,8 +1,6 @@
-#if canImport(Combine)
 import Combine
 import Foundation
 
-@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public extension WeatherRequest {
 
 	func publisher(
@@ -20,10 +18,8 @@ public extension WeatherRequest {
 	}
 
 	func publisher(settings: OpenWeather.Settings, urlSession: URLSession = .shared, finishingQueue: DispatchQueue = .main) -> AnyPublisher<Output, Error> {
-		let request = APINetworkRequest(url: makeURL(settings: settings), urlSession: urlSession, finishingQueue: finishingQueue)
+		let request = APINetworkRequest(url: makeURL(settings: settings), urlSession: urlSession)
 		return request.dataTaskPublisher()
 	}
 
 }
-
-#endif

@@ -14,39 +14,29 @@ final class HPOpenWeatherTests: XCTestCase {
         OpenWeather.shared.apiKey = nil
     }
 
-    func testCurrentRequest() {
-        let exp = XCTestExpectation(description: "Fetched data")
-
-		OpenWeather.shared.requestWeather(coordinate: .init(latitude: 52.5200, longitude: 13.4050)) { result in
-			XCTAssertResult(result)
-			exp.fulfill()
+    func testCurrentRequest() async throws {
+		do {
+			_ = try await OpenWeather.shared.requestWeather(coordinate: .init(latitude: 52.5200, longitude: 13.4050))
+		} catch let error as NSError {
+			print(error)
+			throw error
 		}
-
-        wait(for: [exp], timeout: 10)
     }
 
-    func testTimeMachineRequestFailing() {
+    func testTimeMachineRequestFailing() async throws {
         let request = WeatherRequest(coordinate: .init(latitude: 52.5200, longitude: 13.4050), date: Date().addingTimeInterval(-1 * .hour))
-        let exp = XCTestExpectation(description: "Fetched data")
 
-        OpenWeather.shared.schedule(request) { result in
-            XCTAssertResultError(result)
-			exp.fulfill()
-        }
-
-        wait(for: [exp], timeout: 10)
+		await HPAssertThrowsError {
+			try await OpenWeather.shared.response(request)
+		}
     }
 
-    func testTimeMachineRequest() {
+    func testTimeMachineRequest() async {
         let request = WeatherRequest(coordinate: .init(latitude: 52.5200, longitude: 13.4050), date: Date().addingTimeInterval(-7 * .hour))
-        let exp = XCTestExpectation(description: "Fetched data")
 
-        OpenWeather.shared.schedule(request) { result in
-            XCTAssertResult(result)
-			exp.fulfill()
-        }
-
-        wait(for: [exp], timeout: 10)
+		await HPAssertThrowsNoError {
+			try await OpenWeather.shared.response(request)
+		}
     }
 
 
@@ -90,6 +80,23 @@ extension Encodable {
         return try jsonDecoder.decode(type.self, from: encodedData)
     }
 
+}
+
+func HPAssertThrowsError<T>(_ work: () async throws -> T) async {
+	do {
+		_ = try await work()
+		XCTFail("Block should throw")
+	} catch {
+		return
+	}
+}
+
+func HPAssertThrowsNoError<T>(_ work: () async throws -> T) async {
+	do {
+		_ = try await work()
+	} catch let error {
+		XCTFail(error.localizedDescription)
+	}
 }
 
 /// Asserts that the result is not a failure

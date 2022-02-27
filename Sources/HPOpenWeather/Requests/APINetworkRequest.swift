@@ -13,7 +13,6 @@ struct APINetworkRequest: DecodableRequest {
 
 	let url: URL?
 	let urlSession: URLSession
-	let finishingQueue: DispatchQueue
 	let requestMethod: NetworkRequestMethod = .get
 	let headerFields = [NetworkRequestHeaderField.contentTypeJSON]
 
