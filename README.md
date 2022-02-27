@@ -57,6 +57,7 @@ let timemachineRequest = WeatherRequest(coordinate: .init(latitude: 40, longitud
 To post a request, call `sendWeatherRequest` on `OpenWeather`:
 
 ```swift
+// Classic completion handler approach
 OpenWeather.shared.schedule(request) { result in
 	switch result {
     case .success(let response):
@@ -65,6 +66,9 @@ OpenWeather.shared.schedule(request) { result in
         // handle error
     }
 }
+
+// Or using the new concurrency features
+let response = try await OpenWeather.shared.weatherResponse(request)
 ```
 
 ### Available languages (default in bold)
