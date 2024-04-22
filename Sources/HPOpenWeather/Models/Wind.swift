@@ -13,7 +13,7 @@ public struct Wind: Codable, Equatable, Hashable {
     /// A measurement of the `speed` property if existing, measured in the passed in units.
     /// - Parameter units: The units to use when formatting the `speed` property
     /// - Returns: a measurement in the provided unit
-    public func speedMeasurement(units: Weather.Units) -> Measurement<UnitSpeed>? {
+    public func speedMeasurement(units: WeatherUnits) -> Measurement<UnitSpeed>? {
         guard let speed else {
             return nil
         }

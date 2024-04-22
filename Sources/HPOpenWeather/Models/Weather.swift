@@ -23,8 +23,8 @@ public struct Weather: Decodable, Equatable, Hashable {
     /// Government weather alerts data from major national weather warning systems.
     public let alerts: [WeatherAlert]?
 
-    public internal(set) var language: Weather.Language!
-    public internal(set) var units: Weather.Units!
+    public internal(set) var language: WeatherLanguage!
+    public internal(set) var units: WeatherUnits!
 
     // MARK: - Init
 

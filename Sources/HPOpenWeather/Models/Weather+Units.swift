@@ -34,4 +34,4 @@ public enum WeatherUnits: String, Codable {
         }
     }
 
-    }
+}
