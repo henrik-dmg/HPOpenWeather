@@ -30,12 +30,12 @@ if [ -z "$TARGET" ]; then
 fi
 
 INSTR_PROFILE=$(find $BUILD_PATH -name "*.profdata")
-TARGET_PATH=$(find $BUILD_PATH -name "$TARGET" | tail -n1)
+TARGET_PATH=$(find $BUILD_PATH -name "$TARGET" | head -1)
 if [ -f $TARGET_PATH ]; then
   OBJECT_FILE="$TARGET_PATH"
 else
   TARGET=$(echo $TARGET | sed  's/\.[^.]*$//')
-  OBJECT_FILE=$(find $BUILD_PATH -name "$TARGET" | tail -n1)
+  OBJECT_FILE=$(find $BUILD_PATH -name "$TARGET" | head -1)
 fi
 
 mkdir -p $(dirname "$OUTPUT_FILE")
@@ -45,7 +45,6 @@ xcrun llvm-cov report \
   "$OBJECT_FILE" \
   --instr-profile=$INSTR_PROFILE \
   --ignore-filename-regex=$IGNORE_FILENAME_REGEX \
-  --use-color
 
 # Export to code coverage file
 xcrun llvm-cov export \
