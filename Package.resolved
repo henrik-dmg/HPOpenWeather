@@ -1,34 +1,32 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "HPNetwork",
-        "repositoryURL": "https://github.com/henrik-dmg/HPNetwork",
-        "state": {
-          "branch": null,
-          "revision": "6e1266a06692dab7df6d57faffaee59f2b46c4f5",
-          "version": "4.0.0"
-        }
-      },
-      {
-        "package": "HPURLBuilder",
-        "repositoryURL": "https://github.com/henrik-dmg/HPURLBuilder",
-        "state": {
-          "branch": null,
-          "revision": "49ad1fb6f10914e7134dc9f8e5c21f48a52e3d37",
-          "version": "1.1.0"
-        }
-      },
-      {
-        "package": "swift-http-types",
-        "repositoryURL": "https://github.com/apple/swift-http-types.git",
-        "state": {
-          "branch": null,
-          "revision": "12358d55a3824bd5fed310b999ea8cf83a9a1a65",
-          "version": "1.0.3"
-        }
+  "pins" : [
+    {
+      "identity" : "hpnetwork",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/henrik-dmg/HPNetwork",
+      "state" : {
+        "revision" : "6e1266a06692dab7df6d57faffaee59f2b46c4f5",
+        "version" : "4.0.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "hpurlbuilder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/henrik-dmg/HPURLBuilder",
+      "state" : {
+        "revision" : "49ad1fb6f10914e7134dc9f8e5c21f48a52e3d37",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "swift-http-types",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-http-types.git",
+      "state" : {
+        "revision" : "12358d55a3824bd5fed310b999ea8cf83a9a1a65",
+        "version" : "1.0.3"
+      }
+    }
+  ],
+  "version" : 2
 }

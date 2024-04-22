@@ -1,0 +1,35 @@
+name: Prettier
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "**/*.js"
+      - "**/*.yml"
+      - "**/*.md"
+  pull_request:
+    branches: [main]
+    paths:
+      - "**/*.js"
+      - "**/*.yml"
+      - "**/*.md"
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Make sure the actual branch is checked out when running on pull requests
+          ref: ${{ github.head_ref }}
+          # This is important to fetch the changes to the previous commit
+          fetch-depth: 0
+
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.3
+        with:
+          # This part is also where you can pass other options, for example:
+          prettier_options: --write **/*.{js,md,yml} --config config/prettier.config.js --ignore-path config/.prettierignore
+          only_changed: True
