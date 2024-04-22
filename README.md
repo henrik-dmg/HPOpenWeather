@@ -9,19 +9,17 @@ HPOpenWeather is a cross-platform Swift framework to communicate with the OpenWe
 
 ## Installation
 
-HPOpenWeather supports iOS 13.0+, watchOS 7.0+, tvOS 13.0+ and macOS 10.15+.
+HPOpenWeather supports iOS 15.0+, watchOS 6.0+, tvOS 15.0+ and macOS 12+.
 
 ### SPM
 
-Add `.package(url: "https://github.com/henrik-dmg/HPOpenWeather", from: "5.0.0")` to your `Package.swift` file
-
-### CocoaPods
-
-Add `pod 'HPOpenWeather'` to your `Podfile` and run `pod install`
+Add `.package(url: "https://github.com/henrik-dmg/HPOpenWeather", from: "6.0.0")` to your `Package.swift` file
 
 ## Usage
 
-To get started, you need an API key from [OpenWeather](https://openweathermap.org). Put this API key in the initialiser, additionally you can also specify a custom temperature format and/or language used in the responses (see list for available languages and units below).
+### Configuration
+
+To get started, you need an API key from [OpenWeather](https://openweathermap.org). Configure the `OpenWeather.shared` singleton or create your own instance and configure it with your key and other settings.
 
 ```swift
 import HPOpenWeather
@@ -33,42 +31,33 @@ OpenWeather.shared.units = .metric
 
 // Or use options
 let settings = OpenWeather.Settings(apiKey: "yourAPIKey", language: .german, units: .metric)
-OpenWeather.shared.apply(settings)
+let openWeather = OpenWeather(settings: settings)
 ```
 
 You can also customise the response data units and language by accessing the `language` and `units` propertis.
 
-### Making a request
+### Retrieving Weather Information
 
-To make a request, initialize a new request object like this
+To fetch the weather, there are two options: async/await or callback. Both expect a `CLLocationCoordinate2D` for which to fetch the weather.
+Additionally, you can specify which fields should be excluded from the response to save bandwidth, or specify a historic date or a date up to 4 days in the future.
+
+#### Async
 
 ```swift
-let request = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30))
+let weather = try await OpenWeather.shared.weather(for: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194))
 ```
 
-Or to request weather data from the past:
+#### Callback
 
 ```swift
-let timemachineRequest = WeatherRequest(coordinate: .init(latitude: 40, longitude: 30), date: someDate)
-```
-
-**Note:** the date has to be at least 6 hours in the past
-
-To post a request, call `sendWeatherRequest` on `OpenWeather`:
-
-```swift
-// Classic completion handler approach
-OpenWeather.shared.schedule(request) { result in
-	switch result {
-    case .success(let response):
-    	// do something with weather data here
+OpenWeather.shared.requestWeather(for: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)) { result in
+    switch result {
+    case .success(let weather):
+        print(weather)
     case .failure(let error):
-        // handle error
+        print(error)
     }
 }
-
-// Or using the new concurrency features
-let response = try await OpenWeather.shared.weatherResponse(request)
 ```
 
 ### Available languages (default in bold)

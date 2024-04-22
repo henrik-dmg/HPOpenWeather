@@ -11,16 +11,16 @@ public final class OpenWeather {
         /// The API key to use for weather requests.
         let apiKey: String
         /// The language that will be used in weather responses.
-        let language: Weather.Language
+        let language: WeatherLanguage
         /// The units that will be used in weather responses.
-        let units: Weather.Units
+        let units: WeatherUnits
 
         /// Initialises a new settings instance.
         /// - Parameters:
         ///   - apiKey: The API key to use for weather requests
         ///   - language: The language that will be used in weather responses
         ///   - units: The units that will be used in weather responses
-        public init(apiKey: String, language: Weather.Language = .english, units: Weather.Units = .metric) {
+        public init(apiKey: String, language: WeatherLanguage = .english, units: WeatherUnits = .metric) {
             self.language = language
             self.units = units
             self.apiKey = apiKey
@@ -38,9 +38,9 @@ public final class OpenWeather {
     /// The OpenWeatherMap API key to authorize requests.
     public var apiKey: String?
     /// The language that should be used in API responses.
-    public var language: Weather.Language = .english
+    public var language: WeatherLanguage = .english
     /// The units that should be used to format the API responses.
-    public var units: Weather.Units = .metric
+    public var units: WeatherUnits = .metric
 
     // MARK: - Init
 
