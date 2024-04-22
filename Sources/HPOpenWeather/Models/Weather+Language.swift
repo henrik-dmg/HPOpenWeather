@@ -1,9 +1,9 @@
 import Foundation
 
-public extension Weather {
+extension Weather {
 
-    /// The language that should be used in API responses for example for weather condition descriptions
-    enum Language: String, Codable {
+    /// The language that should be used in API responses for example for weather condition descriptions.
+    public enum Language: String, Codable {
         case afrikaans = "af"
         case arabic = "ar"
         case azerbaijani = "az"

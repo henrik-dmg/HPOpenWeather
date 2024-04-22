@@ -83,4 +83,3 @@ public struct DailyForecast: ForecastBase, SunForecast, MoonForecast {
     }
 
 }
-

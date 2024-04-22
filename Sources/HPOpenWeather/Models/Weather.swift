@@ -20,17 +20,17 @@ public struct Weather: Decodable, Equatable, Hashable {
     public let minutelyForecasts: [MinutelyForecast]?
     public let hourlyForecasts: [HourlyForecast]?
     public let dailyForecasts: [DailyForecast]?
-    /// Government weather alerts data from major national weather warning systems
+    /// Government weather alerts data from major national weather warning systems.
     public let alerts: [WeatherAlert]?
-    
+
     public internal(set) var language: Weather.Language!
     public internal(set) var units: Weather.Units!
-    
+
     // MARK: - Init
 
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         let timezoneIdentifier = try container.decode(String.self, forKey: .timezoneIdentifier)
         guard let timezone = TimeZone(identifier: timezoneIdentifier) else {
             throw OpenWeatherError.invalidTimeZoneIdentifier(timezoneIdentifier)

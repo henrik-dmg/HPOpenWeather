@@ -1,9 +1,9 @@
 import Foundation
 
 public struct CurrentWeather: ForecastBase, SunForecast {
-    
+
     // MARK: - Coding Keys
-    
+
     enum CodingKeys: String, CodingKey {
         case feelsLikeTemperature = "feels_like"
         case snow
@@ -23,9 +23,9 @@ public struct CurrentWeather: ForecastBase, SunForecast {
         case sunrise
         case sunset
     }
-    
+
     // MARK: - Properties
-    
+
     public let timestamp: Date
     public let pressure: Double?
     public let humidity: Double?

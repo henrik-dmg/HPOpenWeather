@@ -1,9 +1,9 @@
 import Foundation
 
 public struct HourlyForecast: ForecastBase {
-    
+
     // MARK: - Coding Keys
-    
+
     enum CodingKeys: String, CodingKey {
         case actualTemperature = "temp"
         case feelsLikeTemperature = "feels_like"
@@ -21,9 +21,9 @@ public struct HourlyForecast: ForecastBase {
         case windDirection = "wind_deg"
         case weather
     }
-    
+
     // MARK: - Properties
-    
+
     public let timestamp: Date
     public let pressure: Double?
     public let humidity: Double?

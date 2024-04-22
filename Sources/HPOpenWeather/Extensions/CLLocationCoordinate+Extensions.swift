@@ -1,5 +1,5 @@
-import Foundation
 import CoreLocation
+import Foundation
 
 extension CLLocationCoordinate2D: Codable {
 

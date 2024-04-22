@@ -1,11 +1,11 @@
 import Foundation
 
-/// Type that holds information about moonset and moonrise times in UTC time
+/// Type that holds information about moonset and moonrise times in UTC time.
 public struct Moon: Codable, Equatable, Hashable {
 
-    /// Moonset time
+    /// Moonset time.
     public let moonset: Date
-    /// Moonrise time
+    /// Moonrise time.
     public let moonrise: Date
 
 }
