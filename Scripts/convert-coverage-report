@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+# Adapted from https://github.com/michaelhenry/swifty-code-coverage/blob/main/lcov.sh
+
+OUTPUT_FILE="coverage/lcov.info"
+IGNORE_FILENAME_REGEX=".build|Tests|Pods|Carthage|DerivedData"
+BUILD_PATH=".build"
+
+while :; do
+  case $1 in
+    --target) TARGET=$2
+    shift
+    ;;
+    --output) OUTPUT_FILE=$2
+    shift
+    ;;
+    *) break
+  esac
+  shift
+done
+
+if [ -z "$BUILD_PATH" ]; then
+  echo "Missing --build-path. Either DerivedData or .build (for spm)"
+  exit 1
+fi
+
+if [ -z "$TARGET" ]; then
+  echo "Missing --target. Either an .app or an .xctest (for spm)"
+  exit 1
+fi
+
+INSTR_PROFILE=$(find $BUILD_PATH -name "*.profdata")
+TARGET_PATH=$(find $BUILD_PATH -name "$TARGET" | tail -n1)
+if [ -f $TARGET_PATH ]; then
+  OBJECT_FILE="$TARGET_PATH"
+else
+  TARGET=$(echo $TARGET | sed  's/\.[^.]*$//')
+  OBJECT_FILE=$(find $BUILD_PATH -name "$TARGET" | tail -n1)
+fi
+
+mkdir -p $(dirname "$OUTPUT_FILE")
+
+# print to stdout
+xcrun llvm-cov report \
+  "$OBJECT_FILE" \
+  --instr-profile=$INSTR_PROFILE \
+  --ignore-filename-regex=$IGNORE_FILENAME_REGEX \
+  --use-color
+
+# Export to code coverage file
+xcrun llvm-cov export \
+  "$OBJECT_FILE" \
+  --instr-profile=$INSTR_PROFILE \
+  --ignore-filename-regex=$IGNORE_FILENAME_REGEX \
+  --format="lcov" > $OUTPUT_FILE
