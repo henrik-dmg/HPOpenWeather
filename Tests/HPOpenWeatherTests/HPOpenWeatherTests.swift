@@ -54,6 +54,24 @@ final class HPOpenWeatherTests: XCTestCase {
         XCTAssertEqual(currentWeather.timestamp, Date(timeIntervalSince1970: 1_713_795_125))
     }
 
+    func testInvalidApiKey() async throws {
+        let settings = OpenWeather.Settings(apiKey: "debug")
+        let request = WeatherRequest(
+            coordinate: .init(latitude: 52.5200, longitude: 13.4050),
+            excludedFields: nil,
+            date: nil,
+            settings: settings,
+            version: .new
+        )
+
+        do {
+            _ = try await request.response(urlSession: .shared).output
+        } catch {
+            let apiError = try XCTUnwrap(error as? OpenWeatherAPIError)
+            XCTAssertEqual(apiError.code, 401)
+        }
+    }
+
     // MARK: - Helpers
 
     private func make25WeatherResponse(version: WeatherRequest.Version) throws {

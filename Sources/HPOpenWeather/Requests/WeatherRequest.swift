@@ -30,7 +30,7 @@ struct WeatherRequest: DecodableRequest {
         return decoder
     }
 
-    // MARK: - OpenWeatherRequest
+    // MARK: - DecodableRequest
 
     func makeURL() throws -> URL {
         if let date = date, date < Date(), abs(date.timeIntervalSinceNow) <= 6 * .hour {
@@ -53,10 +53,25 @@ struct WeatherRequest: DecodableRequest {
     }
 
     func convertResponse(data: Data, response: HTTPResponse) throws -> Weather {
-        var weather = try decoder.decode(Weather.self, from: data)
-        weather.units = settings.units
-        weather.language = settings.language
-        return weather
+        switch response.status.kind {
+        case .informational, .successful:
+            var weather = try decoder.decode(Weather.self, from: data)
+            weather.units = settings.units
+            weather.language = settings.language
+            return weather
+        case .clientError, .invalid, .redirection, .serverError:
+            var errorToThrow: any Error
+            do {
+                errorToThrow = try decoder.decode(OpenWeatherAPIError.self, from: data)
+            } catch {
+                errorToThrow = URLError(URLError.Code(rawValue: response.status.code))
+            }
+            throw errorToThrow
+        }
+    }
+
+    func validateResponse(_ response: HTTPResponse) throws {
+        // do nothing, validation will be handled by convertResponse instead
     }
 
 }
