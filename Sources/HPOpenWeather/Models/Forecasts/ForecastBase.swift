@@ -9,6 +9,7 @@ public protocol ForecastBase: Decodable, Hashable {
     /// Humidity in percent.
     var humidity: Double? { get }
     /// Atmospheric temperature (varying according to pressure and humidity) below which water droplets begin to condense and dew can form.
+    ///
     /// Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
     var dewPoint: Double? { get }
     /// UV index.

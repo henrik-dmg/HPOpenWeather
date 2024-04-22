@@ -1,6 +1,6 @@
 import Foundation
 
-/// Type that holds information about daily temperature changes
+/// Type that holds information about daily temperature changes.
 public struct DailyTemperature: Codable, Equatable, Hashable {
 
     // MARK: - Nested Types

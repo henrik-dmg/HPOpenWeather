@@ -15,7 +15,9 @@ public struct WeatherAlert: Codable, Hashable, Equatable {
 
     // MARK: - Properties
 
-    /// Name of the alert source. Please read here the full list of alert sources.
+    /// Name of the alert source.
+    ///
+    /// A full list of possible sources can be found [here](https://openweathermap.org/api/one-call-3#listsource)
     public let senderName: String
     /// Alert event name.
     public let eventName: String
