@@ -11,16 +11,16 @@ public final class OpenWeather {
         /// The API key to use for weather requests
         let apiKey : String
         /// The language that will be used in weather responses
-        let language: WeatherResponse.Language
+        let language: Weather.Language
         /// The units that will be used in weather responses
-        let units: WeatherResponse.Units
+        let units: Weather.Units
 
         /// Initialises a new settings instance
         /// - Parameters:
         ///   - apiKey: The API key to use for weather requests
         ///   - language: The language that will be used in weather responses
         ///   - units: The units that will be used in weather responses
-        public init(apiKey: String, language: WeatherResponse.Language = .english, units: WeatherResponse.Units = .metric) {
+        public init(apiKey: String, language: Weather.Language = .english, units: Weather.Units = .metric) {
             self.language = language
             self.units = units
             self.apiKey = apiKey
@@ -29,15 +29,12 @@ public final class OpenWeather {
 
     // MARK: - Properties
 
-    /// A shared instance of the weather client
-    public static let shared = OpenWeather()
-
     /// The OpenWeatherMap API key to authorize requests
     public var apiKey : String?
     /// The language that should be used in API responses
-    public var language: WeatherResponse.Language = .english
+    public var language: Weather.Language = .english
     /// The units that should be used to format the API responses
-    public var units: WeatherResponse.Units = .metric
+    public var units: Weather.Units = .metric
 
     // MARK: - Init
 
@@ -64,37 +61,20 @@ public final class OpenWeather {
     ///   - date: The date for which you want to request the weather. If no date is provided, the current weather will be retrieved
     ///   - urlSession: The `URLSession` that will be used schedule requests
     /// - Returns: A weather response object
-    public func weatherResponse(
-        coordinate: CLLocationCoordinate2D,
-        excludedFields: [WeatherRequest.ExcludableField]? = nil,
+    public func weather(
+        for coordinate: CLLocationCoordinate2D,
+        excludedFields: [ExcludableField]? = nil,
         date: Date? = nil,
         urlSession: URLSession = .shared
-    ) async throws -> WeatherResponse {
-        let request = WeatherRequest(
-            coordinate: coordinate,
-            excludedFields: excludedFields,
-            date: date
-        )
-        return try await weatherResponse(request, urlSession: urlSession)
-    }
-
-    /// Sends the specified request to the OpenWeather API
-    /// - Parameters:
-    ///   - request: The request object that holds information about request location, date, etc.
-    ///   - urlSession: The `URLSession` that will be used schedule requests
-    /// - Returns: A weather response object
-    public func weatherResponse(_ request: WeatherRequest, urlSession: URLSession = .shared) async throws -> WeatherRequest.Output {
-        guard let apiKey = apiKey else {
-            throw NSError.noApiKey
+    ) async throws -> Weather {
+        guard let apiKey else {
+            throw OpenWeatherError.invalidAPIKey
         }
 
         let settings = Settings(apiKey: apiKey, language: language, units: units)
+        let request = WeatherRequest(coordinate: coordinate, excludedFields: excludedFields, date: date , settings: settings, version: .new)
 
-        let networkRequest = try request.makeNetworkRequest(settings: settings, urlSession: urlSession)
-        var response = try await networkRequest.response().output
-        response.units = settings.units
-        response.language = settings.language
-        return response
+        return try await request.response(urlSession: urlSession).output
     }
 
     /// Sends the specified request to the OpenWeather API
@@ -103,17 +83,17 @@ public final class OpenWeather {
     ///   - urlSession: The `URLSession` that will be used schedule requests
     ///   - completion: A completion that will be called with the result of the network request
     /// - Returns: A network task that can be used to cancel the request
-    @discardableResult
-    public func schedule(_ request: WeatherRequest, urlSession: URLSession = .shared, completion: @escaping (Result<WeatherRequest.Output, Error>) -> Void) -> Task<Void, Error> {
-        Task {
-            do {
-                let response = try await weatherResponse(request, urlSession: urlSession)
-                completion(.success(response))
-            } catch {
-                completion(.failure(error))
-            }
-        }
-    }
+    //    @discardableResult
+    //    public func schedule(_ request: WeatherRequest, urlSession: URLSession = .shared, completion: @escaping (Result<WeatherRequest.Output, Error>) -> Void) -> Task<Void, Error> {
+    //        Task {
+    //            do {
+    //                let response = try await weatherResponse(request, urlSession: urlSession)
+    //                completion(.success(response))
+    //            } catch {
+    //                completion(.failure(error))
+    //            }
+    //        }
+    //    }
 
     // MARK: - Applying Settings
 

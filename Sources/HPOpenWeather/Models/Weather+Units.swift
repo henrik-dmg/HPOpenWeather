@@ -1,6 +1,6 @@
 import Foundation
 
-public extension WeatherResponse {
+public extension Weather {
 
     /// The units that should the data in the API responses should be formatted in
     enum Units: String, Codable {

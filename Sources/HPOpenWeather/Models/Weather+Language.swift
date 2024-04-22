@@ -1,6 +1,6 @@
 import Foundation
 
-public extension WeatherResponse {
+public extension Weather {
 
     /// The language that should be used in API responses for example for weather condition descriptions
     enum Language: String, Codable {

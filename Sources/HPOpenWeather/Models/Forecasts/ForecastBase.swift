@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol BasicWeatherResponse: Codable, Hashable {
+public protocol ForecastBase: Decodable, Hashable {
 
     /// The timestamp when the data was collected
     var timestamp: Date { get }
@@ -22,9 +22,16 @@ public protocol BasicWeatherResponse: Codable, Hashable {
 
 }
 
-public protocol SunResponse: Codable, Hashable {
+public protocol SunForecast: Decodable, Hashable {
 
     /// A container that holds information about sunset and sunrise timestamps
     var sun: Sun { get }
+
+}
+
+public protocol MoonForecast: Decodable, Hashable {
+
+    /// A container that holds information about moonrise and moonset timestamps
+    var moon: Moon { get }
 
 }

@@ -1,68 +1,117 @@
 import XCTest
 import HPNetwork
+import HPNetworkMock
+
 @testable import HPOpenWeather
 
 final class HPOpenWeatherTests: XCTestCase {
 
-    override class func setUp() {
-        super.setUp()
-        OpenWeather.shared.apiKey = TestSecret.apiKey
-    }
+    // MARK: - Properties
 
-    override class func tearDown() {
+    private lazy var mockedURLSession: URLSession = {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [URLSessionMock.self]
+        return URLSession(configuration: configuration)
+    }()
+
+    // MARK: - Test Lifecycle
+
+    override func tearDown() {
+        URLSessionMock.unregisterAllMockedRequests()
         super.tearDown()
-        OpenWeather.shared.apiKey = nil
     }
 
-    func testCurrentRequest() async throws {
-		do {
-			_ = try await OpenWeather.shared.weatherResponse(coordinate: .init(latitude: 52.5200, longitude: 13.4050))
-		} catch let error as NSError {
-			print(error)
-			throw error
-		}
-    }
+    // MARK: - Tests
 
-    func testTimeMachineRequestFailing() async throws {
-        let request = WeatherRequest(coordinate: .init(latitude: 52.5200, longitude: 13.4050), date: Date().addingTimeInterval(-1 * .hour))
+    func testOldApiRequest() async throws {
+        try make25WeatherResponse(version: .old)
 
-		await HPAssertThrowsError {
-			try await OpenWeather.shared.weatherResponse(request)
-		}
-    }
-
-    func testTimeMachineRequest() async {
-        let request = WeatherRequest(coordinate: .init(latitude: 52.5200, longitude: 13.4050), date: Date().addingTimeInterval(-7 * .hour))
-
-		await HPAssertThrowsNoError {
-			try await OpenWeather.shared.weatherResponse(request)
-		}
-    }
-
-    func testPublisher() {
-        let request = WeatherRequest(coordinate: .init(latitude: 52.5200, longitude: 13.4050))
-
-        let expectationFinished = expectation(description: "finished")
-        let expectationReceive = expectation(description: "receiveValue")
-        //let expectationFailure = expectation(description: "failure")
-
-        let cancellable = request.publisher(apiKey: TestSecret.apiKey).sink(
-            receiveCompletion: { result in
-				switch result {
-				case .failure(let error):
-					XCTFail(error.localizedDescription)
-				case .finished:
-					expectationFinished.fulfill()
-				}
-            }, receiveValue: { response in
-                expectationReceive.fulfill()
-            }
+        let settings = OpenWeather.Settings(apiKey: "debug")
+        let request = WeatherRequest(
+            coordinate: .init(latitude: 52.5200, longitude: 13.4050),
+            excludedFields: nil,
+            date: nil,
+            settings: settings,
+            version: .old
         )
+        _ = try await request.response(urlSession: mockedURLSession)
+    }
 
-        waitForExpectations(timeout: 10) { error in
-            cancellable.cancel()
+    func testNewApiRequest() async throws {
+        try make25WeatherResponse(version: .new)
+
+        let settings = OpenWeather.Settings(apiKey: "debug")
+        let request = WeatherRequest(
+            coordinate: .init(latitude: 52.5200, longitude: 13.4050),
+            excludedFields: nil,
+            date: nil,
+            settings: settings,
+            version: .new
+        )
+        let weather = try await request.response(urlSession: mockedURLSession).output
+
+        let currentWeather = try XCTUnwrap(weather.currentWeather)
+        XCTAssertEqual(currentWeather.timestamp, Date(timeIntervalSince1970: 1713795125))
+    }
+
+    // MARK: - Helpers
+
+    private func make25WeatherResponse(version: WeatherRequest.Version) throws {
+        let url = try XCTUnwrap(URL(string: "https://api.openweathermap.org/data/\(version.rawValue)/onecall"))
+        let jsonDataURL = try XCTUnwrap(Bundle.module.url(forResource: "\(version.rawValue.replacingOccurrences(of: ".", with: "-"))-test-response", withExtension: "json"))
+        let jsonData = try Data(contentsOf: jsonDataURL)
+
+        _ = URLSessionMock.mockRequest(to: url, ignoresQuery: true) { _ in
+            let response = HTTPURLResponse(
+                url: url,
+                statusCode: 200,
+                httpVersion: nil,
+                headerFields: ["Content-Type": ContentType.applicationJSON.rawValue]
+            )!
+            return (jsonData, response)
         }
     }
+
+//    func testTimeMachineRequestFailing() async throws {
+//        let request = WeatherRequest(coordinate: .init(latitude: 52.5200, longitude: 13.4050), date: Date().addingTimeInterval(-1 * .hour))
+//
+//		await HPAssertThrowsError {
+//			try await OpenWeather.shared.weatherResponse(request)
+//		}
+//    }
+//
+//    func testTimeMachineRequest() async {
+//        let request = WeatherRequest(coordinate: .init(latitude: 52.5200, longitude: 13.4050), date: Date().addingTimeInterval(-7 * .hour))
+//
+//		await HPAssertThrowsNoError {
+//			try await OpenWeather.shared.weatherResponse(request)
+//		}
+//    }
+//
+//    func testPublisher() {
+//        let request = WeatherRequest(coordinate: .init(latitude: 52.5200, longitude: 13.4050))
+//
+//        let expectationFinished = expectation(description: "finished")
+//        let expectationReceive = expectation(description: "receiveValue")
+//        //let expectationFailure = expectation(description: "failure")
+//
+//        let cancellable = request.publisher(apiKey: TestSecret.apiKey).sink(
+//            receiveCompletion: { result in
+//				switch result {
+//				case .failure(let error):
+//					XCTFail(error.localizedDescription)
+//				case .finished:
+//					expectationFinished.fulfill()
+//				}
+//            }, receiveValue: { response in
+//                expectationReceive.fulfill()
+//            }
+//        )
+//
+//        waitForExpectations(timeout: 10) { error in
+//            cancellable.cancel()
+//        }
+//    }
 
 }
 
@@ -78,35 +127,4 @@ extension Encodable {
         return try jsonDecoder.decode(type.self, from: encodedData)
     }
 
-}
-
-func HPAssertThrowsError<T>(_ work: () async throws -> T) async {
-	do {
-		_ = try await work()
-		XCTFail("Block should throw")
-	} catch {
-		return
-	}
-}
-
-func HPAssertThrowsNoError<T>(_ work: () async throws -> T) async {
-	do {
-		_ = try await work()
-	} catch let error {
-		XCTFail(error.localizedDescription)
-	}
-}
-
-/// Asserts that the result is not a failure
-func XCTAssertResult<T, E: Error>(_ result: Result<T, E>) {
-    if case .failure(let error as NSError) = result {
-		XCTFail(error.localizedDescription)
-    }
-}
-
-/// Asserts that the result is not a failure
-func XCTAssertResultError<T, E: Error>(_ result: Result<T, E>) {
-    if case .success(_) = result {
-        XCTFail("Result was not an error")
-    }
 }

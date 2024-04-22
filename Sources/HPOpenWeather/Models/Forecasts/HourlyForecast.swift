@@ -1,6 +1,6 @@
 import Foundation
 
-public struct HourlyForecast: BasicWeatherResponse {
+public struct HourlyForecast: ForecastBase {
     
     // MARK: - Coding Keys
     
@@ -19,7 +19,7 @@ public struct HourlyForecast: BasicWeatherResponse {
         case windSpeed = "wind_speed"
         case windGust = "wind_gust"
         case windDirection = "wind_deg"
-        case weatherArray = "weather"
+        case weather
     }
     
     // MARK: - Properties
@@ -33,32 +33,39 @@ public struct HourlyForecast: BasicWeatherResponse {
     public let cloudCoverage: Double?
     public let rain: Precipitation?
     public let snow: Precipitation?
-    
-    // Temperature
-    
-    private let actualTemperature: Double
-    private let feelsLikeTemperature: Double
-    
-    public var temperature: Temperature {
-        Temperature(actual: actualTemperature, feelsLike: feelsLikeTemperature)
+    public let temperature: Temperature
+    public let wind: Wind
+    public let condition: WeatherCondition
+
+    // MARK: - Init
+
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        let weatherArray = try container.decode([WeatherCondition].self, forKey: .weather)
+        guard let condition = weatherArray.first else {
+            throw OpenWeatherError.noCurrentConditionReturned
+        }
+        self.condition = condition
+
+        self.snow = try container.decodeIfPresent(Precipitation.self, forKey: .snow)
+        self.rain = try container.decodeIfPresent(Precipitation.self, forKey: .rain)
+        self.timestamp = try container.decode(Date.self, forKey: .timestamp)
+        self.pressure = try container.decodeIfPresent(Double.self, forKey: .pressure)
+        self.humidity = try container.decodeIfPresent(Double.self, forKey: .humidity)
+        self.dewPoint = try container.decodeIfPresent(Double.self, forKey: .dewPoint)
+        self.uvIndex = try container.decodeIfPresent(Double.self, forKey: .uvIndex)
+        self.cloudCoverage = try container.decodeIfPresent(Double.self, forKey: .cloudCoverage)
+        self.visibility = try container.decodeIfPresent(Double.self, forKey: .visibility)
+
+        let actualTemperature = try container.decode(Double.self, forKey: .actualTemperature)
+        let feelsLikeTemperature = try container.decode(Double.self, forKey: .feelsLikeTemperature)
+        self.temperature = Temperature(actual: actualTemperature, feelsLike: feelsLikeTemperature)
+
+        let windSpeed = try container.decodeIfPresent(Double.self, forKey: .windSpeed)
+        let windGust = try container.decodeIfPresent(Double.self, forKey: .windGust)
+        let windDirection = try container.decodeIfPresent(Double.self, forKey: .windDirection)
+        self.wind = Wind(speed: windSpeed, gust: windGust, degrees: windDirection)
     }
-    
-    // Wind
-    
-    private let windSpeed: Double?
-    private let windGust: Double?
-    private let windDirection: Double?
-    
-    public var wind: Wind {
-        Wind(speed: windSpeed, gust: windGust, degrees: windDirection)
-    }
-    
-    // Weather
-    
-    private let weatherArray: [WeatherCondition]
-    
-    public var weather: [WeatherCondition] {
-        weatherArray
-    }
-    
+
 }

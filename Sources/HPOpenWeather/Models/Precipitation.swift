@@ -15,7 +15,7 @@ public struct Precipitation: Codable, Equatable, Hashable {
 
     /// A convertible measurement of how much precipitation occured in the last hour if any
     public var lastHourMeasurement: Measurement<UnitLength>? {
-        guard let lastHour = lastHour else {
+        guard let lastHour else {
             return nil
         }
         return Measurement(value: lastHour, unit: .millimeters)
@@ -23,7 +23,7 @@ public struct Precipitation: Codable, Equatable, Hashable {
 
     /// A convertible measurement of how much precipitation occured in the last three hours if any
     public var lastThreeHoursMeasurement: Measurement<UnitLength>? {
-        guard let lastThreeHours = lastThreeHours else {
+        guard let lastThreeHours else {
             return nil
         }
         return Measurement(value: lastThreeHours, unit: .millimeters)

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct DailyForecast: BasicWeatherResponse, SunResponse {
+public struct DailyForecast: ForecastBase, SunForecast, MoonForecast {
 
     // MARK: - Coding Keys
 
@@ -19,9 +19,11 @@ public struct DailyForecast: BasicWeatherResponse, SunResponse {
         case windSpeed = "wind_speed"
         case windGust = "wind_gust"
         case windDirection = "wind_deg"
-        case weatherArray = "weather"
+        case weather
         case sunrise
         case sunset
+        case moonrise
+        case moonset
     }
 
     // MARK: - Properties
@@ -38,32 +40,46 @@ public struct DailyForecast: BasicWeatherResponse, SunResponse {
     public let uvIndex: Double?
     public let visibility: Double?
     public let cloudCoverage: Double?
+    public let condition: WeatherCondition
+    public let sun: Sun
+    public let wind: Wind
+    public let moon: Moon
 
-    // Weather Conditions
+    // MARK: - Init
 
-    private let weatherArray: [WeatherCondition]
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
 
-    public var condition: WeatherCondition? {
-        weatherArray.first
-    }
+        let weatherArray = try container.decode([WeatherCondition].self, forKey: .weather)
+        guard let condition = weatherArray.first else {
+            throw OpenWeatherError.noCurrentConditionReturned
+        }
+        self.condition = condition
 
-    // Wind
+        self.timestamp = try container.decode(Date.self, forKey: .timestamp)
+        self.pressure = try container.decodeIfPresent(Double.self, forKey: .pressure)
+        self.humidity = try container.decodeIfPresent(Double.self, forKey: .humidity)
+        self.dewPoint = try container.decodeIfPresent(Double.self, forKey: .dewPoint)
+        self.uvIndex = try container.decodeIfPresent(Double.self, forKey: .uvIndex)
+        self.cloudCoverage = try container.decodeIfPresent(Double.self, forKey: .cloudCoverage)
+        self.visibility = try container.decodeIfPresent(Double.self, forKey: .visibility)
+        self.temperature = try container.decode(DailyTemperature.self, forKey: .temperature)
+        self.feelsLikeTemperature = try container.decode(DailyTemperature.self, forKey: .feelsLikeTemperature)
+        self.totalRain = try container.decodeIfPresent(Double.self, forKey: .totalRain)
+        self.totalSnow = try container.decodeIfPresent(Double.self, forKey: .totalSnow)
 
-    private let windSpeed: Double?
-    private let windGust: Double?
-    private let windDirection: Double?
+        let windSpeed = try container.decodeIfPresent(Double.self, forKey: .windSpeed)
+        let windGust = try container.decodeIfPresent(Double.self, forKey: .windGust)
+        let windDirection = try container.decodeIfPresent(Double.self, forKey: .windDirection)
+        self.wind = Wind(speed: windSpeed, gust: windGust, degrees: windDirection)
 
-    public var wind: Wind {
-        Wind(speed: windSpeed, gust: windGust, degrees: windDirection)
-    }
+        let sunrise = try container.decode(Date.self, forKey: .sunrise)
+        let sunset = try container.decode(Date.self, forKey: .sunset)
+        self.sun = Sun(sunset: sunset, sunrise: sunrise)
 
-    // Sun
-
-    private let sunrise: Date
-    private let sunset: Date
-
-    public var sun: Sun {
-        Sun(sunset: sunset, sunrise: sunrise)
+        let moonrise = try container.decode(Date.self, forKey: .moonrise)
+        let moonset = try container.decode(Date.self, forKey: .moonset)
+        self.moon = Moon(moonset: moonset, moonrise: moonrise)
     }
 
 }

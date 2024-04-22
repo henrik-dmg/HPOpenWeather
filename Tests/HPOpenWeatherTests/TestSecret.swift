@@ -1,7 +1,7 @@
 import Foundation
 
-struct TestSecret {
+enum TestSecret {
 
-    static let apiKey: String! = ProcessInfo.processInfo.environment["API_KEY"]
+    static let apiKey: String = ProcessInfo.processInfo.environment["API_KEY"] ?? ""
 
 }
