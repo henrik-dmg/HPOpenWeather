@@ -42,21 +42,21 @@ extension WeatherIcon {
 
     #if canImport(UIKit)
 
-    func filledUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
+    public func filledUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
         UIImage(systemName: systemImageNameFilled, withConfiguration: configuration)
     }
 
-    func outlineUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
+    public func outlineUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
         UIImage(systemName: systemImageName, withConfiguration: configuration)
     }
 
     #elseif canImport(AppKit)
 
-    func filledNSImage(accessibilityDescription: String? = nil) -> NSImage? {
+    public func filledNSImage(accessibilityDescription: String? = nil) -> NSImage? {
         NSImage(systemSymbolName: systemImageNameFilled, accessibilityDescription: accessibilityDescription)
     }
 
-    func outlineNSImage(accessibilityDescription: String? = nil) -> NSImage? {
+    public func outlineNSImage(accessibilityDescription: String? = nil) -> NSImage? {
         NSImage(systemSymbolName: systemImageName, accessibilityDescription: accessibilityDescription)
     }
 

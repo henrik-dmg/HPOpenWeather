@@ -27,6 +27,12 @@ public final class OpenWeather {
         }
     }
 
+    public enum APIVersion: String {
+        @available(*, deprecated, message: "The OpenWeather One Call API 2.5 will be deprecated in June 2024")
+        case twoPointFive = "2.5"
+        case threePointZero = "3.0"
+    }
+
     // MARK: - Properties
 
     /// The OpenWeatherMap API key to authorize requests.
@@ -54,11 +60,12 @@ public final class OpenWeather {
 
     // MARK: - Sending Requests
 
-    /// Sends the specified request to the OpenWeather API.
+    /// Requests a weather forecast for the specified location.
     /// - Parameters:
     ///   - coordinate: The coordinate for which the weather will be requested
     ///   - excludedFields: An array specifying the fields that will be excluded from the response
     ///   - date: The date for which you want to request the weather. If no date is provided, the current weather will be retrieved
+    ///   - version: The API version to use. Default is 3.0.
     ///   - urlSession: The `URLSession` that will be used schedule requests
     /// - Returns: A weather response object
     /// - Throws: If no API key was provided, the request was misconfigured, the networking failed or the response failed to decode
@@ -66,6 +73,7 @@ public final class OpenWeather {
         for coordinate: CLLocationCoordinate2D,
         excludedFields: [ExcludableField]? = nil,
         date: Date? = nil,
+        version: APIVersion = .threePointZero,
         urlSession: URLSession = .shared
     ) async throws -> Weather {
         guard let apiKey, !apiKey.isEmpty else {
@@ -73,37 +81,49 @@ public final class OpenWeather {
         }
 
         let settings = Settings(apiKey: apiKey, language: language, units: units)
-        let request = WeatherRequest(coordinate: coordinate, excludedFields: excludedFields, date: date, settings: settings, version: .new)
+        let request = WeatherRequest(
+            coordinate: coordinate,
+            excludedFields: excludedFields,
+            date: date,
+            settings: settings,
+            version: version
+        )
 
         return try await request.response(urlSession: urlSession).output
     }
 
-    /// Sends the specified request to the OpenWeather API
+    /// Requests a weather forecast for the specified location.
     /// - Parameters:
-    ///   - request: The request object that holds information about request location, date, etc.
+    ///   - coordinate: The coordinate for which the weather will be requested
+    ///   - excludedFields: An array specifying the fields that will be excluded from the response
+    ///   - date: The date for which you want to request the weather. If no date is provided, the current weather will be retrieved
+    ///   - version: The API version to use. Default is 3.0.
     ///   - urlSession: The `URLSession` that will be used schedule requests
     ///   - completion: A completion that will be called with the result of the network request
     /// - Returns: A network task that can be used to cancel the request
-    //    @discardableResult
-    //    public func schedule(_ request: WeatherRequest, urlSession: URLSession = .shared, completion: @escaping (Result<WeatherRequest.Output, Error>) -> Void) -> Task<Void, Error> {
-    //        Task {
-    //            do {
-    //                let response = try await weatherResponse(request, urlSession: urlSession)
-    //                completion(.success(response))
-    //            } catch {
-    //                completion(.failure(error))
-    //            }
-    //        }
-    //    }
-
-    // MARK: - Applying Settings
-
-    /// Applies new settings to the weather client.
-    /// - Parameter settings: The weather client settings, including an API key, language and units
-    public func apply(_ settings: Settings) {
-        apiKey = settings.apiKey
-        language = settings.language
-        units = settings.units
+    @discardableResult
+    public func requestWeather(
+        for coordinate: CLLocationCoordinate2D,
+        excludedFields: [ExcludableField]? = nil,
+        date: Date? = nil,
+        version: APIVersion = .threePointZero,
+        urlSession: URLSession = .shared,
+        completion: @escaping (Result<Weather, Error>) -> Void
+    ) -> Task<Void, Error> {
+        Task {
+            do {
+                let response = try await weather(
+                    for: coordinate,
+                    excludedFields: excludedFields,
+                    date: date,
+                    version: version,
+                    urlSession: urlSession
+                )
+                completion(.success(response))
+            } catch {
+                completion(.failure(error))
+            }
+        }
     }
 
 }

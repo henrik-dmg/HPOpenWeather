@@ -9,18 +9,13 @@ struct WeatherRequest: DecodableRequest {
 
     typealias Output = Weather
 
-    enum Version: String {
-        case old = "2.5"
-        case new = "3.0"
-    }
-
     // MARK: - Properties
 
     let coordinate: CLLocationCoordinate2D
     let excludedFields: [ExcludableField]?
     let date: Date?
     let settings: OpenWeather.Settings
-    let version: Version
+    let version: OpenWeather.APIVersion
 
     let requestMethod: HTTPRequest.Method = .get
 
@@ -33,8 +28,8 @@ struct WeatherRequest: DecodableRequest {
     // MARK: - DecodableRequest
 
     func makeURL() throws -> URL {
-        if let date = date, date < Date(), abs(date.timeIntervalSinceNow) <= 6 * .hour {
-            throw OpenWeatherError.invalidTimeMachineDate
+        if let date, Date.now.addingTimeInterval(.day * 4) < date {
+            throw OpenWeatherError.invalidRequestTimestamp
         }
         return try URL.buildThrowing {
             Host("api.openweathermap.org")
@@ -47,7 +42,7 @@ struct WeatherRequest: DecodableRequest {
             QueryItem(name: "appid", value: settings.apiKey)
             QueryItem(name: "dt", value: date.flatMap({ Int($0.timeIntervalSince1970) }))
             QueryItem(name: "exclude", value: excludedFields?.compactMap({ $0.rawValue }))
-            QueryItem(name: "units", value: "metric")
+            QueryItem(name: "units", value: settings.units.rawValue)
             QueryItem(name: "lang", value: settings.language.rawValue)
         }
     }
@@ -78,6 +73,8 @@ struct WeatherRequest: DecodableRequest {
 
 extension TimeInterval {
 
-    static let hour = 3600.00
+    static let minute = 60.0
+    static let hour = minute * 60
+    static let day = hour * 24
 
 }

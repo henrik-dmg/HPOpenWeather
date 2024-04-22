@@ -1,5 +1,6 @@
 import Foundation
 
+/// A type containing information about the current weather.
 public struct CurrentWeather: ForecastBase, SunForecast {
 
     // MARK: - Coding Keys

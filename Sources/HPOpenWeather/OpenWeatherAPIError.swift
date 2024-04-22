@@ -14,10 +14,10 @@ public struct OpenWeatherAPIError: Error, Decodable {
     // MARK: - Properties
 
     /// The error code, such as 400, 404 or 5xx.
-    let code: Int
+    public let code: Int
     /// The error message or description.
-    let message: String
+    public let message: String
     /// List of request parameters names that are related to this particular error.
-    let parameters: [String]?
+    public let parameters: [String]?
 
 }
