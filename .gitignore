@@ -80,3 +80,5 @@ iOSInjectionProject/
 settings.json
 /docs
 /coverage
+
+**/.DS_Store
