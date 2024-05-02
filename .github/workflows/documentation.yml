@@ -38,7 +38,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-spm-
       - name: Build DocC
-        run: Scripts/build-docc-archive
+        run: Scripts/build-docc-archive HPOpenWeather
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

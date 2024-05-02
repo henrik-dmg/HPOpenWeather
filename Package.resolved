@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/henrik-dmg/HPNetwork",
       "state" : {
-        "revision" : "6e1266a06692dab7df6d57faffaee59f2b46c4f5",
-        "version" : "4.0.0"
+        "revision" : "a4629039573f695f97fc044032c4e654b40671b0",
+        "version" : "4.0.1"
       }
     },
     {

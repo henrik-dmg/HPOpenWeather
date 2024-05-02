@@ -5,6 +5,13 @@ if [[ -z $RUNNER_TEMP ]]; then
   RUNNER_TEMP=$(git rev-parse --show-toplevel)
 fi
 
+TARGET=$1
+HOSTING_BASE_PATH=$2
+
+if [[ -z $HOSTING_BASE_PATH ]]; then
+  HOSTING_BASE_PATH=$TARGET
+fi
+
 # First, insert docc-plugin dependency. This is very hacky, but it avoids everyone having to pull in the docc-plugin when they use this library.
 
 sed '/Dependencies declare/a\
@@ -18,12 +25,13 @@ swift package resolve
 swift package \
   --allow-writing-to-directory "$RUNNER_TEMP/docs" \
   generate-documentation \
-  --target HPOpenWeather \
+  --target "$TARGET" \
   --transform-for-static-hosting \
-  --hosting-base-path HPOpenWeather \
+  --hosting-base-path "$HOSTING_BASE_PATH" \
   --output-path "$RUNNER_TEMP/docs"
 
-echo "<script>window.location.href += \"documentation/hpopenweather\"</script>" > "$RUNNER_TEMP/docs/index.html"
+CUSTOM_PATH=$(echo $HOSTING_BASE_PATH | tr '[:upper:]' '[:lower:]')
+echo "<script>window.location.href += \"documentation/$CUSTOM_PATH\"</script>" > "$RUNNER_TEMP/docs/index.html"
 
 if [[ -z $GITHUB_ACTIONS ]]; then
   echo "Restoring Package.swift to original state."
