@@ -1,6 +1,6 @@
 import Foundation
 
-public struct MinutelyForecast: Decodable, Equatable, Hashable {
+public struct MinutelyForecast: Codable, Equatable, Hashable {
 
     // MARK: - Nested Types
 

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Weather: Decodable, Equatable, Hashable {
+public struct Weather: Codable, Equatable, Hashable {
 
     // MARK: - Nested Types
 
@@ -11,6 +11,12 @@ public struct Weather: Decodable, Equatable, Hashable {
         case hourlyForecasts = "hourly"
         case dailyForecasts = "daily"
         case alerts
+
+        // These keys are not actually present in the response from the OpenWeather API.
+        // We inject them manually after decoding the response in order to persist these settings
+        // if you want to cache the response for example.
+        case language
+        case units
     }
 
     // MARK: - Properties
@@ -23,8 +29,8 @@ public struct Weather: Decodable, Equatable, Hashable {
     /// Government weather alerts data from major national weather warning systems.
     public let alerts: [WeatherAlert]?
 
-    public internal(set) var language: WeatherLanguage!
-    public internal(set) var units: WeatherUnits!
+    public internal(set) var language: WeatherLanguage?
+    public internal(set) var units: WeatherUnits?
 
     // MARK: - Init
 
@@ -42,6 +48,25 @@ public struct Weather: Decodable, Equatable, Hashable {
         self.hourlyForecasts = try container.decodeIfPresent([HourlyForecast].self, forKey: .hourlyForecasts)
         self.dailyForecasts = try container.decodeIfPresent([DailyForecast].self, forKey: .dailyForecasts)
         self.alerts = try container.decodeIfPresent([WeatherAlert].self, forKey: .alerts)
+
+        self.language = try container.decodeIfPresent(WeatherLanguage.self, forKey: .language)
+        self.units = try container.decodeIfPresent(WeatherUnits.self, forKey: .units)
+    }
+
+    // MARK: - Encoding
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encodeIfPresent(timezone.identifier, forKey: .timezoneIdentifier)
+        try container.encodeIfPresent(currentWeather, forKey: .currentWeather)
+        try container.encodeIfPresent(minutelyForecasts, forKey: .minutelyForecasts)
+        try container.encodeIfPresent(hourlyForecasts, forKey: .hourlyForecasts)
+        try container.encodeIfPresent(dailyForecasts, forKey: .dailyForecasts)
+        try container.encodeIfPresent(alerts, forKey: .alerts)
+
+        try container.encodeIfPresent(language, forKey: .language)
+        try container.encodeIfPresent(units, forKey: .units)
     }
 
 }

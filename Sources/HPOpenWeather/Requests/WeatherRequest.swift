@@ -15,7 +15,6 @@ struct WeatherRequest: DecodableRequest {
     let excludedFields: [ExcludableField]?
     let date: Date?
     let settings: OpenWeather.Settings
-    let version: OpenWeather.APIVersion
 
     let requestMethod: HTTPRequest.Method = .get
 
@@ -34,7 +33,7 @@ struct WeatherRequest: DecodableRequest {
         return try URL.buildThrowing {
             Host("api.openweathermap.org")
             PathComponent("data")
-            PathComponent(version.rawValue)
+            PathComponent("3.0")
             PathComponent("onecall")
             PathComponent(date != nil ? "timemachine" : nil)
             QueryItem(name: "lat", value: coordinate.latitude, digits: 5)

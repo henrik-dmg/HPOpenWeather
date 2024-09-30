@@ -76,4 +76,31 @@ public struct CurrentWeather: ForecastBase, SunForecast {
         self.sun = Sun(sunset: sunset, sunrise: sunrise)
     }
 
+    // MARK: - Encoding
+
+    public func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encodeIfPresent(timestamp, forKey: .timestamp)
+        try container.encodeIfPresent(pressure, forKey: .pressure)
+        try container.encodeIfPresent(humidity, forKey: .humidity)
+        try container.encodeIfPresent(dewPoint, forKey: .dewPoint)
+        try container.encodeIfPresent(uvIndex, forKey: .uvIndex)
+        try container.encodeIfPresent(visibility, forKey: .visibility)
+        try container.encodeIfPresent(cloudCoverage, forKey: .cloudCoverage)
+        try container.encodeIfPresent(rain, forKey: .rain)
+        try container.encodeIfPresent(snow, forKey: .snow)
+        try container.encodeIfPresent([currentCondition], forKey: .weather)
+
+        try container.encodeIfPresent(temperature.actual, forKey: .actualTemperature)
+        try container.encodeIfPresent(temperature.feelsLike, forKey: .feelsLikeTemperature)
+
+        try container.encodeIfPresent(sun.sunrise, forKey: .sunrise)
+        try container.encodeIfPresent(sun.sunset, forKey: .sunset)
+
+        try container.encodeIfPresent(wind.gust, forKey: .windGust)
+        try container.encodeIfPresent(wind.speed, forKey: .windSpeed)
+        try container.encodeIfPresent(wind.degrees, forKey: .windDirection)
+    }
+
 }

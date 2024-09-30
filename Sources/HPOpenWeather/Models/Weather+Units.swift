@@ -10,7 +10,6 @@ public enum WeatherUnits: String, Codable {
     /// Temperature in Fahrenheit and wind speed in miles/hour.
     case imperial
 
-    @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
     var temperatureUnit: UnitTemperature {
         switch self {
         case .standard:
@@ -22,7 +21,6 @@ public enum WeatherUnits: String, Codable {
         }
     }
 
-    @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
     var windSpeedUnit: UnitSpeed {
         switch self {
         case .standard:
