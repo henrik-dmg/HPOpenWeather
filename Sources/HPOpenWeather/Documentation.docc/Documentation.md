@@ -1,4 +1,4 @@
-# `HPOpenWeather`
+# ``HPOpenWeather``
 
 ## Overview
 
@@ -7,7 +7,7 @@ See their [documentation](https://openweathermap.org/api/one-call-api) for furth
 
 ## Installation
 
-`HPOpenWeather` supports iOS 15.0+, watchOS 6.0+, tvOS 15.0+ and macOS 12+.
+``HPOpenWeather`` supports iOS 15.0+, watchOS 6.0+, tvOS 15.0+ and macOS 12+.
 It can be installed via SPM:
 
 ```
@@ -18,7 +18,7 @@ It can be installed via SPM:
 
 ### Configuration
 
-To get started, you need an API key from [OpenWeather](https://openweathermap.org).
+To get started, you need an API key from [OpenWeather](https://openweathermap.org). Then you can create an instance of the ``OpenWeather`` class.
 
 ```swift
 import HPOpenWeather
@@ -38,7 +38,7 @@ openWeatherClient.units = .metric
 
 ### Retrieving Weather Information
 
-To fetch the weather, there are two options: async/await or callback. Both expect a `CLLocationCoordinate2D` for which to fetch the weather.
+To fetch the weather, there are two options: async/await or callback. Both expect a ``CLLocationCoordinate2D`` for which to fetch the weather.
 Additionally, you can specify which fields should be excluded from the response to save bandwidth, or specify a historic date or a date up to 4 days in the future.
 
 #### Async
@@ -82,8 +82,12 @@ openWeatherClient.requestWeather(for: CLLocationCoordinate2D(latitude: 37.7749, 
 - Croatian
 - Catalan
 
+See ``WeatherLanguage`` for details.
+
 ### Available units (default in bold)
 
 - **Metric** (wind speed in m/s, temperature in Celsius)
 - Imperial (wind speed in mph, temperature in Fahrenheit)
 - Standard (wind speed in m/s, temperature in Kelvin)
+
+See ``WeatherUnits`` for details.
