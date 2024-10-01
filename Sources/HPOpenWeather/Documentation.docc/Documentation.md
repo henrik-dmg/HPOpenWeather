@@ -1,4 +1,4 @@
-# ``HPOpenWeather``
+# `HPOpenWeather`
 
 ## Overview
 
@@ -7,7 +7,7 @@ See their [documentation](https://openweathermap.org/api/one-call-api) for furth
 
 ## Installation
 
-``HPOpenWeather`` supports iOS 15.0+, watchOS 6.0+, tvOS 15.0+ and macOS 12+.
+`HPOpenWeather` supports iOS 15.0+, watchOS 6.0+, tvOS 15.0+ and macOS 12+.
 It can be installed via SPM:
 
 ```
@@ -38,7 +38,7 @@ openWeatherClient.units = .metric
 
 ### Retrieving Weather Information
 
-To fetch the weather, there are two options: async/await or callback. Both expect a ``CLLocationCoordinate2D`` for which to fetch the weather.
+To fetch the weather, there are two options: async/await or callback. Both expect a `CLLocationCoordinate2D` for which to fetch the weather.
 Additionally, you can specify which fields should be excluded from the response to save bandwidth, or specify a historic date or a date up to 4 days in the future.
 
 #### Async
