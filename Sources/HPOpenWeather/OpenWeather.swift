@@ -97,7 +97,7 @@ public final class OpenWeather {
         excludedFields: [ExcludableField]? = nil,
         date: Date? = nil,
         urlSession: URLSession = .shared,
-        completion: @escaping (Result<Weather, Error>) -> Void
+        completion: @escaping @Sendable (Result<Weather, Error>) -> Void
     ) -> Task<Void, Error> {
         Task {
             do {
