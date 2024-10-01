@@ -1,7 +1,20 @@
 import Foundation
 
-/// Type that holds information about daily temperature changes
+/// Type that holds information about daily temperature changes.
 public struct DailyTemperature: Codable, Equatable, Hashable {
+
+    // MARK: - Nested Types
+
+    enum CodingKeys: String, CodingKey {
+        case day
+        case night
+        case min
+        case max
+        case evening = "eve"
+        case morning = "morn"
+    }
+
+    // MARK: - Properties
 
     /// Day temperature.
     public let day: Double
@@ -15,14 +28,5 @@ public struct DailyTemperature: Codable, Equatable, Hashable {
     public let evening: Double
     /// Morning temperature.
     public let morning: Double
-
-    enum CodingKeys: String, CodingKey {
-        case day
-        case night
-        case min
-        case max
-        case evening = "eve"
-        case morning = "morn"
-    }
 
 }

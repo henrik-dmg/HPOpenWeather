@@ -1,9 +1,10 @@
+import Foundation
+
 #if canImport(UIKit)
 import UIKit
 #elseif canImport(AppKit)
 import AppKit
 #endif
-import Foundation
 
 public enum WeatherIcon: String, Codable, CaseIterable {
 
@@ -29,37 +30,37 @@ public enum WeatherIcon: String, Codable, CaseIterable {
 }
 
 @available(iOS 13.0, macOS 11.0, tvOS 13.0, watchOS 6.0, *)
-public extension WeatherIcon {
+extension WeatherIcon {
 
-    var systemImageName: String {
+    public var systemImageName: String {
         makeIconName(filled: false)
     }
 
-    var systemImageNameFilled: String {
+    public var systemImageNameFilled: String {
         makeIconName(filled: true)
     }
 
-#if canImport(UIKit)
+    #if canImport(UIKit)
 
-    func filledUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
+    public func filledUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
         UIImage(systemName: systemImageNameFilled, withConfiguration: configuration)
     }
 
-    func outlineUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
+    public func outlineUIImage(withConfiguration configuration: UIImage.Configuration? = nil) -> UIImage? {
         UIImage(systemName: systemImageName, withConfiguration: configuration)
     }
 
-#elseif canImport(AppKit)
+    #elseif canImport(AppKit)
 
-    func filledNSImage(accessibilityDescription: String? = nil) -> NSImage? {
+    public func filledNSImage(accessibilityDescription: String? = nil) -> NSImage? {
         NSImage(systemSymbolName: systemImageNameFilled, accessibilityDescription: accessibilityDescription)
     }
 
-    func outlineNSImage(accessibilityDescription: String? = nil) -> NSImage? {
+    public func outlineNSImage(accessibilityDescription: String? = nil) -> NSImage? {
         NSImage(systemSymbolName: systemImageName, accessibilityDescription: accessibilityDescription)
     }
 
-#endif
+    #endif
 
     private func makeIconName(filled: Bool) -> String {
         let iconName: String

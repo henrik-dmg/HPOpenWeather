@@ -78,3 +78,7 @@ fastlane/test_output
 iOSInjectionProject/
 .swiftpm
 settings.json
+/docs
+/coverage
+
+**/.DS_Store
