@@ -38,19 +38,23 @@ openWeatherClient.units = .metric
 
 ### Retrieving Weather Information
 
-To fetch the weather, there are two options: async/await or callback. Both expect a ``CLLocationCoordinate2D`` for which to fetch the weather.
+To fetch the weather, there are two options: async/await or callback. Both expect a `CLLocationCoordinate2D` for which to fetch the weather.
 Additionally, you can specify which fields should be excluded from the response to save bandwidth, or specify a historic date or a date up to 4 days in the future.
+
+See the ``Weather`` and ``CurrentWeather`` types for details on available data.
 
 #### Async
 
 ```swift
-let weather = try await openWeatherClient.weather(for: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194))
+let coordinate = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
+let weather = try await openWeatherClient.weather(for: coordinate)
 ```
 
 #### Callback
 
 ```swift
-openWeatherClient.requestWeather(for: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)) { result in
+let coordinate = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
+openWeatherClient.requestWeather(for: coordinate) { result in
     switch result {
     case .success(let weather):
         print(weather)
@@ -60,9 +64,9 @@ openWeatherClient.requestWeather(for: CLLocationCoordinate2D(latitude: 37.7749, 
 }
 ```
 
-### Available languages (default in bold)
+### Available languages
 
-- **English**
+- English (default)
 - Russian
 - Italian
 - Spanish
@@ -84,9 +88,9 @@ openWeatherClient.requestWeather(for: CLLocationCoordinate2D(latitude: 37.7749, 
 
 See ``WeatherLanguage`` for details.
 
-### Available units (default in bold)
+### Available units
 
-- **Metric** (wind speed in m/s, temperature in Celsius)
+- Metric (wind speed in m/s, temperature in Celsius, default)
 - Imperial (wind speed in mph, temperature in Fahrenheit)
 - Standard (wind speed in m/s, temperature in Kelvin)
 
