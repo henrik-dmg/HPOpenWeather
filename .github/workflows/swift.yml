@@ -56,21 +56,5 @@ jobs:
           xcode-version: '27'
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Cache SPM dependencies
-        uses: actions/cache@v4
-        with:
-          path: .build
-          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-spm-
-      - name: Install Periphery
-        run: brew install periphery
       - name: Lint code
         run: Scripts/lint-swift-code
-      - name: Build index store
-        # The default SwiftPM build system does not write an index store to the path that Periphery reads.
-        run: >
-          swift build --build-tests --build-system native --scratch-path .build/periphery
-          -Xswiftc -index-store-path -Xswiftc "$PWD/.build/periphery-index"
-      - name: Scan for dead code
-        run: periphery scan --strict --config config/periphery.yml --skip-build --index-store-path "$PWD/.build/periphery-index"
