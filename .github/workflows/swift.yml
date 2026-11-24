@@ -67,5 +67,10 @@ jobs:
         run: brew install periphery
       - name: Lint code
         run: Scripts/lint-swift-code
+      - name: Build index store
+        # The default SwiftPM build system does not write an index store to the path that Periphery reads.
+        run: >
+          swift build --build-tests --build-system native --scratch-path .build/periphery
+          -Xswiftc -index-store-path -Xswiftc "$PWD/.build/periphery-index"
       - name: Scan for dead code
-        run: periphery scan --strict --config config/periphery.yml
+        run: periphery scan --strict --config config/periphery.yml --skip-build --index-store-path "$PWD/.build/periphery-index"
