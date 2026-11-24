@@ -63,8 +63,8 @@ jobs:
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-spm-
-      - name: Install SwiftLint
-        run: brew install swift-format peripheryapp/periphery/periphery
+      - name: Install Periphery
+        run: brew install periphery
       - name: Lint code
         run: Scripts/lint-swift-code
       - name: Scan for dead code
