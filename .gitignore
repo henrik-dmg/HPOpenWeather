@@ -82,3 +82,5 @@ settings.json
 /coverage
 
 **/.DS_Store
+# Local secrets, such as the OpenWeather API key for the live tests
+.env
