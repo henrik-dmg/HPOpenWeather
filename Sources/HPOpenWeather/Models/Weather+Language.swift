@@ -1,11 +1,12 @@
 import Foundation
 
 /// The language that should be used in API responses for example for weather condition descriptions.
-public enum WeatherLanguage: String, Codable {
+public enum WeatherLanguage: String, Codable, Sendable {
 
     case afrikaans = "af"
     case arabic = "ar"
     case azerbaijani = "az"
+    case belarusian = "be"
     case bulgarian = "bg"
     case catalan = "ca"
     case czech = "cz"
@@ -23,9 +24,11 @@ public enum WeatherLanguage: String, Codable {
     case croatian = "hr"
     case hungarian = "hu"
     case indonesian = "id"
+    case icelandic = "is"
     case italian = "it"
     case japanese = "ja"
     case korean = "kr"
+    case kurmanji = "ku"
     case latvian = "la"
     case lithuanian = "lt"
     case macedonian = "mk"
@@ -39,6 +42,7 @@ public enum WeatherLanguage: String, Codable {
     case swedish = "sv"
     case slovak = "sk"
     case slovenian = "sl"
+    case albanian = "sq"
     case spanish = "es"
     case serbian = "sr"
     case thai = "th"

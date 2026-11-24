@@ -2,8 +2,8 @@
 
 ## Overview
 
-HPOpenWeather is a cross-platform Swift framework to communicate with the OpenWeather One-Call API.
-See their [documentation](https://openweathermap.org/api/one-call-api) for further details.
+HPOpenWeather is a cross-platform Swift framework to communicate with the OpenWeather One Call API 4.0.
+See their [documentation](https://openweathermap.org/api/one-call-4) for further details.
 
 ## Installation
 
@@ -11,7 +11,7 @@ See their [documentation](https://openweathermap.org/api/one-call-api) for furth
 It can be installed via SPM:
 
 ```
-.package(url: "https://github.com/henrik-dmg/HPOpenWeather", from: "6.0.0")
+.package(url: "https://github.com/henrik-dmg/HPOpenWeather", from: "7.0.0")
 ```
 
 ## Usage
@@ -38,8 +38,40 @@ openWeatherClient.units = .metric
 
 ### Retrieving Weather Information
 
-To fetch the weather, there are two options: async/await or callback. Both expect a `CLLocationCoordinate2D` for which to fetch the weather.
-Additionally, you can specify which fields should be excluded from the response to save bandwidth, or specify a historic date or a date up to 4 days in the future.
+The One Call API 4.0 has a separate endpoint for each type of data. ``OpenWeather`` has one method for each endpoint.
+Each method expects a `CLLocationCoordinate2D` for the location of the weather.
+
+```swift
+let coordinate = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
+
+let currentWeather = try await openWeatherClient.currentWeather(for: coordinate)
+let minutely = try await openWeatherClient.minutelyForecast(for: coordinate)
+let quarterHourly = try await openWeatherClient.quarterHourlyForecast(for: coordinate)
+let hourly = try await openWeatherClient.hourlyForecast(for: coordinate)
+let daily = try await openWeatherClient.dailyForecast(for: coordinate)
+```
+
+The timeline methods return a ``WeatherTimeline``. Each response has a limited number of entries.
+To get historical data, set the `startDate` parameter. To get the adjacent entries, request the next or the previous page:
+
+```swift
+let lastYear = Calendar.current.date(byAdding: .year, value: -1, to: .now)
+let history = try await openWeatherClient.dailyForecast(for: coordinate, startDate: lastYear)
+
+if let nextPage = try await openWeatherClient.nextPage(of: history) {
+    print(nextPage.entries)
+}
+```
+
+The forecasts contain the IDs of the weather alerts for the location. To get the details of an alert, use ``OpenWeather/weatherAlert(withID:urlSession:)``.
+
+### Retrieving All Weather Information at Once
+
+The ``OpenWeather/weather(for:excludedFields:urlSession:)`` method calls the endpoints in parallel and combines the responses into one ``Weather`` value.
+It also gets the details of all weather alerts that the responses refer to.
+
+Each call counts against your API quota. A request without excluded fields causes five calls, plus one call for each alert.
+Use the `excludedFields` parameter to skip the data that you do not need.
 
 See the ``Weather`` and ``CurrentWeather`` types for details on available data.
 
@@ -47,7 +79,7 @@ See the ``Weather`` and ``CurrentWeather`` types for details on available data.
 
 ```swift
 let coordinate = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
-let weather = try await openWeatherClient.weather(for: coordinate)
+let weather = try await openWeatherClient.weather(for: coordinate, excludedFields: [.minutely, .quarterHourly])
 ```
 
 #### Callback

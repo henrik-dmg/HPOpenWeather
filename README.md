@@ -4,7 +4,7 @@
 [![Swift](https://github.com/henrik-dmg/HPOpenWeather/actions/workflows/swift.yml/badge.svg)](https://github.com/henrik-dmg/HPOpenWeather/actions/workflows/swift.yml)
 [![GitHub license](https://img.shields.io/github/license/henrik-dmg/HPOpenWeather)](https://github.com/henrik-dmg/HPOpenWeather/blob/master/LICENSE.md)
 
-HPOpenWeather is a cross-platform Swift framework to communicate with the OpenWeather One-Call API. See their [documentation](https://openweathermap.org/api/one-call-api) for further details.
+HPOpenWeather is a cross-platform Swift framework to communicate with the OpenWeather One Call API 4.0. See their [documentation](https://openweathermap.org/api/one-call-4) for further details.
 
 ## Installation
 
@@ -12,7 +12,7 @@ HPOpenWeather is a cross-platform Swift framework to communicate with the OpenWe
 It can be installed via SPM:
 
 ```
-.package(url: "https://github.com/henrik-dmg/HPOpenWeather", from: "6.0.0")
+.package(url: "https://github.com/henrik-dmg/HPOpenWeather", from: "7.0.0")
 ```
 
 ## Documentation

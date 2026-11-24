@@ -1,5 +1,6 @@
 import Foundation
 
+/// A forecast for one day.
 public struct DailyForecast: ForecastBase, SunForecast, MoonForecast {
 
     // MARK: - Coding Keys
@@ -19,19 +20,26 @@ public struct DailyForecast: ForecastBase, SunForecast, MoonForecast {
         case windSpeed = "wind_speed"
         case windGust = "wind_gust"
         case windDirection = "wind_deg"
+        case precipitationProbability = "pop"
         case weather
         case sunrise
         case sunset
         case moonrise
         case moonset
+        case moonPhase = "moon_phase"
+        case alertIDs = "alerts"
     }
 
     // MARK: - Properties
 
     public let temperature: DailyTemperature
     public let feelsLikeTemperature: DailyTemperature
+    /// The total rain on this day, in mm.
     public let totalRain: Double?
+    /// The total snow on this day, in mm.
     public let totalSnow: Double?
+    /// The probability of precipitation, from 0 to 1.
+    public let precipitationProbability: Double?
 
     public let timestamp: Date
     public let pressure: Double?
@@ -44,6 +52,10 @@ public struct DailyForecast: ForecastBase, SunForecast, MoonForecast {
     public let sun: Sun
     public let wind: Wind
     public let moon: Moon
+    /// The IDs of the weather alerts for the location on this day.
+    ///
+    /// Use ``OpenWeather/weatherAlert(withID:urlSession:)`` to get the details of an alert.
+    public let alertIDs: [String]
 
     // MARK: - Init
 
@@ -67,19 +79,22 @@ public struct DailyForecast: ForecastBase, SunForecast, MoonForecast {
         self.feelsLikeTemperature = try container.decode(DailyTemperature.self, forKey: .feelsLikeTemperature)
         self.totalRain = try container.decodeIfPresent(Double.self, forKey: .totalRain)
         self.totalSnow = try container.decodeIfPresent(Double.self, forKey: .totalSnow)
+        self.precipitationProbability = try container.decodeIfPresent(Double.self, forKey: .precipitationProbability)
+        self.alertIDs = try container.decodeIfPresent([String].self, forKey: .alertIDs) ?? []
 
         let windSpeed = try container.decodeIfPresent(Double.self, forKey: .windSpeed)
         let windGust = try container.decodeIfPresent(Double.self, forKey: .windGust)
         let windDirection = try container.decodeIfPresent(Double.self, forKey: .windDirection)
         self.wind = Wind(speed: windSpeed, gust: windGust, degrees: windDirection)
 
-        let sunrise = try container.decode(Date.self, forKey: .sunrise)
-        let sunset = try container.decode(Date.self, forKey: .sunset)
+        let sunrise = try container.decodeEventTimestampIfPresent(forKey: .sunrise)
+        let sunset = try container.decodeEventTimestampIfPresent(forKey: .sunset)
         self.sun = Sun(sunset: sunset, sunrise: sunrise)
 
-        let moonrise = try container.decode(Date.self, forKey: .moonrise)
-        let moonset = try container.decode(Date.self, forKey: .moonset)
-        self.moon = Moon(moonset: moonset, moonrise: moonrise)
+        let moonrise = try container.decodeEventTimestampIfPresent(forKey: .moonrise)
+        let moonset = try container.decodeEventTimestampIfPresent(forKey: .moonset)
+        let moonPhase = try container.decodeIfPresent(Double.self, forKey: .moonPhase)
+        self.moon = Moon(moonset: moonset, moonrise: moonrise, phase: moonPhase)
     }
 
     // MARK: - Encoding
@@ -91,6 +106,7 @@ public struct DailyForecast: ForecastBase, SunForecast, MoonForecast {
         try container.encodeIfPresent(feelsLikeTemperature, forKey: .feelsLikeTemperature)
         try container.encodeIfPresent(totalRain, forKey: .totalRain)
         try container.encodeIfPresent(totalSnow, forKey: .totalSnow)
+        try container.encodeIfPresent(precipitationProbability, forKey: .precipitationProbability)
         try container.encodeIfPresent(timestamp, forKey: .timestamp)
         try container.encodeIfPresent(pressure, forKey: .pressure)
         try container.encodeIfPresent(humidity, forKey: .humidity)
@@ -99,12 +115,14 @@ public struct DailyForecast: ForecastBase, SunForecast, MoonForecast {
         try container.encodeIfPresent(visibility, forKey: .visibility)
         try container.encodeIfPresent(cloudCoverage, forKey: .cloudCoverage)
         try container.encodeIfPresent([condition], forKey: .weather)
+        try container.encode(alertIDs, forKey: .alertIDs)
 
         try container.encodeIfPresent(sun.sunrise, forKey: .sunrise)
         try container.encodeIfPresent(sun.sunset, forKey: .sunset)
 
         try container.encodeIfPresent(moon.moonrise, forKey: .moonrise)
         try container.encodeIfPresent(moon.moonset, forKey: .moonset)
+        try container.encodeIfPresent(moon.phase, forKey: .moonPhase)
 
         try container.encodeIfPresent(wind.gust, forKey: .windGust)
         try container.encodeIfPresent(wind.speed, forKey: .windSpeed)

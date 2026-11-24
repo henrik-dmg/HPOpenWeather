@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-swift-format format \
+xcrun swift-format format \
   --recursive \
   --parallel \
   --in-place \

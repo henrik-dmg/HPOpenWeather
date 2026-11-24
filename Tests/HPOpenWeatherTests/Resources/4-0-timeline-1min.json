@@ -1,0 +1,27 @@
+{
+  "lat": 52.52,
+  "lon": 13.405,
+  "timezone": "Europe/Berlin",
+  "timezone_offset": 3600,
+  "data": [
+    {
+      "dt": 1764000060,
+      "precipitation": 0,
+      "alerts": []
+    },
+    {
+      "dt": 1764000120,
+      "precipitation": 0.12,
+      "alerts": [
+        "alert-1"
+      ]
+    },
+    {
+      "dt": 1764000180,
+      "precipitation": 0.25,
+      "alerts": [
+        "alert-1"
+      ]
+    }
+  ]
+}

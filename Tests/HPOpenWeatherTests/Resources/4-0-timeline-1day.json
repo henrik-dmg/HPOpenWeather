@@ -1,0 +1,93 @@
+{
+  "lat": 52.52,
+  "lon": 13.405,
+  "timezone": "Europe/Berlin",
+  "timezone_offset": 3600,
+  "data": [
+    {
+      "dt": 1764014400,
+      "sunrise": 1763967600,
+      "sunset": 1763997600,
+      "moonset": 1763986000,
+      "moon_phase": 0.13,
+      "temp": {
+        "day": 4.6,
+        "min": 1.2,
+        "max": 6.3,
+        "night": 2.1,
+        "eve": 3.4,
+        "morn": 1.5
+      },
+      "feels_like": {
+        "day": 1.9,
+        "night": -0.8,
+        "eve": 0.6,
+        "morn": -1.6
+      },
+      "pressure": 1012,
+      "humidity": 84,
+      "dew_point": 1.9,
+      "wind_speed": 4.9,
+      "wind_deg": 250,
+      "wind_gust": 11.3,
+      "weather": [
+        {
+          "id": 500,
+          "main": "Rain",
+          "description": "light rain",
+          "icon": "10d"
+        }
+      ],
+      "clouds": 90,
+      "pop": 0.8,
+      "rain": 1.2,
+      "uvi": 0.6,
+      "moonrise": 0
+    },
+    {
+      "dt": 1764100800,
+      "sunrise": 1764054100,
+      "sunset": 1764083900,
+      "moonrise": 1764065400,
+      "moonset": 1764076200,
+      "moon_phase": 0.17,
+      "temp": {
+        "day": 2.8,
+        "min": -1.4,
+        "max": 3.9,
+        "night": -0.6,
+        "eve": 1.2,
+        "morn": -1.1
+      },
+      "feels_like": {
+        "day": -0.9,
+        "night": -4.2,
+        "eve": -2.1,
+        "morn": -4.8
+      },
+      "pressure": 1018,
+      "humidity": 79,
+      "dew_point": -0.7,
+      "wind_speed": 6.2,
+      "wind_deg": 300,
+      "wind_gust": 14.8,
+      "weather": [
+        {
+          "id": 600,
+          "main": "Snow",
+          "description": "light snow",
+          "icon": "13d"
+        }
+      ],
+      "clouds": 100,
+      "pop": 0.6,
+      "snow": 0.7,
+      "uvi": 0.4,
+      "alerts": [
+        "alert-2"
+      ]
+    }
+  ],
+  "prev": "https://api.openweathermap.org/data/4.0/onecall/timeline/1day?cnt=10&lat=52.5200&lon=13.4050&start=1763150400&appid=debug",
+  "next": "https://api.openweathermap.org/data/4.0/onecall/timeline/1day?cnt=10&lat=52.5200&lon=13.4050&start=1764878400&appid=debug"
+}
