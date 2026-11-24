@@ -1,0 +1,7 @@
+{
+  "cod": 400,
+  "message": "Invalid date format",
+  "parameters": [
+    "start"
+  ]
+}

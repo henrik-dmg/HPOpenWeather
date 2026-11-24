@@ -1,7 +1,7 @@
 import Foundation
 
 /// The units that should the data in the API responses should be formatted in.
-public enum WeatherUnits: String, Codable {
+public enum WeatherUnits: String, Codable, Sendable {
 
     /// Temperature in Kelvin and wind speed in meter/sec.
     case standard

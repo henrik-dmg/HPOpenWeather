@@ -1,7 +1,7 @@
 import Foundation
 
 /// The language that should be used in API responses for example for weather condition descriptions.
-public enum WeatherLanguage: String, Codable {
+public enum WeatherLanguage: String, Codable, Sendable {
 
     case afrikaans = "af"
     case arabic = "ar"

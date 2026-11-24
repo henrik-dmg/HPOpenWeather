@@ -1,5 +1,6 @@
 import Foundation
 
+/// A forecast for one hour.
 public struct HourlyForecast: ForecastBase {
 
     // MARK: - Coding Keys
@@ -19,7 +20,9 @@ public struct HourlyForecast: ForecastBase {
         case windSpeed = "wind_speed"
         case windGust = "wind_gust"
         case windDirection = "wind_deg"
+        case precipitationProbability = "pop"
         case weather
+        case alertIDs = "alerts"
     }
 
     // MARK: - Properties
@@ -33,9 +36,15 @@ public struct HourlyForecast: ForecastBase {
     public let cloudCoverage: Double?
     public let rain: Precipitation?
     public let snow: Precipitation?
+    /// The probability of precipitation, from 0 to 1.
+    public let precipitationProbability: Double?
     public let temperature: Temperature
     public let wind: Wind
     public let condition: WeatherCondition
+    /// The IDs of the weather alerts for the location at this time.
+    ///
+    /// Use ``OpenWeather/weatherAlert(withID:urlSession:)`` to get the details of an alert.
+    public let alertIDs: [String]
 
     // MARK: - Init
 
@@ -57,6 +66,8 @@ public struct HourlyForecast: ForecastBase {
         self.uvIndex = try container.decodeIfPresent(Double.self, forKey: .uvIndex)
         self.cloudCoverage = try container.decodeIfPresent(Double.self, forKey: .cloudCoverage)
         self.visibility = try container.decodeIfPresent(Double.self, forKey: .visibility)
+        self.precipitationProbability = try container.decodeIfPresent(Double.self, forKey: .precipitationProbability)
+        self.alertIDs = try container.decodeIfPresent([String].self, forKey: .alertIDs) ?? []
 
         let actualTemperature = try container.decode(Double.self, forKey: .actualTemperature)
         let feelsLikeTemperature = try container.decode(Double.self, forKey: .feelsLikeTemperature)
@@ -82,7 +93,9 @@ public struct HourlyForecast: ForecastBase {
         try container.encodeIfPresent(cloudCoverage, forKey: .cloudCoverage)
         try container.encodeIfPresent(rain, forKey: .rain)
         try container.encodeIfPresent(snow, forKey: .snow)
+        try container.encodeIfPresent(precipitationProbability, forKey: .precipitationProbability)
         try container.encodeIfPresent([condition], forKey: .weather)
+        try container.encode(alertIDs, forKey: .alertIDs)
 
         try container.encodeIfPresent(temperature.actual, forKey: .actualTemperature)
         try container.encodeIfPresent(temperature.feelsLike, forKey: .feelsLikeTemperature)

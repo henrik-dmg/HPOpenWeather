@@ -1,0 +1,16 @@
+{
+  "id": "alert-2",
+  "sender_name": "German Meteorological Office",
+  "event": "Strong wind",
+  "start": 1764003600,
+  "end": 1764086400,
+  "description": [
+    {
+      "language": "en-GB",
+      "description": "There is a risk of strong gusts of up to 55 km/h."
+    }
+  ],
+  "tags": [
+    "Wind"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "lat": 52.52,
+  "lon": 13.405,
+  "timezone": "Europe/Berlin",
+  "timezone_offset": 3600,
+  "data": [
+    {
+      "dt": 1764000000,
+      "temp": 4.1,
+      "feels_like": 1.2,
+      "pressure": 1012,
+      "humidity": 82,
+      "dew_point": 1.3,
+      "clouds": 80,
+      "uvi": 0.3,
+      "visibility": 10000,
+      "wind_speed": 3.8,
+      "wind_deg": 240,
+      "pop": 0.4,
+      "weather": [
+        {
+          "id": 500,
+          "main": "Rain",
+          "description": "light rain",
+          "icon": "10n"
+        }
+      ],
+      "alerts": [
+        "alert-1"
+      ]
+    },
+    {
+      "dt": 1764000900,
+      "temp": 0.9,
+      "feels_like": -2.4,
+      "pressure": 1013,
+      "humidity": 90,
+      "dew_point": -0.5,
+      "clouds": 100,
+      "uvi": 0.2,
+      "visibility": 6000,
+      "wind_speed": 4.4,
+      "wind_gust": 9.2,
+      "wind_deg": 250,
+      "pop": 0.6,
+      "snow": {
+        "1h": 0.3
+      },
+      "weather": [
+        {
+          "id": 600,
+          "main": "Snow",
+          "description": "light snow",
+          "icon": "13n"
+        }
+      ],
+      "alerts": [
+        "alert-1",
+        "alert-2"
+      ]
+    }
+  ],
+  "next": "https://api.openweathermap.org/data/4.0/onecall/timeline/15min?lat=52.5200&lon=13.4050&start=1764001800&appid=debug"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "alert-1",
+  "sender_name": "German Meteorological Office",
+  "event": "Frost",
+  "start": 1764000000,
+  "end": 1764043200,
+  "description": [
+    {
+      "language": "de-DE",
+      "description": "Es tritt leichter Frost zwischen -1 und -4 Grad auf."
+    },
+    {
+      "language": "en-GB",
+      "description": "There is a risk of light frost between -1 and -4 degrees."
+    }
+  ],
+  "tags": [
+    "Extreme low temperature"
+  ]
+}
