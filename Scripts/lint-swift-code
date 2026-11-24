@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-swift-format lint \
+xcrun swift-format lint \
   --recursive \
   --parallel \
   --strict \
